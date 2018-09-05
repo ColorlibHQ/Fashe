@@ -1,0 +1,38 @@
+{% if section.settings.show_social_links %}
+  {% if settings.social_facebook_link != blank %}
+  <a href="{{ settings.social_facebook_link }}" class="topbar-social-item fa fa-facebook" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Facebook' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_twitter_link != blank %}
+  <a data-toggle="tooltip" class=" topbar-social-item fa fa-twitter" data-placement="bottom" href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Twitter' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_pinterest_link != blank %}
+  <a data-toggle="tooltip" class=" topbar-social-item fa fa-pinterest-square" data-placement="bottom"  href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Pinterest' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_google_plus_link != blank %}
+  <a data-toggle="tooltip" class=" topbar-social-item fa fa-google-plus" data-placement="bottom" href="{{ settings.social_google_plus_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Google' | escape }}" rel="publisher">
+  </a>
+  {% endif %}
+  {% if settings.social_instagram_link != blank %}
+  <a data-toggle="tooltip" class="topbar-social-item fa fa-instagram" data-placement="bottom" href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Instagram' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_tumblr_link != blank %}
+  <a data-toggle="tooltip" class="topbar-social-item fa fa-tumblr" data-placement="bottom" href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Tumblr' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_youtube_link != blank %}
+  <a data-toggle="tooltip" class="topbar-social-item fa fa-youtube" data-placement="bottom"  href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'YouTube' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_vimeo_link != blank %}
+  <a data-toggle="tooltip" class="topbar-social-item fa fa-vimeo" data-placement="bottom"  href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Vimeo' | escape }}">
+  </a>
+  {% endif %}
+  {% if settings.social_fancy_link != blank %}
+  <a data-toggle="tooltip" class="topbar-social-item fa fa-fancy" data-placement="bottom"  href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.store_on_social_network' | t: store_name: shop.name, social_network: 'Fancy' | escape }}">
+  </a>
+  {% endif %}
+{% endif %}

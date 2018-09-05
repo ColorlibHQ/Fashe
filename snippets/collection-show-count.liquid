@@ -1,0 +1,54 @@
+<select name="" id="input-limit" class="form-control">
+  <option value="{% if ltype %}{{ ltype }}{% endif %}10" {% if template contains '10' %} selected {% endif %}>10</option>
+  <option value="{% if ltype %}{{ ltype }}{% endif %}20" {% if template contains '20' %} selected {% endif %}>20</option>
+  <option value="{% if ltype %}{{ ltype }}{% endif %}30" {% if template contains '30' %} selected {% endif %}>30</option>
+  <option value="{% if ltype %}{{ ltype }}{% endif %}all" {% if template contains 'all' %} selected {% endif %}>{{ 'collections.view.all' | t }}</option>
+</select>
+<script>
+  function replaceUrlParam(url, paramName, paramValue) {
+    var pattern = new RegExp('('+paramName+'=).*?(&|$)'),
+        newUrl = url.replace(pattern,'$1' + paramValue + '$2');
+    if ( newUrl == url ) {
+      newUrl = newUrl + (newUrl.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
+    }
+    return newUrl;
+  }
+
+  $(function() {
+    $('#input-limit').on('change', function(e) {
+      e.preventDefault();
+      var view = $(this).val(),
+          url = document.URL,
+          hasParams = url.indexOf('?') > -1;
+      // window.location
+      if (hasParams) {
+        url = replaceUrlParam(url, 'view', view);
+      } else {
+        url = url + '?view=' + view;
+      }
+      $.ajax({
+        type: 'GET',
+        url: url,
+        data: {},
+        beforeSend: function( xhr ) {
+          $("#wraper_ajax").show();
+        },
+        complete: function (data) {          
+          $('#custom-products').html($("#custom-products", data.responseText).html());
+          $('#column-left').html($("#column-left", data.responseText).html());
+          if (localStorage.getItem('display') == 'list') {
+            $('#list-view').trigger('click');
+          } else {
+            $('#grid-view').trigger('click');
+          }
+          $('#pagination').html($("#pagination", data.responseText).html());
+          history.pushState({
+            page: url
+          }, url, url);      
+          $("#wraper_ajax").hide();
+          SPR.registerCallbacks(), SPR.initRatingHandler(), SPR.initDomEls(), SPR.loadProducts(), SPR.loadBadges();
+        }
+      });
+    });
+  });
+</script>

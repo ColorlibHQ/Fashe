@@ -1,0 +1,29 @@
+<!-- Pagination -->
+<div class="pagination flex-m flex-w p-t-26" id="pagination">
+  {% if paginate.pages > 1 %}
+  {% if paginate.previous %}
+  <a class="item-pagination flex-c-m trans-0-4" href="{{ paginate.previous.url }}" title="{{ paginate.previous.title }}">
+    &lt;
+  </a>
+  {% else %}
+  {% endif %}
+  {% for part in paginate.parts %}
+  {% if part.is_link %}
+  <a class="item-pagination flex-c-m trans-0-4" href="{{ part.url }}" title="">{{ part.title }}</a>
+  {% else %}
+  {% if part.title == paginate.current_page %}
+  <a class="item-pagination flex-c-m trans-0-4 active-pagination" href="#" title="{{ paginate.previous.title }}">
+    {{ part.title }}</a>
+  {% else %}
+  {{ part.title }}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  {% if paginate.next %}
+  <a class="item-pagination flex-c-m trans-0-4" href="{{ paginate.next.url }}" title="{{ paginate.next.title }}">
+    &gt;
+  </a>
+  {% else %}
+  {% endif %}
+  {% endif %}
+</div>

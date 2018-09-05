@@ -1,0 +1,33 @@
+<!-- Slide1 -->
+<section class="slide1 rs1-slick1">
+  <div class="wrap-slick1">
+    <div class="slick1">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      <div class="item-slick1 item{{forloop.index}}-slick1" {% if block.settings.image != blank %}style="background-image: url({{ block.settings.image | img_url: '1920x570' }});"{% endif %}>
+        <div class="wrap-content-slide1 size24 flex-col-c-m p-l-15 p-r-15 p-t-120 p-b-170">
+          {% if block.settings.heading != blank %}  
+          <h2 class="caption1-slide1 xl-text3 t-center bo15 p-b-3 animated visible-false m-b-24" data-appear="{{ block.settings.heading_appear }}">
+            {{ block.settings.heading }}
+          </h2>
+          {% endif %}
+          {% if block.settings.subheading != blank %}  
+          <span class="caption2-slide1 m-text27 t-center animated visible-false m-b-30" data-appear="{{ block.settings.subheading_appear }}">
+            {{ block.settings.subheading }}
+          </span>
+          {% endif %}
+          {% if block.settings.slide_link_text != blank %} 
+          <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="{{ block.settings.slide_appear }}">
+            <!-- Button -->
+            <a href="{{ block.settings.slide_link }}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+              {{ block.settings.slide_link_text }}
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>

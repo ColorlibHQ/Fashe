@@ -1,0 +1,69 @@
+{% unless settings.shipping_calculator == 'Disabled' %}
+<p class="s-text8 p-b-23">{{ 'cart.general.shipping_text' | t }}</p>
+<div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
+  <select id="address_country" name="address[country]" class="form-control selection-2" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% elsif settings.shipping_calculator_default_country != '' %}{{ settings.shipping_calculator_default_country }}{% endif %}">{{ country_option_tags }}</select>
+</div>
+<div class="size13 bo4 m-b-12" id="address_province_container" style="display:none;">
+  <select id="address_province" name="address[province]" class="form-control selection-2" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
+</div>
+<div class="size13 bo4 m-b-22">
+  <input type="text" id="address_zip" name="address[zip]" placeholder="{{ 'cart.general.shipping_zip' | t }}" class="form-control sizefull s-text7 p-l-15 p-r-15" {% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+</div>
+<div class="size14 trans-0-4 m-b-10">
+  <!-- Button -->
+  <button class="get-rates flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+    {{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' }}
+  </button>
+</div>
+<div class="size14 trans-0-4 m-b-10">
+  <div id="wrapper-response" style="padding-top:10px;"></div>
+</div>
+<!--
+<div class="form-horizontal">
+<div class="form-group required">
+<label class="col-sm-2 control-label" for="address_country">{{ 'cart.general.shipping_country' | t }}</label>
+<div class="col-sm-10">
+<select id="address_country" name="address[country]" class="form-control" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% elsif settings.shipping_calculator_default_country != '' %}{{ settings.shipping_calculator_default_country }}{% endif %}">{{ country_option_tags }}</select>
+</div>
+</div>
+<div class="form-group required" id="address_province_container" style="display:none;">
+<label class="col-sm-2 control-label" for="input-zone">{{ 'cart.general.shipping_province' | t }}</label>
+<div class="col-sm-10">
+<select id="address_province" name="address[province]" class="form-control" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
+</div>
+</div>
+<div class="form-group required">
+<label class="col-sm-2 control-label" for="input-postcode">{{ 'cart.general.shipping_zip' | t }}</label>
+<div class="col-sm-10">
+<input type="text" id="address_zip" name="address[zip]" class="form-control" {% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+</div>
+</div>
+<input type="button" class="get-rates btn btn-primary" value="{{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' }}" />
+<div id="wrapper-response" style="padding-top:10px;"></div>
+</div>
+-->
+{% endunless %}
+
+<script id="shipping-calculator-response-template" type="text/template">
+  {% raw %}
+  <p id="shipping-rates-feedback" {{#if success}} class="success" {{else}} class="error" {{/if}}>
+  {{#if success}}
+    {{#if rates}}
+      {{#rates}}
+        {{#if @first}}
+            Rates start at {{price}}.
+        {{/if}}
+      {{/rates}}
+    {{else}}
+      We do not ship to this destination.
+    {{/if}}    
+  {{else}}
+    {{ errorFeedback }}
+  {{/if}}
+  </p>
+  {% endraw %}
+</script>
+
+<!--[if lte IE 8]>
+<style> #shipping-calculator { display: none; } </style>
+<![endif]-->

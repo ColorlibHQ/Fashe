@@ -1,0 +1,14 @@
+<section class="banner2 bg5 p-t-55 p-b-55 bg-img1" {% if section.settings.image != blank %}style="background-image: url({{ section.settings.image | img_url: 'master' }});"{% endif %} data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="flex-w flex-r-m flex-c-xl">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product_deal] %}
+      <div class="p-t-15 p-b-15 w-size28">
+        {% include 'product-grid-item-deal' %}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>

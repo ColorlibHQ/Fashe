@@ -1,0 +1,41 @@
+{% comment %}
+
+MailChimp is the go-to newsletter service for Shopify.
+Use the link below to find your MailChimp "form action"
+and insert it in your site settings.
+If the form action URL is not set in the theme settings,
+it will fallback to a customer form so you can still capture the email.
+MailChimp newsletter integration and requirement:
+- http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
+{% endcomment %}
+{% if settings.mailing_list_form_action != blank %}
+  <form action="{{ settings.mailing_list_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
+    <div class="input-box" {% if settings.show_pupup_image == false %} style="float: none; " {% endif %}>
+      <input type="text" class="input-text newsletter-subscribe" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'layout.footer.newsletter_email_placeholder' | t }}" name="EMAIL" id="newsletter-input" required aria-label="{{ 'layout.footer.newsletter_email_placeholder' | t }}" autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="actions1">
+      <button class="button-subscribe" title="Subscribe" type="submit">{{ settings.popup_btn_text }}</button>
+    </div>
+  </form>
+  {% else %}
+  {% form 'customer' %}
+    {% if form.errors %}
+    <div role="alert" class="successError alert alert-danger alert-dismissible">{{ form.errors | default_errors }}
+      <button type="button" data-dismiss="alert" aria-hidden="true" aria-label="Close" class="close">x</button>
+    </div>
+    {% endif %}
+    {% if form.posted_successfully? %}
+    <div role="alert" class="successMessage alert alert-success alert-dismissible">{{ 'layout.footer.newsletter_confirmation' | t }}.
+      <button type="button" data-dismiss="alert" aria-hidden="true" aria-label="Close" class="close">x</button>
+    </div>
+    {% else %}
+    <div class="input-box" {% if settings.show_pupup_image == false %} style="float: none; " {% endif %}>
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="text" class="input-text newsletter-subscribe" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'layout.footer.newsletter_email_placeholder' | t }}" name="contact[email]" id="newsletter-input" required aria-label="{{ 'layout.footer.newsletter_email_placeholder' | t }}" autocorrect="off" autocapitalize="off">
+    </div>
+    <div class="actions1">
+      <button class="button-subscribe" title="Subscribe" type="submit">{{ settings.popup_btn_text }}</button>
+    </div>
+  	{% endif %}
+	{% endform %}
+{% endif %}

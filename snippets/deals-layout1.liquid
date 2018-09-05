@@ -1,0 +1,42 @@
+<section class="banner2 bg5 p-t-55 p-b-55" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+        <div class="hov-img-zoom pos-relative">
+          {% if section.settings.link != blank %}          
+          <a href="{{ section.settings.link }}" {{ section.shopify_attributes }}>
+            {% endif %}
+            {% if section.settings.image != blank %}
+            <img src="{{ section.settings.image | img_url: '720x539' }}" alt="" class="" />
+            {% endif %}
+            {% if section.settings.link != blank %}          
+          </a>
+          {% endif %}
+          <div class="ab-t-l sizefull flex-col-c-m p-l-15 p-r-15">
+            {% if section.settings.heading != blank %} 
+            <span class="m-text9 p-t-45 fs-20-sm">
+              {{ section.settings.heading }}
+            </span>
+            {% endif %}
+            {% if section.settings.subheading != blank %} 
+            <h3 class="l-text1 fs-35-sm">
+              {{ section.settings.subheading }}
+            </h3>
+            {% endif %}
+            {% if section.settings.link != blank %}          
+            <a href="{{ section.settings.link }}" class="s-text4 hov2 p-t-20" {{ section.shopify_attributes }}>{{ section.settings.link_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% assign product = all_products[block.settings.product_deal] %}
+      <div class="col-sm-10 col-md-8 col-lg-6 m-l-r-auto p-t-15 p-b-15">
+        {% include 'product-grid-item-deal' %}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>

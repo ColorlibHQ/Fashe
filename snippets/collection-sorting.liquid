@@ -1,0 +1,87 @@
+<select class="form-control" name="input-sort" id="input-sort">
+  <option value="manual">{{ 'collections.sorting.featured' | t }}</option>
+  <option value="best-selling">{{ 'collections.sorting.best_selling' | t }}</option>
+  <option value="title-ascending">{{ 'collections.sorting.az' | t }}</option>
+  <option value="title-descending">{{ 'collections.sorting.za' | t }}</option>
+  <option value="price-ascending">{{ 'collections.sorting.price_ascending' | t }}</option>
+  <option value="price-descending">{{ 'collections.sorting.price_descending' | t }}</option>
+  <option value="created-descending">{{ 'collections.sorting.date_descending' | t }}</option>
+  <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
+</select>
+<script>
+  function replaceUrlParam(url, paramName, paramValue) {
+    var pattern = new RegExp('('+paramName+'=).*?(&|$)'),
+        newUrl = url.replace(pattern,'$1' + paramValue + '$2');
+    if ( newUrl == url ) {
+      newUrl = newUrl + (newUrl.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
+    }
+    return newUrl;
+  }
+
+  $(function() {
+    $('#input-sort').val('{{ collection.sort_by | default: collection.default_sort_by | escape }}').on('change', function(e) {
+                         e.preventDefault();
+    var view = $(this).val(),
+        url = document.URL,
+        hasParams = url.indexOf('?') > -1;
+    // window.location
+    if (hasParams) {
+      url = replaceUrlParam(url, 'sort_by', view);
+    } else {
+      url = url + '?sort_by=' + view;
+    }
+    $.ajax({
+      type: 'GET',
+      url: url,
+      data: {},
+      beforeSend: function( xhr ) {
+        $("#wraper_ajax").show();
+      },
+      complete: function (data) {          
+        $('#custom-products').html($("#custom-products", data.responseText).html());
+        $('#column-left').html($("#column-left", data.responseText).html());
+        if (localStorage.getItem('display') == 'list') {
+          $('#list-view').trigger('click');
+        } else {
+          $('#grid-view').trigger('click');
+        }
+        $('#pagination').html($("#pagination", data.responseText).html());
+        history.pushState({
+          page: url
+        }, url, url);      
+        $("#wraper_ajax").hide();
+        SPR.registerCallbacks(), SPR.initRatingHandler(), SPR.initDomEls(), SPR.loadProducts(), SPR.loadBadges();
+      }
+    });
+
+  });
+
+  });
+</script>
+{% comment %}
+<script>
+  /*============================================================================
+    Inline JS because collection liquid object is only available
+    on collection pages and not external JS files
+  ==============================================================================*/
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  $(function() {
+    $('#input-sort')
+    .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+         .bind('change', function() {
+      Shopify.queryParams.sort_by = jQuery(this).val();
+      location.search = jQuery.param(Shopify.queryParams);
+    }
+    );
+  });
+</script>
+{% endcomment %}

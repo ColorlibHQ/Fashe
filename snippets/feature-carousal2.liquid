@@ -1,0 +1,18 @@
+{% assign product_collection = section.settings.collection %}
+<div class="container">
+  <div class="sec-title p-b-60">
+    {% if section.settings.heading != blank %}  
+    <h3 class="m-text5 t-center">{{ section.settings.heading }}</h3>
+    {% endif %}
+  </div>
+  <!-- Slide2 -->
+  <div class="wrap-slick2 rs1-slick2">
+    <div class="slick2">
+      {% for product in collections[product_collection].products limit:section.settings.products_tab_count %}
+      <div class="item-slick2 p-l-15 p-r-15">
+        {% include 'product-grid-item' %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

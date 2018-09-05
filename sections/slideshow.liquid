@@ -1,0 +1,243 @@
+{% include section.settings.layout_slider %}
+{% schema %}
+{
+  "name": "Slideshow",
+  "class": "index-section index-section--flush",
+  "max_blocks": 7,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "autoplay_speed",
+      "label": "Change slides every",
+      "options": [
+        { "value": "5000", "label": "5 seconds" },
+        { "value": "6000", "label": "6 seconds" },
+        { "value": "7000", "label": "7 seconds" },
+        { "value": "8000", "label": "8 seconds" },
+        { "value": "9000", "label": "9 seconds" },
+        { "value": "10000", "label": "10 seconds" }
+      ],
+      "default": "10000"
+    },
+	{
+        "type": "select",
+        "id": "layout_slider",
+        "label": "Select page slider",
+        "options": [
+              {
+                "value": "slider-1",
+                "label": "Slider 1"
+              },
+			  {
+                "value": "slider-2",
+                "label": "Slider 2"
+              },
+			  {
+                "value": "slider-3",
+                "label": "Slider 3"
+              }
+            ]	
+        }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slide image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1920x570px recommended"
+        },
+		{
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+		{
+          "type": "select",
+          "id": "heading_appear",
+          "label": "Animation style",
+            "options": [
+              {
+                "value": "none",
+                "label": "None"
+              },
+              {
+                "value": "fadeInDown",
+                "label": "fadeInDown"
+              },
+              {
+                "value": "fadeInUp",
+                "label": "fadeInUp"
+              },
+              {
+                "value": "zoomIn",
+                "label": "zoomIn"
+              },
+              {
+                "value": "rollIn",
+                "label": "rollIn"
+              },
+              {
+                "value": "lightSpeedIn",
+                "label": "lightSpeedIn"
+              },
+              {
+                "value": "slideInUp",
+                "label": "slideInUp"
+              },
+              {
+                "value": "rotateInDownLeft",
+                "label": "rotateInDownLeft"
+              },
+              {
+                "value": "rotateInUpRight",
+                "label": "rotateInUpRight"
+              },
+              {
+                "value": "rotateIn",
+                "label": "rotateIn"
+              }
+            ],
+		  "default": "fadeInDown"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+		{
+          "type": "select",
+          "id": "subheading_appear",
+          "label": "Animation style",
+            "options": [
+              {
+                "value": "none",
+                "label": "None"
+              },
+              {
+                "value": "fadeInDown",
+                "label": "fadeInDown"
+              },
+              {
+                "value": "fadeInUp",
+                "label": "fadeInUp"
+              },
+              {
+                "value": "zoomIn",
+                "label": "zoomIn"
+              },
+              {
+                "value": "rollIn",
+                "label": "rollIn"
+              },
+              {
+                "value": "lightSpeedIn",
+                "label": "lightSpeedIn"
+              },
+              {
+                "value": "slideInUp",
+                "label": "slideInUp"
+              },
+              {
+                "value": "rotateInDownLeft",
+                "label": "rotateInDownLeft"
+              },
+              {
+                "value": "rotateInUpRight",
+                "label": "rotateInUpRight"
+              },
+              {
+                "value": "rotateIn",
+                "label": "rotateIn"
+              }
+            ],
+		  "default": "fadeInDown"
+        },		
+		{
+          "type": "text",
+          "id": "slide_link_text",
+          "label": "Link Text"
+        },
+        {
+          "type": "url",
+          "id": "slide_link",
+          "label": "Link URL"
+        },
+		{
+          "type": "select",
+          "id": "slide_appear",
+          "label": "Animation style",
+            "options": [
+              {
+                "value": "none",
+                "label": "None"
+              },
+              {
+                "value": "fadeInDown",
+                "label": "fadeInDown"
+              },
+              {
+                "value": "fadeInUp",
+                "label": "fadeInUp"
+              },
+              {
+                "value": "zoomIn",
+                "label": "zoomIn"
+              },
+              {
+                "value": "rollIn",
+                "label": "rollIn"
+              },
+              {
+                "value": "lightSpeedIn",
+                "label": "lightSpeedIn"
+              },
+              {
+                "value": "slideInUp",
+                "label": "slideInUp"
+              },
+              {
+                "value": "rotateInDownLeft",
+                "label": "rotateInDownLeft"
+              },
+              {
+                "value": "rotateInUpRight",
+                "label": "rotateInUpRight"
+              },
+              {
+                "value": "rotateIn",
+                "label": "rotateIn"
+              }
+            ],
+		  "default": "fadeInDown"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Slideshow",
+    "category": "Image",
+    "settings": {
+      "autoplay": true,
+      "autoplay_speed": "5000"
+    },
+    "blocks": [
+      {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+    ]
+  }]
+}
+{% endschema %}

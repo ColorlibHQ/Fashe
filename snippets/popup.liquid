@@ -1,0 +1,23 @@
+<!--Newsletter Popup Start-->
+<div id="newsletter-popup-conatiner">
+  <div id="newsletter-pop-up" {% if settings.show_pupup_image %} style="background:url({{ 'popup_img.png' | asset_url }})" {% else %}style="background:#fff;text-align:center;" {% endif %}>
+    <span class="hide-popup">X</span>
+    <div class="subscribe-pop-up">
+      <div class="title-subscribe">
+        <h1>{{ settings.popup_heading }}</h1>
+      </div>
+      <div id="newsletter-form" class="content-subscribe">
+        <div class="form-subscribe-header">
+          <label>{{ settings.popup_description }}..</label>
+        </div>
+        {% include 'newsletter-form-popup' %}
+      </div>
+      <div class="subscribe-bottom">
+        <input type="checkbox" id="dont_show" name="dont_show">
+        <label for="dont_show">{{ 'homepage.popup.do_not_show' | t }}</label>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End of Newsletter Popup-->
+{{ '//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js' | script_tag }}  

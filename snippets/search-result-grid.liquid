@@ -1,0 +1,89 @@
+{% unless grid_item_width %}
+{% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+
+{% unless current_collection %}
+{% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if item.compare_at_price > item.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if item.available %}
+{% assign sold_out = false %}
+{% endif %}
+
+{% assign image_size = settings.collection_prod_image_sizes %}
+{% if item.object_type == 'product' %}
+{% assign img_size = settings.img_size_grid %}
+<!-- Block2 -->
+<div class="block2">
+  {% assign product_created_at = item.created_at | date: '%s' %}
+  {% assign time_ago = 'now' | date: '%s' | minus: product_created_at | divided_by: 86400 %}
+  {% assign product_new_time = settings.product_new_time | times: 1 %}
+  <div class="block2-img wrap-pic-w of-hidden pos-relative {% if time_ago < product_new_time %}block2-labelnew{% endif %} {% if on_sale %} block2-labelsale{% endif %}">
+    <a href="{{ item.url | within: collection }}">
+      <img class="" src="{{ item.featured_image.src | img_url: img_size }}" alt="{{ item.featured_image.alt | escape }}">
+    </a>
+    <div class="block2-overlay trans-0-4">
+      <a href="{{ item.url }}" class="block2-btn-addwishlist hov-pointer trans-0-4">
+        <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+        <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+      </a>
+      <div class="block2-btn-addcart w-size1 trans-0-4">
+        <!-- Button -->
+        <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" data-toggle="tooltip" data-loading-text="{{ 'products.product.loading' | t }}" title="{{ 'products.product.add_to_cart' | t }}" onclick="cart.add('{{ item.variants.first.id }}', '{{ item.title }}');">
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="block2-txt p-t-20">
+    <a href="{{ item.url | within: collection }}" class="block2-name dis-block s-text3 p-b-5">
+      {{ item.title }}
+    </a>
+    {% if item.compare_at_price > item.price %}
+    <span class="block2-oldprice m-text7 p-r-5">
+      {{ item.compare_at_price_max | money }}
+    </span>
+    <span class="block2-newprice m-text8 p-r-5">
+      {{ item.price | money }}
+    </span>
+    {% else %}
+    <span class="block2-price m-text6 p-r-5">
+      {{ item.price | money }}
+    </span>
+    {% endif %}
+  </div>
+</div>
+{% else %}
+{% assign img_tag = '<' | append: 'img' %}
+{% if item.content contains img_tag %}
+{% assign src = item.content | split: 'src="' %}
+{% assign src = src[1] | split: '"' | first %}
+{% if src %}
+{% assign image_src = src | replace: '_small.', '.' | replace: '_compact.', '.' | replace: '_medium.', '.' | replace: '_large.', '.' | replace: '_grande.', '.' %}
+{% endif %}
+{% endif %}
+
+{% unless image_src == blank %}
+<div class="product-grid-image">
+  <div class="product-grid-image--centered">
+    {{ image_src | img_tag }}
+  </div>
+</div>
+{% endunless %}
+
+<p class="h6">{{ item.title }}</p>
+
+<div class="rte">
+  {% if item.excerpt.size > 0 %}
+  <p>{{ item.excerpt | strip_html | truncatewords: 30 }}</p>
+  {% else %}
+  <p>{{ item.content | strip_html | truncatewords: 30 }}</p>
+  {% endif %}
+</div>
+{% endif %}

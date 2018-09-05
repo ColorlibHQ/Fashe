@@ -1,0 +1,118 @@
+<!--Start of Header Area-->
+{% include section.settings.header_layout %}
+<!--End of Header Area-->
+<script type="text/javascript">
+  $(document).ready(function() { 
+      /*--------------------------
+    Newsletter Popup Js 
+---------------------------- */ 
+      $("#newsletter-popup-conatiner").mouseup(function(e){
+        var popContainer = $("#newsletter-popup-conatiner");
+        var newsLatterPop = $("#newsletter-pop-up"); 
+        if(e.target.id != newsLatterPop.attr('id') && !newsLatterPop.has(e.target).length)
+        {
+          popContainer.fadeOut();
+        }
+      });
+      $('.hide-popup').on("click", function(){
+        var popContainer = $("#newsletter-popup-conatiner");
+        $('#newsletter-popup-conatiner')
+        {
+          popContainer.fadeOut();
+        }
+      });
+
+      $('#dont_show').on("click", function(){
+        $.cookie('popup_cookie', 'pclosed', {
+          expires: 3,
+          path: '/'
+        });
+        $('.hide-popup').trigger('click');
+      });
+      // console.log($.cookie('popup_cookie'));
+
+      {% if settings.show_pupup and template == 'index'%}
+      if($.cookie('popup_cookie') == 'pclosed') {
+        $('.hide-popup').trigger('click');
+      }
+      {% endif %}
+
+    });
+</script>
+{% schema %}
+{
+"name": "Header",
+"settings": [
+    {
+      "type": "select",
+      "id": "header_layout",
+      "label": "Select header layout",
+      "options": [
+        {
+        "value": "header-1",
+        "label": "Design 1"
+        },
+        {
+        "value": "header-2",
+        "label": "Design 2"
+        },
+        {
+        "value": "header-3",
+        "label": "Design 3"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Top Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_top_bar",
+      "label": "Use Top Bar"
+    },
+    {
+      "type": "text",
+      "id": "top_bar_message",
+      "label": "Top Bar Message"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email",
+      "label": "Show email text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_links",
+      "label": "Show social media icons",
+      "info": "Add accounts in Social media section"
+    },
+    {
+      "type": "text",
+      "id": "header_email_text",
+      "label": "Email Text"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_use_image",
+      "label": "Use a custom logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "logo",
+      "info": "400px wide .png recommended"
+    },
+    {
+      "type": "link_list",
+      "id": "header_menu_1",
+      "label": "Header Navigational Menu To Use"
+    }
+  ]
+
+}
+{% endschema %}

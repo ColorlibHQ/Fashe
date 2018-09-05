@@ -1,0 +1,50 @@
+<!-- New Product -->
+<section class="newproduct bgwhite p-t-45 p-b-105" data-section-id="{{ section.id }}">
+  {% include section.settings.collection_layout %}
+</section>
+{% schema %}
+{
+"name": "Featured collection",
+"class": "index-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "collection_layout",
+      "label": "Select section layout",
+      "options": [
+        {
+        "value": "feature-carousal",
+        "label": "Layout 1"
+        },
+		{
+        "value": "feature-carousal2",
+        "label": "Layout 2"
+        }
+      ]
+    },
+	{
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FEATURED PRODUCTS"
+    },
+    {
+      "id": "collection",
+      "type": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "products_tab_count",
+      "label": "No of products to show",
+      "default": "8"
+    }
+  ],
+  "presets": [
+    {
+    "name": "Featured collection",
+    "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

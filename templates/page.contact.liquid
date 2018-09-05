@@ -1,0 +1,51 @@
+<!-- Title Page -->
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" {% if settings.show_contact_top_image %}style="background-image:url({{ 'contact_top.jpg' | asset_url }});" {% endif %}>
+  <h2 class="l-text2 t-center">
+    {{ page_title }}
+  </h2>
+</section>
+<!-- content page -->
+<section class="bgwhite p-t-66 p-b-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 p-b-30">
+        <div class="p-r-20 p-r-0-lg">
+          <div class="contact-map size21">
+            {% if settings.show_map %}
+            {{ settings.map_code }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 p-b-30 leave-comment">
+        {% form 'contact' %}
+        {% if form.posted_successfully? %}
+        <p class="note form-success">
+          {{ 'contact.form.post_success' | t }}
+        </p>
+        {% endif %}
+
+        {% include 'form-errors-custom' %}
+        <h4 class="m-text26 p-b-36 p-t-15">{{ 'contact.form.leave_msg' | t }}</h4>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <input type="text" id="contactFormName" name="contact[name]" class="sizefull s-text7 p-l-22 p-r-22" placeholder="{{ 'contact.form.name' | t }}" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" />
+        </div>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <input type="text" id="contactFormEmail" name="contact[email]" class="sizefull s-text7 p-l-22 p-r-22" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" />
+        </div>
+        <div class="bo4 of-hidden size15 m-b-20">
+          <input type="text" id="contactFormPhone" name="contact[phone]" class="sizefull s-text7 p-l-22 p-r-22" placeholder="{{ 'contact.form.phone' | t }}" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" />
+        </div>
+        <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        <div class="w-size25">
+          <!-- Button -->
+          <!--<input class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" id="submitMessage" name="submitMessage" type="submit" value="{{ 'contact.form.send' | t }}" /> -->
+          <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+            {{ 'contact.form.send' | t }}
+          </button>
+        </div>
+        {% endform %}  
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<!-- Shipping -->
+<section class="shipping bgwhite p-t-62 p-b-46" data-section-id="{{ section.id }}">
+  {% include section.settings.layout %}
+</section>
+{% schema %}
+{
+  "name": "Service Boxes section",
+  "max_blocks": 4,
+  "settings": [
+	{
+        "type": "select",
+        "id": "layout",
+        "label": "Select layout design",
+        "options": [
+            {
+              "value": "feature-service1",
+              "label": "Design 1"
+            }
+          ]	
+    }
+  ],
+  "blocks": [
+    {
+      "type": "box",
+      "name": "Feature box",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_service_title",
+          "label": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "feature_service_description",
+          "label": "Feature description"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Service box section",
+    "category": "Feature Sections",
+    "blocks": [
+      {
+        "type": "box"
+      },
+      {
+        "type": "box"
+      }
+    ]
+  }]
+}
+{% endschema %}

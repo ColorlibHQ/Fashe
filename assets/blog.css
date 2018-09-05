@@ -1,0 +1,85 @@
+.article-page .article-list{
+	float: left;
+	width: 100%;
+}
+.article-page .article-item{
+	float: left;
+	width: 100%;
+	margin-bottom: 40px;
+}
+.article-page .article-name{
+	font-size: 24px;
+	text-transform: uppercase;
+	margin: 0px 0px 20px;
+}
+.articledate i{
+	margin-right: 5px;
+}
+.articledate{
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #787878;
+	padding: 10px 0px;
+	border-bottom: 1px solid #E5E5E5;
+	border-top: 1px solid #E5E5E5;
+	margin: 0px 0px 10px;
+}
+.intro-content > div:not(:last-child){
+	margin: 0 0 30px 0;
+}
+.intro-content{
+	font-size: 14px;
+	padding: 30px 0 0;
+	line-height: 30px;
+}
+.readmore-page i{
+	margin-left: 5px;
+	display: inline-block;
+	font-size: 13px;
+}
+.readmore-page{
+	background: #3c74b9;
+	color: #fff;
+	font-weight: 500;
+	font-size: 11px;
+	text-transform: uppercase;
+	border-radius: 3px;
+	padding: 10px 20px;
+	margin: 20px 0 0;
+	display: inline-block;
+	letter-spacing: 2px;
+}
+.readmore-page:hover{
+	background: #444;
+	color: #fff;
+}
+.article-title{
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0px 0px 20px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	color: #222;
+}
+.article-description{
+		font-size: 14px;
+margin: 20px 0px;
+line-height: 30px;
+}
+.article-container img{
+	float: left;
+	margin-right: 30px;
+}
+.article-description p{
+
+}
+.article-date{
+	display: inline-block;
+	font-size: 10px;
+	text-transform: uppercase;
+	color: #787878;
+	padding: 10px 0px;
+	border-bottom: 1px solid #E5E5E5;
+	border-top: 1px solid #E5E5E5;
+	margin: 0px 0px 10px;
+}

@@ -1,0 +1,31 @@
+{% for link in linklists[section.settings.header_menu_1].links %}
+{% assign child_list_handle = link.title | handleize %}
+{% assign megamenu = false %}
+
+{% for block in section.blocks %}
+{% if block.type == 'megamenu' %}
+{% if child_list_handle == block.settings.mega_menu %}
+{% include 'mega-menu' %}
+{% assign megamenu = true %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% if megamenu == false %}
+{% if linklists[child_list_handle].links != blank %}
+<li class="item-menu-mobile {% if link.active %} sale-noti{% endif %}">
+  <a href="{{link.url}}">{{link.title}}</a>
+  <ul class="sub-menu">
+    {% for childlink in linklists[child_list_handle].links %}
+    <li><a class="" href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+    {% endfor %}
+  </ul>
+  <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+</li>
+{% else %}
+<li class="item-menu-mobile {% if link.active %} sale-noti{% endif %}">
+  <a href="{{link.url}}">{{link.title}}</a>
+</li>
+{% endif %}
+{% endif %}
+{% endfor %}

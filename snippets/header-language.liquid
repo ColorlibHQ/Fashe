@@ -1,0 +1,16 @@
+<div class="language">
+  <form action="/language" method="post" enctype="multipart/form-data" >
+    <div class="btn-group" id="form-language">
+      <label>Language:</label>
+      <button class="btn-link dropdown-toggle btn-language" data-toggle="dropdown">
+        English												
+      </button>
+      <ul class="dropdown-menu">
+        <li><button class="btn btn-link btn-block language-select language-selected" type="button" name="en-gb">English</button></li>
+        <li><button class="btn btn-link btn-block language-select" type="button" name="fr-gb">French</button></li>
+      </ul>
+    </div>
+    <input type="hidden" name="code" value="" />
+    <input type="hidden" name="redirect" value="/" />
+  </form>
+</div>

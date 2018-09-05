@@ -1,0 +1,63 @@
+<li>
+  <span class=" button-view1 collapse1">
+    <a href="{{link.url}}">{{link.title}}</a>
+  </span>
+  <ul class="level2">
+    {% for i in (1..4) %}
+    {% capture handle %}mega_menu_col_{{ i }}{% endcapture %}
+
+    {% case block.settings[handle] %}
+
+    {% when 'menu' %}
+
+    {% capture menu_width %}mega_menu_width_col_{{ i }}{% endcapture %}
+    {% capture menu_title %}mega_menu_title_col_{{ i }}{% endcapture %}
+    {% capture menu %}mega_menu_ll_col_{{ i }}{% endcapture %}
+    <li>
+      <span class="button-view2 collapse1">
+        <a href="#">{{ block.settings[menu_title] }}</a>
+      </span>
+      <ul class="level3">
+        {% for link in linklists[block.settings[menu]].links limit:5%}
+        <li><span class="no-close">
+          <a href="{{link.url}}">{{link.title}}</a>
+          </span></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% when 'collection' %}
+
+    {% capture menu_collection %}mega_menu_collection_col_{{ i }}{% endcapture %}
+    <li>
+      <span class="button-view2 collapse1">
+        <a href="{{ collections[block.settings[menu_collection]].url }}">{{ collections[block.settings[menu_collection]].title }}</a>
+      </span>
+      <ul class="level3">
+        {% for product in collections[block.settings[menu_collection]].products limit:5 %}
+        <li><span class="no-close">
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+          </span></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% when 'image' %}
+
+    {% capture menu_title %}mega_menu_title_col_{{ i }}{% endcapture %}
+    {% capture menu_image %}mega_menu_image_col_{{ i }}.jpg{% endcapture %}
+    {% capture menu_image_link %}mega_menu_image_link_col_{{ i }}{% endcapture %}
+    <li>
+      <ul class="level3">
+        {% for product in collections[block.settings[menu_collection]].products limit:5 %}
+        <li>
+          <a href="{{ block.settings[menu_image_link] }}" class="post-thumbnail">
+            <img src="{{ menu_image | asset_url }}"alt=" ">
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    {% endcase %}
+    {% endfor %}
+  </ul>
+</li>

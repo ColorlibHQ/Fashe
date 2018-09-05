@@ -1,0 +1,63 @@
+<!-- Banner -->
+{% include section.settings.feature_advert_design %}
+{% schema %}
+{
+  "name": "Ad banner section",
+  "class": "index-section index-section--flush",
+  "max_blocks": 6,
+  "settings": [
+    {
+    "type": "select",
+    "id": "feature_advert_design",
+    "label": "Select Design",
+    "options": [
+      {
+      "value": "feature-advert3",
+      "label": "Design 3 (Three images )"
+      },
+	  {
+      "value": "feature-advert6",
+      "label": "Design 6 (Six images )"
+      }
+    ],
+    "default": "feature-advert6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "ad image"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+		}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Ad banner section",
+    "category": "Image",
+    "blocks": [
+      {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+    ]
+  }]
+}
+{% endschema %}

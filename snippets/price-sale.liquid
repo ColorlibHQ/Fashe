@@ -1,0 +1,33 @@
+{% assign saved_amount = compare_price | minus: product_price %}
+
+{% comment %}
+  Unless this store uses multiple currencies,
+  we will remove the decimals when they are equal to 00,
+  or when the amount is > 10 (dollars, pounds, etc.).
+{% endcomment %}
+
+{% if shop.money_format contains 'money' %}
+  {% assign saved_amount = saved_amount | money %}
+{% else %}
+  {% if saved_amount > 1000 %}
+    {% if shop.money_format contains '{{amount}}' and shop.money_format contains '.' %}
+      {% assign saved_amount = saved_amount | money_without_trailing_zeros %}
+    {% elsif shop.money_format contains '{{amount}}' %}
+      {% assign saved_amount = saved_amount | money | split: '.' | first %}
+    {% elsif shop.money_format contains '{{amount_with_comma_separator}}' %}
+      {% assign saved_amount = saved_amount | money | split: ',' | first %}
+    {% else %}
+      {% assign saved_amount = saved_amount | money_without_trailing_zeros %}
+    {% endif %}
+  {% else %}
+    {% assign saved_amount = saved_amount | money_without_trailing_zeros %}
+  {% endif %}
+{% endif %}
+
+{{ 'products.general.save_html' | t: saved_amount: saved_amount }}
+
+{% comment %}
+{% if compare_price > product_price %}
+  Save {{ compare_price | minus: product_price | times: 100 | divided_by: compare_price | round }}%
+{% endif %}
+{% endcomment %}

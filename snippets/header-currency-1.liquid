@@ -1,0 +1,17 @@
+{% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+{% assign supported_codes = settings.supported_currencies | split: ' ' %}   
+<div class="btn-group" id="form-currency">
+  <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">		
+    <span class="text-ex">{{ 'general.header.currency'| t }}</span><i class="ion-chevron-down"></i>
+    <span class="selected-currency hidden">{{ shop.currency }}</span>
+  </button>
+  {% if settings.show_multiple_currencies %}
+  <ul name="currencies" class="dropdown-menu">
+    {% for code in supported_codes %}
+    <li>
+      <button class="currency-select btn btn-link btn-block {% if code == shop.currency %}item-selected{% endif %}" type="button" name="{{ code }}">{{ code }}</button>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>

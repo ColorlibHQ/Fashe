@@ -1,0 +1,44 @@
+<!-- Blog -->
+{% include section.settings.layout %}         
+{% schema %}
+{
+   "name": "Blog section",
+   "class": "index-section index-section--flush",
+   "max_blocks": 3,
+   "settings": [
+      {
+         "type": "select",
+         "id": "layout",
+         "label": "Select layout design",
+         "options": [
+            {
+               "value": "blog-1",
+               "label": "Design 1"
+            },
+			{
+               "value": "blog-2",
+               "label": "Design 2"
+            }
+         ]
+      },
+      {
+         "type": "text",
+         "id": "heading",
+         "label": "Heading",
+         "default": "LATEST BLOGS & UPDATES"
+      },
+      {
+         "type": "blog",
+         "id": "blog",
+         "label": "Blog"
+      }
+   ],
+   "blocks": [],
+   "presets": [
+      {
+         "name": "Blog section",
+         "category": "Feature Sections"
+      }
+   ]
+}
+{% endschema %}

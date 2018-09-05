@@ -1,0 +1,26 @@
+{% assign layout = section.settings.header_layout | strip %}
+
+<div class="search-containers pull-right">
+  <div class="search-container">
+    <i class="ion-ios-search-strong"></i>
+    <div class="search-content">
+      <div class="container">
+        <div id="search">
+          <h1>{{ 'layout.search_bar.placeholder' | t }}</h1>
+          <input type="text" name="q" id="text-search" value="{{ search.terms | escape }}" placeholder="{{ 'layout.search_bar.placeholder' | t }}" class="form-control input-lg" aria-label="{{ 'layout.search_bar.placeholder' | t }}" />
+          <button type="button" class="btn btn-default btn-lg">
+            <i class="ion-ios-search-strong"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.search-container > i').click(function(){
+        $(".search-content").slideToggle();
+        $(this).toggleClass("ion-ios-search-strong ion-android-close")
+      });
+    });
+  </script>
+</div>

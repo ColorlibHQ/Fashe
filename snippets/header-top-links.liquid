@@ -1,0 +1,25 @@
+<div class="box-content">
+  <div id="top-links">
+    <div class="box-link">
+      <ul class="list-inline links">
+        {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+        <li class="dropdown"><a href="/account"><span>{{ 'homepage.navigation.my_account' | t }}</span></a></li>
+        <li><a href="/account/logout" id="customer_logout_link"><span>{{ 'layout.customer.log_out' | t }}</span></a></li>
+        {% else %}
+        <li><a href="/account/login" id="customer_login_link"><span>{{ 'layout.customer.sign_in' | t }}</span></a></li>
+        {% if shop.customer_accounts_optional %}
+        <li><a href="/account/register" id="customer_register_link"><span>{{ 'layout.customer.create_account' | t }}</span></a></li>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        <li><a href="/pages/wishlist"><span>{{ 'homepage.navigation.wish_list' | t }}</span></a></li>
+        <li><a href="/cart"><span>{{ 'homepage.navigation.shopping_cart' | t }}</span></a></li>
+        <li><a href="/checkout"><span>{{ 'homepage.navigation.checkout' | t }}</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="language-currency">
+    {% include 'header-currency' %}
+  </div>
+</div>

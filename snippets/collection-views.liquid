@@ -1,0 +1,9 @@
+{% comment %}
+Toggle between collection.liquid and collection.list.liquid with the
+?view= parameter.
+{% endcomment %}
+<div class="btn-group">
+  <button type="button" id="list-view" data-view="list" class="btn btn-default {% if template contains 'list' %} selected{% endif %} " data-toggle="tooltip" title="List"  data-view="list"><i class="fa fa-th-list"></i></button>
+  <button type="button" id="grid-view" data-view="grid" class="btn btn-default {% unless template contains 'list' %} selected{% endunless %}" data-toggle="tooltip" title="Grid"  data-view="grid"><i class="fa fa-th"></i></button>
+</div>
+<!-- Nav tabs -->

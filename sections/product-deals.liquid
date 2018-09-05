@@ -1,0 +1,96 @@
+<!-- Banner2 -->
+{% include section.settings.collection_layout %}
+{% schema %}
+{
+   "name": "Deal of the day",
+   "max_blocks": 1,
+   "settings": [
+    {
+      "type": "select",
+      "id": "collection_layout",
+      "label": "Select section layout",
+      "options": [
+        {
+        "value": "deals-layout1",
+        "label": "Design 1"
+        },
+		{
+        "value": "deals-layout2",
+        "label": "Design 2"
+        }
+      ]
+    },
+	{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Collection image",
+	  "info": "720x539px"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Ad Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Ad subheading"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Ad link text"
+    },
+    {
+    "type": "url",
+    "id": "link",
+    "label": "Image URL"
+    }
+   ],
+   "blocks": [
+      {
+         "type": "deal",
+         "name": "deal product",
+         "settings": [
+            {
+               "type": "product",
+               "id": "product_deal",
+               "label": "Product"
+            },
+            {
+              "type": "checkbox",
+              "id": "custom_image",
+              "label": "Set custom image?",
+              "default": true
+            },
+            {
+              "type": "image_picker",
+              "id": "product_image",
+              "label": "Product image",
+              "info": "720x539px"
+            },
+            {
+               "type": "text",
+               "id": "expiry_deal",
+               "label": "Expiry",
+               "info": "(yyyy,mm,dd)"
+            }
+         ]
+      }
+   ],
+   "presets": [
+      {
+         "name": "Deals section",
+         "category": "Collection",
+         "blocks": [
+            {
+               "type": "deal"
+            },
+            {
+               "type": "deal"
+            }
+         ]
+      }
+   ]
+}
+{% endschema %}

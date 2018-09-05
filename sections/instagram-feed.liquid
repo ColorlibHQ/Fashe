@@ -1,0 +1,125 @@
+<!-- Instagram -->
+<section class="instagram p-t-20" id="instagram_block_home" data-section-id="{{ section.id }}">
+  {% include section.settings.layout %}
+</section>
+{% if template == 'index' %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    var feed = new Instafeed({
+      get: "user",
+      userId: '{{ section.settings.insta_access_token | split: "." | first }}',
+      accessToken: '{{ section.settings.insta_access_token }}',
+      limit: "{{ section.settings.insta_images_fetch }}",
+      resolution: "standard_resolution",
+      template: '<div class="block4 wrap-pic-w" >'+
+      '<img src="\{\{image\}\}">'+
+      '<a href="\{\{image\}\}" target="_blank" class="block4-overlay sizefull ab-t-l trans-0-4">'+
+      '<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">'+
+      '<i class="icon_heart_alt fs-20 p-r-12" aria-hidden="true"></i>'+
+      '<span class="p-t-2">\{\{comments\}\}</span></span>'+
+      '<div class="block4-overlay-txt trans-0-4 p-l-40 p-r-25 p-b-30">'+
+      '<p class="s-text10 m-b-15 h-size1 of-hidden">\{\{caption\}\}</p>'+
+      '</div>  </a>  </div>',
+      target: "instafeed",
+      after: function () {
+      $("#instagram_block_home .flex-w").owlCarousel({
+      autoPlay: false,
+      items: {{ section.settings.no_of_products }},
+      loop: true,
+      navSpeed: 1000,
+      dotsSpeed: 1000,
+      autoplaySpeed: 1000,
+      nav: true,
+      dots: false,
+      navText: ['<i class="ion-chevron-left"></i>', '<i class="ion-chevron-right"></i>'],
+        responsive: {
+          0: {
+            items: 1
+          },
+          480: {
+            items: 1
+          },
+          640: {
+            items: 2
+          },
+          991: {
+            items: 3
+          },
+          1200: {
+            items: {{ section.settings.no_of_products }}
+          }
+        }
+      });
+    }
+  });
+  feed.run();
+  }); 
+  {% endif %}
+</script>
+
+<script type="text/javascript">
+ /* $('.flex-w').magnificPopup({
+    type: 'image',
+    delegate: 'm',
+    gallery: {
+      enabled : true
+    }
+  });*/
+</script>
+{% schema %}
+{
+"name": "Instafeed section",
+"class": "insta-section index-section--flush",
+"settings": [
+{
+        "type": "select",
+        "id": "layout",
+        "label": "Select layout design",
+        "options": [
+          {
+            "value": "instafeed",
+            "label": "Design 1"
+          }
+        ],
+    	"default": "instafeed"
+      },
+{
+"type": "checkbox",
+"id": "homepage_instagram_feed",
+"label": "Show Instagram feed",
+"default": true
+},
+{
+"type": "text",
+"id": "insta_title",
+"label": "Title",
+"default": "@ FOLLOW US ON INSTAGRAM"
+},
+{
+"type": "text",
+"id": "insta_access_token",
+"label": "Access Token",
+"default": "4032644233.1677ed0.c17607b4a50e46b1a13a7a7713af871f",
+"info": "Can be found from http:\/\/instagram.pixelunion.net"
+},
+{
+"type": "text",
+"id": "insta_images_fetch",
+"label": "No of images to fetch",
+"default": "10"
+},
+    {
+      "type": "text",
+      "id": "no_of_products",
+      "label": "No of products in a row",
+      "default": "5"
+    }
+],
+"blocks": [
+],
+"presets": [{
+"name": "Instagram Feed",
+"category": "Feature Sections"
+}]
+}
+{% endschema %}

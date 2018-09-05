@@ -1,0 +1,73 @@
+<div class="vermagemenu hidden-xs hidden-sm">
+  <div class="content-vermagemenu">
+    <div class="title-vetical">
+      <h2>{{ 'homepage.navigation.shop_by_categories' | t }}</h2>
+    </div>
+    <div class="navleft-container">
+      <div id="pt_vmegamenu" class="pt_vmegamenu">
+        {% for link in linklists[section.settings.header_menu_2].links %}
+        {% assign child_list_handle = link.title | handleize %}
+        {% assign megamenu = false %}
+        
+        {% for block in section.blocks %}
+        {% if block.type == 'megamenu' %}
+        {% if child_list_handle == block.settings.mega_menu %}
+        {% include 'ver-mega-menu' %}
+        {% assign megamenu = true %}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% if megamenu == false %}
+        {% if linklists[child_list_handle].links != blank %}
+        <div class="pt_ver_menu nav-{{ forloop.index }} had-child">
+          <div class="parentMenu">
+            <a href="{{link.url}}">
+              <span>{{link.title}}</span>
+            </a>
+          </div>
+          <div class="wrap-popup">
+            <div class="popup" style="display: none;">
+              <div class="content-popup">
+                <div class="arrow-left-menu"></div>
+                <div class="block1" >
+                  <div class="column first">
+                    <div class="itemMenu level1">
+                      <div class="itemSubMenu level0">
+                        <div class="itemMenu level1">
+                          {% for childlink in linklists[child_list_handle].links %}
+                          <a class="itemMenuName level0 act" href="{{ childlink.url }}"><span>{{ childlink.title | escape }}</span></a>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearBoth"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div id="pt_ver_menu{{ forloop.index }}" class="pt_ver_menu nav-{{ forloop.index }} pt_ver_menu_no_child">
+          <div class="parentMenu">
+            <a href="{{link.url}}">
+              <span>{{link.title}}</span>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  //<![CDATA[
+  var CUSTOMMENU_POPUP_EFFECT = 1;
+  var VCUSTOMMENU_POPUP_TOP_OFFSET = 20//]]>
+  $('.vermagemenu .title-vetical').click(function () {
+    $( ".navleft-container" ).slideToggle("slow");
+  });
+</script>

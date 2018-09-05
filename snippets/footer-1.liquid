@@ -1,0 +1,60 @@
+<!-- Footer -->
+<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+  <div class="flex-w p-b-90">
+    <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+      <h4 class="s-text12 p-b-30">
+        {{ 'layout.footer.contact' | t }}
+      </h4>
+      <div>
+        <p class="s-text7 w-size27">
+          {{ section.settings.footer_about_us }}
+        </p>
+        <div class="flex-m p-t-30">
+          {% if section.settings.footer_social_enable %}
+          {% include 'social-button' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+      <h4 class="s-text12 p-b-30">{{ linklists[section.settings.footer_menu_1].title }}</h4>
+      <ul>
+        {% for link in linklists[section.settings.footer_menu_1].links %}
+        <li class="p-b-9"><a href="{{link.url}}" class="s-text7">{{link.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+      <h4 class="s-text12 p-b-30">{{ linklists[section.settings.footer_menu_2].title }}</h4>
+      <ul>
+        {% for link in linklists[section.settings.footer_menu_2].links %}
+        <li class="p-b-9"><a href="{{link.url}}" class="s-text7">{{link.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+      <h4 class="s-text12 p-b-30">{{ linklists[section.settings.footer_menu_3].title }}</h4>
+      <ul>
+        {% for link in linklists[section.settings.footer_menu_3].links %}
+        <li class="p-b-9"><a href="{{link.url}}" class="s-text7">{{link.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+      {% if section.settings.footer_newsletter_enable %}
+      {% include 'newsletter' %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="t-center p-l-15 p-r-15">
+    {% unless shop.enabled_payment_types == empty %}
+    {% assign enabled_payment_types = 'visa,mastercard,amex,paypal' | remove: ' ' | split: ',' %}
+    {% for type in enabled_payment_types %}
+    <a class="f-payment h-size2 icon fa fa-cc-{{ type }} fa-2x" aria-hidden="true"></a>
+    {% endfor %}
+    {% endunless %}
+    <div class="t-center s-text8 p-t-20">
+      {{ section.settings.footer_content_text }}
+    </div>
+  </div>
+</footer>

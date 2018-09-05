@@ -1,0 +1,14 @@
+<div class="flex-w p-l-15 p-r-15">
+  {% if section.blocks.size > 0 %}
+  {% for block in section.blocks limit:3 %}
+  <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 {% cycle '','bo2','' %} respon1">
+    <h4 class="m-text12 t-center">
+      {{ block.settings.feature_service_title }}
+    </h4>
+    <span class="s-text11 t-center">
+      {{ block.settings.feature_service_description }}
+    </span>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>

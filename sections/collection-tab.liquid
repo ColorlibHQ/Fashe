@@ -1,0 +1,71 @@
+{% include section.settings.products_tab_layout %}
+{% schema %}
+{
+  "name": "Collection Tabs",
+  "class": "index-section",
+	 "settings": [
+      {
+        "type": "header",
+        "content": "Select the collection to show products from"
+      },
+      {
+        "type": "select",
+        "id": "products_tab_layout",
+        "label": "Select section layout",
+        "options": [
+          {
+            "value": "products-tab1",
+            "label": "Design 1"
+          },
+		  {
+            "value": "products-tab2",
+            "label": "Design 2"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "type": "collection",
+        "id": "products_tab_collection1",
+        "label": "Collection for Tab 1"
+      },
+      {
+        "type": "collection",
+        "id": "products_tab_collection2",
+        "label": "Collection for Tab 2"
+      },
+      {
+        "type": "collection",
+        "id": "products_tab_collection3",
+        "label": "Collection for Tab 3"
+      },
+      {
+        "type": "collection",
+        "id": "products_tab_collection4",
+        "label": "Collection for Tab 4"
+      },
+      {
+        "type": "collection",
+        "id": "products_tab_collection5",
+        "label": "Collection for Tab 5"
+      },
+      {
+        "type": "text",
+        "id": "products_tab_count",
+        "label": "No of products to show",
+        "default": "8"
+      }
+    ],
+  "presets": [
+    {
+      "name": "Collection Tabs",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

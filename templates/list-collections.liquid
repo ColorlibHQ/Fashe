@@ -1,0 +1,12 @@
+{% include 'breadcrumb' %}
+<div class="container p-t-30">
+  <div class="row">
+    {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
+      {% include 'collection-grid-item' %}
+    </div>
+    {% endunless %}
+    {% endfor %}
+  </div>
+</div>

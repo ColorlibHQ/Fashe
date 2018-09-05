@@ -1,0 +1,49 @@
+{% comment %}
+  This snippet renders meta data needed to create a Twitter card
+  for products and articles.
+
+  Your cards must be approved by Twitter to be activated
+    - https://dev.twitter.com/docs/cards/validation/validator
+
+  More information:
+   - https://dev.twitter.com/docs/cards/types/summary-card
+{% endcomment %}
+{% comment %}
+  Twitter user name of the site, based on theme settings
+{% endcomment %}
+
+<meta name="twitter:card" content="summary">
+{% unless settings.social_twitter_link == blank %}
+  <meta name="twitter:site" content="@{{ settings.social_twitter_link | split: 'twitter.com/' | last }}">
+{% endunless %}
+{% if template contains 'index' %}
+  <meta name="twitter:title" content="{{ page_title }}">
+   {% if home_page_content_enabled %}
+     <meta name="twitter:description" content="{{ pages[settings.home_content].content | strip_html | truncate: 200, '' | escape }}">
+   {% else %}
+     <meta name="twitter:description" content="{{ page_description | escape }}">
+   {% endif %}
+   {% if hero_enabled %}
+     {% for i in (1..6) %}
+       {% capture slide %}slide_{{ i }}{% endcapture %}
+       {% capture slide_img %}slide_{{ i }}_1024x1024.jpg{% endcapture %}
+       {% if settings[slide] %}
+        <meta name="twitter:image" content="https:{{ slide_img | asset_url }}">
+         {% break %}
+       {% endif %}
+     {% endfor %}
+   {% endif %}
+{% elsif template contains 'product' %}
+  <meta name="twitter:card" content="product">
+  <meta name="twitter:title" content="{{ product.title | strip_html | escape }}">
+  <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 200, '' | escape }}">
+  <meta name="twitter:image" content="https:{{ product | img_url: 'large' }}">
+  <meta name="twitter:image:width" content="480">
+  <meta name="twitter:image:height" content="480">
+{% elsif template contains 'article' %}
+  <meta name="twitter:title" content="{{ article.title | strip_html | escape }}">
+  <meta name="twitter:description" content="{{ article.content | strip_html | truncatewords: 200, '' | escape }}">
+  {% if article.image %}
+    <meta property="twitter:image" content="https:{{ article | img_url: '1024x1024' }}">
+  {% endif %}
+{% endif %}

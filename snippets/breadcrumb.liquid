@@ -1,0 +1,79 @@
+{% include 'advanced-tag-loop' %}
+
+{% unless template == 'index' %} {% comment %} or template == 'cart' {% endcomment %}
+
+<!-- breadcrumb -->
+<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
+  <a class="s-text16" href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">
+    {{ 'general.breadcrumbs.home' | t }}<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+  </a>
+  {% if template contains 'product' %}
+
+  {% if collection %}
+  {% if collection.handle %}
+  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+  {{ collection.title | link_to: url }}
+  {% endif %}
+  {% endif %}
+  <a class="s-text16" href=""><span>{{ product.title }}</span></a>
+
+  {% elsif template contains 'collection' and collection.handle %}
+
+  {% if current_tags %}
+
+  {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+  {{ collection.title | link_to: url }}
+
+
+  {% for tag in current_tags %}
+
+  {% assign is_advanced_tag = false %}
+  {% assign cat = tag | split: '_' | first %}
+  {% unless cat == tag %}
+  {% if cat_array contains cat %}
+  {% assign is_advanced_tag = true %}
+  {{ tag | remove_first: cat | remove_first: '_' }}
+  {% endif %}
+  {% endunless %}
+
+  {% if is_advanced_tag == false %}
+  {{ tag }}
+  {% endif %}
+
+  {% unless forloop.last %}
+  {% endunless %}
+
+  {% endfor %}
+
+  {% else %}
+
+  <a class="s-text16" href=""><span>{{ collection.title }}</span></a>
+  {% endif %}
+
+  {% elsif template == 'blog' %}
+
+  {% if current_tags %}
+  {{ 'reaching' }}
+  {{ blog.title | link_to: blog.url }}
+  <span class="navigation">&gt;</span>
+  <span>{{ current_tags | join: " + " }}</span>
+  {% else %}
+  <span class="s-text17">{{ blog.title }}</span>
+  {% endif %}
+
+  {% elsif template == 'article' %}
+  <a class="s-text16" href="{{ blog.url }}"><span>{{ blog.title }}</span><i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i></a>
+
+  <span class="s-text17">{{ article.title }}</span>
+
+  {% elsif template contains 'page' %}
+
+  <a class="s-text16" href=""><span>{{ page.title }}</span></a>
+
+  {% else %}
+
+  <a class="s-text16" href=""><span>{{ page_title }}</span></a>
+  {% endif %}
+</div>
+<!--End Breadcumb area -->
+{% endunless %}

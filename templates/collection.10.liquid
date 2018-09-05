@@ -1,0 +1,70 @@
+<!-- Title Page -->
+<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" {% if settings.show_collection_top_image %}
+         style="background-image:url({{ 'collection_top.jpg' | asset_url }});" {% endif %}>
+  <h2 class="l-text2 t-center">
+    {{ page_title }}
+  </h2>
+  {% if collection.description != blank %}
+  <p class="m-text13 t-center">
+    {{ collection.description }}
+  </p>
+  {% endif %}
+</section>
+<!-- Content page -->
+<section class="bgwhite p-t-55 p-b-65">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+        {% if settings.show_collection_sidebar != false %}
+        {% include 'collection-sidebar' %}
+        {% endif %}
+      </div>
+      <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+        <div id="wraper_ajax" class="loadding_ajaxcart" ><i class="fa fa-spinner fa-spin"></i></div>
+        {% paginate collection.products by 10 %}
+        <!--  -->
+        <div class="flex-sb-m flex-w p-b-35">
+          <div class="flex-w">
+            <div class="rs2-select2 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+              {% include 'collection-sorting' %}
+            </div>
+            <div class="rs2-select2 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+              {% include 'collection-show-count' %}
+            </div>
+          </div>
+          <span class="s-text8 p-t-5 p-b-5">
+            {% assign current_first_item = paginate.current_offset | plus:1 %}
+            {% if paginate.pages == paginate.current_page %}
+            {% assign current_displayed = paginate.items | modulo:paginate.page_size %}
+            {% assign current_last_item = paginate.items %}
+            {% else %}
+            {% assign current_displayed = paginate.page_size %}
+            {% assign current_last_item = paginate.current_offset | plus:paginate.page_size %}
+            {% endif %}
+            <div class="product-results">{{ 'products.pagination.showing' | t }} {{ current_first_item }} {{ 'products.pagination.to' | t }} {% unless current_first_item == current_last_item %}{{ current_last_item }}{% endunless %} {{ 'products.pagination.of' | t }} {{ paginate.items }} {{ 'products.pagination.items' | t }}</div>
+          </span>
+        </div>
+        <!-- Product -->
+        <div class="row" id="custom-products">
+          {% for product in collection.products %}
+          {% if settings.show_collection_sidebar != false %}
+          <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+            {% include 'product-grid-item' %}
+          </div>
+          {% else %}
+          <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+            {% include 'product-grid-item' %}
+          </div>
+          {% endif %}
+          {% else %}
+          <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+            <p>{{ 'collections.general.no_matches' | t }}</p>
+          </div>
+          {% endfor %}
+        </div>
+        {% include 'pagination' %}
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+</section>

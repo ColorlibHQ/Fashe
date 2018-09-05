@@ -1,0 +1,43 @@
+{% assign number_of_products = 8 %}
+{% assign number_of_products_to_fetch = number_of_products | plus: 1 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+{% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+{% assign found_a_collection = true %}
+{% assign collection = c %}
+{% endif %}
+{% endfor %}
+{% endif %}
+<section class="relateproduct bgwhite p-t-45 p-b-138">
+  <div class="container">
+    {% if collection and collection.products_count > 1 %}
+    <!--Featured Product Area Start-->
+    <div class="sec-title p-b-60">
+      <h3 class="m-text5 t-center">
+        {{ 'products.general.related_products' | t }}
+      </h3>
+    </div>
+    <div class="wrap-slick2">
+      <div class="slick2">
+
+        {% assign current_product = product %}
+        {% assign current_product_found = false %}
+        {% for product in collection.products limit: number_of_products_to_fetch %}
+        {% if product.handle == current_product.handle %}
+        {% assign current_product_found = true %}
+        {% else %}
+        {% unless current_product_found == false and forloop.last %}
+        <div class="item-slick2 p-l-15 p-r-15">
+          {% include 'product-grid-item' %}
+        </div>
+        {% endunless %}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <!--End of Featured Product Area-->
+    {% endif %}
+  </div>
+</section>

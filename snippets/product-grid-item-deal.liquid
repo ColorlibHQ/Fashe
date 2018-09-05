@@ -1,0 +1,106 @@
+{% unless current_collection %}
+{% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available  %}
+{% assign sold_out = false %}
+{% endif %}
+{% assign img_size = settings.img_size_grid %}
+<div class="bgwhite hov-img-zoom pos-relative p-b-20per-ssm">
+  <a href="{{ product.url | within: collection }}">
+    {% if block.settings.custom_image %}
+    <img class="" src="{{ block.settings.product_image | img_url: '720x539' }}" alt="">
+    {% else %}
+    <img class="" src="{{ product.featured_image.src | img_url: '720x539' }}" alt="{{ product.featured_image.alt | escape }}">
+    {% endif %}
+  </a>
+  <div class="ab-t-l sizefull flex-col-c-b p-l-15 p-r-15 p-b-20">
+    <div class="t-center">
+      <a href="{{ product.url | within: collection }}" class="dis-block s-text3 p-b-5">
+        {{ product.title }}
+      </a>
+      {% if product.compare_at_price > product.price %}
+      <span class="block2-oldprice m-text7 p-r-5">
+        {{ product.compare_at_price_max | money }}
+      </span>
+      <span class="block2-newprice m-text8 p-r-5">
+        {{ product.price | money }}
+      </span>
+      {% else %}
+      <span class="block2-price m-text6 p-r-5">
+        {{ product.price | money }}
+      </span>
+      {% endif %}
+    </div>
+    <div class="flex-c-m p-t-44 p-t-30-xl">
+      <div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
+        <span class="m-text10 p-b-1 days" id="days">
+
+        </span>
+        <span class="s-text5">
+          days
+        </span>
+      </div>
+      <div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
+        <span class="m-text10 p-b-1 hours" id="hours">
+        </span>
+        <span class="s-text5">
+          hrs
+        </span>
+      </div>
+      <div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
+        <span class="m-text10 p-b-1 minutes" id="minutes">
+        </span>
+        <span class="s-text5">
+          mins
+        </span>
+      </div>
+      <div class="flex-col-c-m size3 bo1 m-l-5 m-r-5">
+        <span class="m-text10 p-b-1 seconds" id="seconds">
+        </span>
+        <span class="s-text5">
+          secs
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  // Set the date we're counting down to
+  var countDownDate = new Date("{{ block.settings.expiry_deal }}").getTime();
+
+                               // Update the count down every 1 second
+                               var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="demo"
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+    }
+  }, 1000);
+</script>

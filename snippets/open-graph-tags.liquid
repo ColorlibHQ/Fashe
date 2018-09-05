@@ -1,0 +1,66 @@
+{% comment %}
+Open Graph tags.
+{% endcomment %}
+{% if template contains 'index' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if home_page_content_enabled %}
+    <meta property="og:description" content="{{ pages[settings.home_content].content | strip_html | escape }}" >
+  {% else %}
+    {% if page_description %}
+      <meta property="og:description" content="{{ page_description }}"> 
+    {% endif  %} 
+  {% endif %}
+  {% if hero_enabled %}
+    {% for i in (1..6) %}
+      {% capture slide %}slide_{{ i }}{% endcapture %}
+      {% capture slide_img %}slide_{{ i }}_1024x1024.jpg{% endcapture %}
+      {% if settings[slide] %}
+        <meta property="og:image" content="http:{{ slide_img | asset_url }}">
+        <meta property="og:image:secure_url" content="https:{{ slide_img | asset_url }}">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% elsif template contains 'product' %}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title | strip_html | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% for image in product.images limit:3 %}
+  <meta property="og:image" content="http:{{ image.src | img_url: '1024x1024' }}">
+  <meta property="og:image:secure_url" content="https:{{ image.src | img_url: '1024x1024' }}">
+  {% endfor %}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
+  <meta property="og:price:currency" content="{{ shop.currency }}">
+{% elsif template == 'password' %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ shop.name | escape }}">
+  <meta property="og:url" content="{{ shop.url }}">
+  {% if settings.logo_use_image %}
+  <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+  {% endif %}
+{% elsif template contains 'article' %}
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ article.title | strip_html | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if article.image %}
+  <meta property="og:image" content="http:{{ article | img_url: '1024x1024' }}">
+  <meta property="og:image:secure_url" content="https:{{ article | img_url: '1024x1024' }}">
+  {% endif %}
+{% else %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% if settings.logo_use_image %}
+  <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
+  <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+  {% endif %}
+{% endif %}
+{% unless template contains 'index' %}
+  {% if page_description %}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {% endif %}
+{% endunless %}
+  <meta property="og:site_name" content="{{ shop.name }}">
+

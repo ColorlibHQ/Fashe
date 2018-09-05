@@ -1,0 +1,134 @@
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+{% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+{% include 'breadcrumb' %}
+<!-- content page -->
+<section class="bgwhite p-t-60 p-b-25">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-lg-9 p-b-80">
+        <div class="p-r-50 p-r-0-lg">
+          <div class="p-b-40">
+            {% if article.image %}
+            <div class="blog-detail-img wrap-pic-w">
+              <a href="{{ article | img_url: 'master' }}">
+                <img class="" src="{{ article | img_url: 'master' }}" alt="">
+              </a>
+            </div>
+            {% endif %}
+            <div class="blog-detail-txt p-t-33">
+              <h4 class="p-b-11 m-text24">
+                {{ article.title }}
+              </h4>
+              <div class="s-text8 flex-w flex-m p-b-21">
+                <span>
+                  {{ 'blogs.article.by' | t }} {{ article.author }}
+                  <span class="m-l-3 m-r-6">|</span> 
+                </span>
+                <span>
+                  <time datetime="{{ article.published_at }}">{{ article.published_at | date: "%d %b, %Y" }}</time>
+                  <span class="m-l-3 m-r-6">|</span> 
+                </span>
+                <span>
+                  {% include 'tags-article' %}
+                  <span class="m-l-3 m-r-6">|</span> 
+                </span>
+                <span>
+                  {{ article.comments_count }} {{ 'blogs.article.comments' | t }}
+                </span>
+              </div>
+              <p class="p-b-25">
+                {{ article.content }}
+              </p>
+            </div>
+            <div class="flex-m flex-w p-t-20">
+              <span class="s-text20 p-r-20">
+                {{ 'blogs.sidebar.tags_cloud' | t }}
+              </span>
+              <div class="wrap-tags flex-w">
+                {% for tag in article.tags %}
+                <a class="tag-item" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!-- Leave a comment -->
+          {% if blog.comments_enabled? %}
+          {% comment %}
+          Just like blog.liquid page, define how many comments should be on each page.
+          {% endcomment %}
+          {% paginate article.comments by 5 %}
+          {% comment %}
+          #comments is required, it is used as an anchor link by Shopify.
+          {% endcomment %}
+          <div class="reply-comment-area" id="#comments">
+            <h4 class="m-text25 p-b-14">{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h4>
+            {% if comment and comment.created_at %}
+            <div class="row">
+              {% if blog.moderated? %}
+              <div class="item-message-box item-message-success">
+                <p><span class="lnr lnr-hand"></span> {{ 'blogs.comments.success_moderated' | t }}</p>
+              </div>
+              {% else %}
+              <div class="item-message-box item-message-success">
+                <p><span class="lnr lnr-hand"></span> {{ 'blogs.comments.success' | t }}</p>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            {% if number_of_comments > 0 %}
+            {% comment %}
+            If a comment was just submitted with no blank field, show it.
+            {% if comment and comment.created_at %}
+            {% include 'comment' %}
+            {% endif %}
+            {% endcomment %}
+
+            {% comment %}
+            Showing the rest of the comments.
+            {% endcomment %}
+            {% for comment in article.comments %}
+            {% include 'comment' %}
+            {% endfor %}
+            <!-- end comments-list -->
+            {% if paginate.pages > 1 %}
+            <div class="pagination">
+              {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
+          <div class="leave-comment">
+            <h4 class="m-text25 p-b-14">{{ 'blogs.comments.title' | t }}</h4>
+            {% form 'new_comment', article %}
+            {{ form.errors | default_errors }}
+            <p class="s-text8 p-b-40">{{ 'blogs.comments.description' | t }}</p>
+            <textarea class="dis-block s-text7 size18 bo12 p-l-18 p-r-18 p-t-13 m-b-20" name="comment[body]" id="CommentBody" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+            <div class="bo12 of-hidden size19 m-b-20">
+              <input type="text" class="sizefull s-text7 p-l-18 p-r-18" name="comment[author]" id="CommentAuthor" placeholder="{{ 'blogs.comments.name' | t }}" value="{{ form.author }}" autocapitalize="words"  />
+            </div>
+            <div class="bo12 of-hidden size19 m-b-20">
+              <input type="text" class="sizefull s-text7 p-l-18 p-r-18"  name="comment[email]" id="CommentEmail" placeholder="{{ 'blogs.comments.email' | t }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off" />
+            </div>
+            <div class="w-size24">
+              <!-- Button -->
+              <button class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                {{ 'blogs.comments.post' | t }}
+              </button>
+            </div>
+            {% if blog.moderated? %}
+            <p class="s-text8 p-t-20">{{ 'blogs.comments.moderated' | t }}</p>
+            {% endif %}
+            {% endform %}
+          </div>
+          {% endpaginate %}
+          {% endif %}
+          <!--blog end -->
+        </div>
+      </div>
+      {% include 'blog-sidebar' %}
+    </div>
+  </div>
+</section>

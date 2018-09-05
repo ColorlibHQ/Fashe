@@ -1,0 +1,36 @@
+{% include 'breadcrumb' %}
+<div class="container">
+  <div class="row">
+    <div id="content" class="col-sm-12 contact-form">
+      <h3>{{ 'customer.activate_account.title' | t }}</h3>
+      <p>{{ 'customer.activate_account.subtext' | t }}</p>
+
+      {% form 'activate_customer_password' %}
+
+      {% include 'form-errors-custom' %}
+      <div id="create-account-form" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="customer_password">{{ 'customer.activate_account.password' | t }}</label>
+          <div class="col-sm-4">
+            <input type="password" value="" name="customer[password]" class="form-control" id="customer_password">
+          </div>
+          <label class="col-sm-2 control-label" for="customer_password_confirmation">{{ 'customer.activate_account.password_confirm' | t }}</label>
+          <div class="col-sm-4">
+            <input type="password" value="" name="customer[password_confirmation]" class="form-control" id="customer_password_confirmation">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="text-center">
+            <div class="buttons clearfix">
+              <p>
+                <input type="submit" class="btn btn-primary" value="{{ 'customer.activate_account.submit' | t }}">
+                <input type="submit" class="btn btn-default" name="decline" id="customer_decline" value="{{ 'customer.activate_account.cancel' | t }}">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endform %}
+    </div>
+  </div>
+</div>

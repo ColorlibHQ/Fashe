@@ -1,0 +1,37 @@
+{% unless current_collection %}
+{% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available  %}
+{% assign sold_out = false %}
+{% endif %}
+{% assign img_size = '90x120' %}
+<!-- Block2 -->
+<li class="flex-w p-b-20">
+  <a href="{{ product.url | within: collection }}" class="dis-block wrap-pic-w w-size22 m-r-20 trans-0-4 hov4">
+    <img class="" src="{{ product.featured_image.src | img_url: img_size }}" alt="{{ product.featured_image.alt | escape }}">
+  </a>
+  <div class="w-size23 p-t-5">
+    <a href="{{ product.url | within: collection }}" class="s-text20">
+      {{ product.title }}
+    </a>
+    {% if product.compare_at_price > product.price %}
+    <span class="dis-block s-text17 p-t-6" style="text-decoration:strikethrough;">
+      {{ product.compare_at_price_max | money }}
+    </span>
+    <span class="dis-block s-text17 p-t-6">
+      {{ product.price | money }}
+    </span>
+    {% else %}
+    <span class="dis-block s-text17 p-t-6">
+      {{ product.price | money }}
+    </span>
+    {% endif %}
+  </div>
+</li>

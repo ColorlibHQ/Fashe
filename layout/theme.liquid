@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]>
+<html dir="ltr" lang="en" class="ie8">
+<![endif]-->
+<!--[if IE 9 ]>
+<html dir="ltr" lang="en" class="ie9">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="en">
+  <!--<![endif]-->
+  <head>
+    <!-- Basic page needs ================================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% if settings.favicon_enable %}
+    <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" />
+    <link rel="apple-touch-icon" href="{{ 'favicon.png' | asset_url }}" />
+    {% endif %}
+    <!-- Title and description ================================================== -->
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign current_tags_joined = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags_joined }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <base href="{{ canonical_url }}" />
+
+    <!-- Product meta ================================================== -->
+    {% include 'open-graph-tags' %}
+    {% include 'twitter-card' %}
+
+    <!-- Helpers ================================================== -->
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <!-- CSS ================================================== -->
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} 
+    {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' | stylesheet_tag }}
+    {{ 'https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css' | stylesheet_tag }}
+    {{ 'icon-font.min.css' | asset_url | stylesheet_tag }}
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+    {{ 'animate.css' | asset_url | stylesheet_tag }}
+    {{ 'hamburgers.min.css' | asset_url | stylesheet_tag }}
+    {{ 'animsition.min.css' | asset_url | stylesheet_tag }}
+    {{ 'select2.min.css' | asset_url | stylesheet_tag }}
+    {{ 'daterangepicker.css' | asset_url | stylesheet_tag }}
+    {{ 'slick.css' | asset_url | stylesheet_tag }}
+    {{ 'lightbox.min.css' | asset_url | stylesheet_tag }}
+    {{ 'util.css' | asset_url | stylesheet_tag }}
+    {{ 'main.css' | asset_url | stylesheet_tag }}    
+    {{ 'quickview.css' | asset_url | stylesheet_tag }}
+    {{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
+    {% if template == 'blog' or template == 'article' %}
+    {% endif %}
+    {% if template == 'collection' %}
+    {% endif %}
+    {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css' | stylesheet_tag }}
+
+    {% comment %}
+    {% include 'google-fonts' %}
+    {% if settings.product_vertical_thumbs == true %}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.9/jquery.bxslider.min.css' | stylesheet_tag }}
+    {% endif %}
+    {{ '//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css' | stylesheet_tag }}
+    {% endcomment %}
+    <!-- Header hook for plugins ================================================== -->
+    {{ content_for_header }}
+    {% include 'oldIE-js' %}
+    {{ 'jquery-3.2.1.min.js' | asset_url | script_tag }}
+    {{ 'shipping-cart.js' | asset_url | script_tag }}
+
+  </head>
+  <body class="animsition{% case template %}
+               {% when 'index' %}
+
+               {% when 'collection' %}
+               collection
+               {% when 'blog' %}
+               blog-blog
+               {% when 'article' %}
+               blog-article
+               {% when 'cart' %}
+               checkout-cart
+               {% when 'customers/login' %}
+               account-login
+               {% else %}
+               {% endcase %}" >
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    {% section 'header' %}
+    <div class="contentforlayout">
+      {{ content_for_layout }}
+      <!-- End Content -->  
+
+      {% include 'quickview' %}
+
+      {% section 'footer' %}
+    </div>
+    <!-- Back to top -->
+    <div class="btn-back-to-top bg0-hov" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+      </span>
+    </div>
+    <!-- Container Selection1 -->
+    <div id="dropDownSelect1"></div>
+    {% if settings.show_pupup and template == 'index'%}
+    {% include 'popup' %}
+    {% endif %}
+    <!-- JavaScripts-->
+    {{ 'animsition.min.js' | asset_url | script_tag }}
+    {{ 'popper.js' | asset_url | script_tag }}
+    {{ 'bootstrap.min.js' | asset_url | script_tag }}
+    {{ 'select2.min.js' | asset_url | script_tag }}
+    <script type="text/javascript">
+      $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+      });
+    </script>
+    {{ 'slick.min.js' | asset_url | script_tag }}
+    {{ 'slick-custom.js' | asset_url | script_tag }} 
+    {{ 'countdowntime.js' | asset_url | script_tag }}
+    {{ 'lightbox.min.js' | asset_url | script_tag }}
+    {{ 'sweetalert.min.js' | asset_url | script_tag }}
+    <script type="text/javascript">
+      /* $('.block2-btn-addcart').each(function(){
+        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+        $(this).on('click', function(){
+          swal(nameProduct, "is added to cart !", "success");
+        });
+      });*/
+
+      $('.block2-btn-addwishlist').each(function(){
+        var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+        $(this).on('click', function(){
+          swal(nameProduct, "is added to wishlist !", "success");
+        });
+      });
+    </script>
+    <!--===============================================================================================-->
+    {{ 'parallax100.js' | asset_url | script_tag }}
+    <script type="text/javascript">
+      $('.parallax100').parallax100();
+    </script>
+    <!--===============================================================================================-->
+
+    {{ 'main.js' | asset_url | script_tag }}
+    {{ 'owl.carousel.min.js' | asset_url | script_tag }} 
+
+    {{ 'common.js' | asset_url | script_tag }}
+    {{ 'jquery.magnific-popup.min.js' | asset_url | script_tag }}
+    {{ 'quickview.js' | asset_url | script_tag }}
+    {{ 'jquery.cookie.js' | asset_url | script_tag }}
+    {{ 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js' | script_tag }}
+    {{ 'shipping-cart.js' | asset_url | script_tag }}
+
+    {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    <script>
+      var moneyFormat = '{{ shop.money_format }}';
+    </script>
+
+    {% if template == 'product' %}
+    {{ 'handlebars.min.js' | asset_url | script_tag }}
+    {% endif %}
+    {% if settings.ajax_cart_method != 'page' %}
+    {% include 'ajax-cart-template' %}
+    {{ 'ajaxify.js' | asset_url | script_tag }}
+
+    <script>
+      jQuery(function($) {
+        ajaxifyShopify.init({
+          method: '{{ settings.ajax_cart_method }}',
+          wrapperClass: 'product-detail',
+          formSelector: '#addToCartForm',
+          addToCartSelector: '#addToCart',
+          cartCountSelector: '.cart-count',
+          cartCostSelector: '.cart-cost',
+          toggleCartButton: '.cart-toggle',
+          useCartTemplate: true,
+          btnClass: 'btn',
+          moneyFormat: {{ shop.money_format | json }},
+          disableAjaxCart: false,
+          enableQtySelectors: true
+        });
+      });
+    </script>
+    {% endif %}
+    {{ 'fastclick.min.js' | asset_url | script_tag }}
+    {% if template  == 'product' %}
+    {{ 'shop.js' | asset_url | script_tag }}
+    {% endif %}
+    {% include 'currencies' %}
+
+
+  </body>
+</html>

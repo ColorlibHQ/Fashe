@@ -1,0 +1,53 @@
+{% if template contains 'article' or template contains 'blog' %}
+{% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
+{% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+
+{% elsif template contains 'product' %}
+{% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
+{% capture shareTitle %}{{ product.title | url_param_escape }}{% endcapture %}
+
+{% elsif template == 'password' %}
+{% capture permalinkURL %}{{ shop.url }}{% endcapture %}
+{% capture shareTitle %}{% unless shop.description == blank %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+
+{% endif %}
+
+{% assign shareButtonStyle = settings.social_sharing_style %}
+
+<ul data-permalink="{{ permalinkURL }}">
+  <li><h2 class="share">{{ 'blogs.article.share_this_post'| t }} :</h2></li>
+
+  {% if settings.share_facebook %}
+  <li>
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="fa fa-facebook">
+    </a>
+  </li>
+  {% endif %}
+
+  {% if settings.share_twitter %}
+  <li>  
+    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }};source=webclient" class="fa fa-twitter">
+    </a>
+  </li>
+  {% endif %}
+
+  {% if product.featured_image or article.image  %}
+
+  {% if settings.share_pinterest %}
+  <li>
+    <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{% if template contains 'product' %}{{ product | img_url: '1024x1024' }}{% else %}{{ article | img_url: '1024x1024' }}{% endif %}&amp;description={{ shareTitle }}" class="fa fa-pinterest">
+    </a>
+  </li>
+  {% endif %}
+
+  {% endif %}
+
+  {% if settings.share_google %}
+  <li>
+    <a target="_blank" href="//plus.google.com/share?url={{ permalinkURL }}" class="fa fa-google-plus">
+      <!-- Cannot get Google+ share count with JS yet -->
+    </a>
+  </li>
+  {% endif %}
+
+</ul>

@@ -1,0 +1,54 @@
+<img src="{{ 'icon-header-02.png' | asset_url }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
+<span class="header-icons-noti" id="cart-total">{{ cart.item_count }}</span>
+<!-- Header cart noti -->
+<div id="cart" class="header-cart header-dropdown">
+  <div id="subcart">
+    {% if cart.item_count < 1 %} 
+    <ul class="header-cart-wrapitem">
+      <li>
+        <p class="text-center cart-empty">{{ 'cart.general.no_items'| t }}</p>
+      </li>
+    </ul>
+    {% else %}
+    <ul class="header-cart-wrapitem">
+      {% for item in cart.items %}
+      <li class="header-cart-item">
+        <div class="header-cart-item-img">
+          <a href="{{ item.url }}">
+            <img class="" src="{{ item | img_url: '80x80' }}"  alt="{{ item.title | escape }}" title="{{ item.title | escape }}"/>
+          </a>
+        </div>
+        <div class="header-cart-item-txt">
+          <a href="{{ item.url }}" class="header-cart-item-name">
+            {{ item.product.title }}
+          </a>
+          <span class="header-cart-item-info">
+            {{ item.quantity }} &times; {{ item.line_price | money }}
+          </span>
+          <button type="button" onclick="cart.remove('{{ item.variant_id }}');" title="Remove" class="btn btn-xs">
+          x
+          </button>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="header-cart-total">
+      {{ 'cart.general.subtotal' | t }} : {{ cart.total_price | money }}
+    </div>
+    <div class="header-cart-buttons">
+      <div class="header-cart-wrapbtn">
+        <!-- Button -->
+        <a href="/cart" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+          {{ 'cart.general.view_cart' | t }}
+        </a>
+      </div>
+      <div class="header-cart-wrapbtn">
+        <!-- Button -->
+        <a href="/checkout" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+          {{ 'cart.general.checkout' | t }}
+        </a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

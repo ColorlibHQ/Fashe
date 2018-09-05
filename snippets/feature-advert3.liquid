@@ -1,0 +1,30 @@
+<div class="banner bgwhite p-t-40 p-b-40" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks limit:3 %}
+      <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+        <!-- block{{forloop.index}} -->
+        <div class="block1 hov-img-zoom pos-relative m-b-30">
+          {% if block.settings.link != blank %}          
+          <a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            {% endif %}
+            {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: 'master' }}" class="" alt=""/>
+            {% endif %}
+            {% if block.settings.link != blank %}          
+          </a>
+          {% endif %}
+          <div class="block1-wrapbtn w-size2">
+            <!-- Button -->
+            {% if block.settings.link != blank %}          
+            <a href="{{ block.settings.link }}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4" {{ block.shopify_attributes }}>{{ block.settings.link_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<section class="blog bgwhite p-t-94 p-b-65" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="sec-title p-b-52">
+      <h3 class="m-text5 t-center">
+        {{ section.settings.heading }}
+      </h3>
+    </div>
+    <div class="row">
+      {% for article in blogs[section.settings.blog].articles %}
+      <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
+        <!-- Block3 -->
+        <div class="block3">
+          <a href="{{ article.url }}" class="block3-img dis-block hov-img-zoom">
+            <img src="{{ article.image.src | img_url: '720x539' }}" alt="">
+          </a>
+          <div class="block3-txt p-t-14">
+            <h4 class="p-b-7">
+              <a href="{{ article.url }}" class="m-text11">
+                {{ article.title }}
+              </a>
+            </h4>
+            <span class="s-text6">{{ 'blogs.article.by' | t }}</span> <span class="s-text7">{{ article.author }}</span> 
+            <span class="s-text6">{{ 'blogs.article.on' | t }}</span>
+            <span class="s-text7">
+              <time datetime="{{ article.published_at | date }}">
+                {{ article.published_at | date: "%b %d,%Y" }}
+              </time>
+            </span>
+            <p class="s-text8 p-t-16">
+              {% if article.excerpt.size > 0 %}
+              {{ article.excerpt | truncatewords: 15}}
+              {% else %}
+              {{ article.content | strip_html | truncatewords: 20 }}
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

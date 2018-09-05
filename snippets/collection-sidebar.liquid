@@ -1,0 +1,171 @@
+<div class="leftbar p-r-20 p-r-0-sm" id="column-left">
+  <!--  -->
+  <h4 class="m-text14 p-b-7">
+    {{ 'collections.sidebar.categories' | t }}
+  </h4>
+  <ul class="p-b-54">
+    {% for collection in collections limit:settings.category_count %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+    <li class="p-t-4"><a class="s-text13 {% if forloop.first %}active1{% endif %}" href="{{ collection.url }}">{{ collection.title }} ({{ 'collections.general.items_with_count' | t: count: collection.all_products_count }})</a></li>
+    {% endunless %}
+    {% endfor %}
+  </ul>
+  <!--  -->
+
+  {% comment %}
+  The code below relies on the advanced-tag-loop snippet.
+  The snippet is already included in snippets/breadrumbs.liquid
+  because it is needed there too, but if you remove
+  breadcrumbs you need to include this:
+
+  {% endcomment %}
+  {% include 'advanced-tag-loop' %}
+
+  {% if settings.collection_sidebar_filters == 'groups' %}
+  {% if collection.all_tags.size > 0 %}
+  {% comment %}
+  Loop through tag categories
+  {% endcomment %}
+  {% for cat_item in cat_array %}
+  <div class="filter-attribute-container">
+    <h4 class="m-text14 p-b-7">{{ cat_item }}</h4>
+    <div id="filter-group{{forloop.index}}" class="advanced-filters" data-filter-group="{{ cat_item }}">
+      {% comment %}
+      Loop through collection tags
+      {% endcomment %}
+      {% for tag in collection.all_tags %}
+      {% assign cat = tag | split: '_' | first %}              
+      {% if cat != tag and cat_item == cat %}
+      {% comment %}
+      Strip out tag category prefix and add/remove link for tag filtering
+      {% endcomment %}
+      {% if current_tags contains tag %}
+      <span class="active-filter">
+        {{ tag | remove_first: cat_item | remove_first: '_' | link_to_remove_tag: tag }}
+      </span>
+      {% else %}
+      <span>
+        {{ tag | remove_first: cat_item | remove_first: '_' | link_to_add_tag: tag }}
+      </span>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {% endif %}
+  {% else %}
+  <div class="filter-attribute-container">
+    <h4 class="m-text14 p-b-7">{{ 'collections.sidebar.shop_by' | t }}</h4>
+    <div id="filter-group{{forloop.index}}">
+      {% if template contains 'collection' and collection.all_tags.size > 0 %}
+      {% comment %}
+      Provide a 'catch-all' link at the top of the list,
+      we'd check against the collection.handle, product type, and vendor.
+      {% endcomment %}
+      {% if current_tags %}
+      {% comment %}
+      Good for /collections/all collection and regular collections
+      {% endcomment %}
+      {% if collection.handle %}
+      <a href="/collections/{{ collection.handle }}">
+        {{ 'collections.sidebar.all' | t }}
+        {% unless collection.title == 'Products' %}
+        {{ collection.title }}
+        {% endunless %}
+      </a>
+      {% comment %}
+      Good for automatic type collections
+      {% endcomment %}
+      {% elsif collection.current_type %}
+      <a href="{{ collection.current_type | url_for_type }}">{{ 'collections.sidebar.all_collection' | t: collection_title: collection.title }}</a>
+      {% comment %}
+      Good for automatic vendor collections
+      {% endcomment %}
+      {% elsif collection.current_vendor %}
+      <a href="{{ collection.current_vendor | url_for_vendor }}">{{ 'collections.sidebar.all_collection' | t: collection_title: collection.title }}</a>
+      {% endif %}
+      {% endif %}
+      {% comment %}
+      And for the good stuff, loop through the tags themselves.
+      Strip the prepended categories if they happen to exist.
+      {% endcomment %}
+      {% for tag in collection.all_tags %}
+      {% assign is_advanced_tag = false %}
+      {% assign cat = tag | split: '_' | first %}
+      {% unless cat == tag %}
+      {% if cat_array contains cat %}
+      {% assign is_advanced_tag = true %}
+      {% if current_tags contains tag %}
+      <span class="active-filter">
+        {{ tag | remove_first: cat | remove_first: '_' }}
+      </span>
+      {% else %}
+      <span>
+        {{ tag | remove_first: cat | remove_first: '_' | link_to_tag: tag }}
+      </span>
+      {% endif %}
+      {% endif %}
+      {% endunless %}
+      {% if is_advanced_tag == false %}
+      {% if current_tags contains tag %}
+      {{ tag }}
+      {% else %}
+      {{ tag | link_to_tag: tag }}
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% else %}
+      <p>{{ 'collections.sidebar.no_tags' | t }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  <script>
+    $(".filter-attribute-container").find("a").addClass("advanced-filter a-filter add-filter");
+    $(function() {
+      // collection sidebar 
+      $("#column-left").on("click",".advanced-filters a",function (event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        console.log(url); 
+        $.ajax({
+          type: 'GET',
+          url: url,
+          data: {},
+          beforeSend: function( xhr ) {
+            $("#wraper_ajax").show();
+          },
+          complete: function (data) {  
+            $('#custom-products').html($("#custom-products", data.responseText).html());
+            $('#column-left').html($("#column-left", data.responseText).html());
+            //$('#product-filter').html($("#product-filter", data.responseText).html());
+            if (localStorage.getItem('display') == 'list') {
+              $('#list-view').trigger('click');
+            } else {
+              $('#grid-view').trigger('click');
+            }
+            $('#pagination').html($("#pagination", data.responseText).html());
+            history.pushState({
+              page: url
+            }, url, url);      
+            $("#wraper_ajax").hide();
+            SPR.registerCallbacks(), SPR.initRatingHandler(), SPR.initDomEls(), SPR.loadProducts(), SPR.loadBadges();
+          }
+        });
+      });
+    });
+  </script>
+  <script type="text/javascript">
+    $("#adil").find("a").addClass("active-filter a-filter add-filter");
+  </script>
+  <form action="/search" method="POST" role="search" id="blog-search">
+    <div id="search" class="search-product pos-relative bo4 of-hidden">
+      <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'layout.search_bar.placeholder' | t }}" class="s-text7 size6 p-l-23 p-r-50" aria-label="{{ 'layout.search_bar.placeholder' | t }}" />
+      <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+        <i class="fs-12 fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+</div>
