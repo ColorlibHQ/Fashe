@@ -1018,6 +1018,7 @@ li.sale-noti > a {
   display: flex;
   align-items: center;
   margin-right: 15px;
+  position: relative;
 }
 .linedivide2 {
   display: block;
