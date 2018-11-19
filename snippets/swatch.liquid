@@ -25,7 +25,7 @@
       #product-select-option-{{ option_index }} { display: none; }
       #product-select-option-{{ option_index }} + .custom-style-select-box { display: none !important; }
     </style>
-    <script>$(window).load(function() { $('.selector-wrapper:eq({{ option_index }})').hide(); });</script>
+    
     {% assign downcased_option = swatch | downcase %}
     {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
       {% assign is_color = true %}

@@ -115,7 +115,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-	color: #e65540;
+	color: {{ settings.color_skin }};
 }
 
 /* ------------------------------------ */
@@ -212,7 +212,7 @@ iframe {
     -o-animation: ball-scale infinite linear .75s;
     animation: ball-scale infinite linear .75s;
     border-radius: 100%;
-    background-color: #e65540;
+    background-color: {{ settings.color_skin }};
 }
 
 @-webkit-keyframes ball-scale {
@@ -356,7 +356,7 @@ iframe {
   font-size: 13px;
   font-family: Montserrat-Regular;
   line-height: 20px;
-  color: #888888;
+  color: {{ settings.color_top_header_label }};
   padding-left: 0px ;
   background-color: transparent;
 }
@@ -410,12 +410,12 @@ iframe {
 }
 
 .select2-container .select2-results__option[aria-selected="true"] {
-  background-color: #e65540;
+  background-color: {{ settings.color_skin }};
   color: white;
 }
 
 .select2-container .select2-results__option--highlighted[aria-selected] {
-  background-color: #e65540;
+  background-color: {{ settings.color_skin }};
   color: white;
 }
 
@@ -537,7 +537,7 @@ iframe {
 ===========================================================*/
 .topbar {
   height: 45px;
-  background-color: #f5f5f5;
+  background-color: {{ settings.color_top_header }};
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -567,7 +567,7 @@ iframe {
 
 .topbar-social-item {
   font-size: 18px;
-  color: #888888;
+  color: {{ settings.color_top_header_label }};
   padding: 10px;
 }
 
@@ -576,7 +576,7 @@ iframe {
 .topbar-child1 {
   font-family: Montserrat-Regular;
   font-size: 13px;
-  color: #888888;
+  color: {{ settings.color_top_header_label }};
   line-height: 1.7;
 }
 
@@ -608,7 +608,7 @@ iframe {
   flex-wrap: wrap;
   width: 100%;
   height: 80px;
-  background-color: white;
+  background-color: {{ settings.color_center_header }};
   justify-content: center;
   align-items: center;
   position: relative;
@@ -669,13 +669,13 @@ iframe {
 .main_menu > li > a {
   font-family: Montserrat-Regular;
   font-size: 15px;
-  color: #333333;
+  color: {{ settings.color_menu_links }};
   padding: 0;
   border-bottom: 1px solid transparent;
 }
 
 li.sale-noti > a {
-  color: #e65540;
+  color: {{ settings.color_skin }};
 }
 
 .main_menu > li:hover > a {
@@ -736,7 +736,7 @@ li.sale-noti > a {
 }
 
 .sub_menu > li:hover > a {
-  color: #e65540;
+  color: {{ settings.color_skin }};
   text-decoration: none;
 }
 
@@ -971,7 +971,7 @@ li.sale-noti > a {
   padding-left: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: white;
+  background-color: {{ settings.color_center_header }};
   display: none;
 }
 
@@ -1056,7 +1056,7 @@ li.sale-noti > a {
 .side-menu .main-menu {margin-bottom: 0;}
 
 .item-menu-mobile {
-  background-color: #e65540;
+  background-color: {{ settings.color_skin }};
 }
 
 .side-menu .main-menu > li > a {
@@ -1113,7 +1113,7 @@ li.sale-noti > a {
 .side-menu .sub-menu a:hover {
   text-decoration: none;
   padding-left: 20px;
-  color: #e65540 !important;
+  color: {{ settings.color_skin }} !important;
 }
 
 .side-menu .sub-menu {
@@ -1401,7 +1401,7 @@ li.sale-noti > a {
 }
 
 .arrow-slick1:hover {
-  background-color: #e65540;
+  background-color: {{ settings.color_skin }};
 }
 
 .next-slick1 {
@@ -1572,7 +1572,7 @@ li.sale-noti > a {
 }
 
 .swal-button {
-    background-color: #e65540;
+    background-color: {{ settings.color_skin }};
     font-family: Montserrat-Regular;
     font-size: 15px;
     color: white;
@@ -1590,7 +1590,7 @@ li.sale-noti > a {
 }
 
 .swal-button:active {
-    background-color: #e65540;
+    background-color: {{ settings.color_skin }};
 }
 
 .swal-title {
@@ -1660,7 +1660,7 @@ li.sale-noti > a {
 }
 
 .block2-labelsale::before {
-  background-color: #e65540;
+  background-color: {{ settings.color_skin }};
   content: 'Sale';
 }
 
@@ -1733,7 +1733,7 @@ li.sale-noti > a {
 
 .block2-btn-towishlist .icon_heart {
   display: block;
-  color: #e65540;
+  color: {{ settings.color_skin }};
 }
 
 /* ------------------------------------ */
@@ -2182,7 +2182,7 @@ li.sale-noti > a {
 }
 
 .tag-item:hover {
-  border: 1px solid #e65540;
+  border: 1px solid {{ settings.color_skin }};
 }
 
 
@@ -2346,4 +2346,24 @@ input.num-product::-webkit-inner-spin-button {
     margin: 0; 
 }
 
+/* Footer */
+
+footer#footer {
+  background-color: {{ settings.color_footer }};
+}
+
+#footer h4.s-text12 {
+  color: {{ settings.color_footer_heading }};
+}
+
+#footer a {
+  color: {{ settings.color_footer_links }};
+}
+
+#footer a.footer-social-button {
+  color: {{ settings.color_social_links }};
+}
+#footer .s-text7 {
+  color: {{ settings.color_footer_text }};
+}
 
