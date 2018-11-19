@@ -12,7 +12,7 @@
       <div class="wrap-slick3 flex-sb flex-w">
         <div class="wrap-slick3-dots"></div>
 
-        <div class="slick3">
+        <div id="product-image-carousel" class="slick3">
           {% for image in product.images %}
           <div class="item-slick3" data-thumb="{{ image.src | img_url: '90x120' }}">
             <div class="wrap-pic-w">
@@ -167,8 +167,7 @@
   // when a variant is selected that has a variant image.
   Shopify.Image.preload({{ product.images | json }}, '{{ product_img_size }}');
 
-                        var selectCallback = function(variant, selector) {
-
+  var selectCallback = function( variant, selector ) {
     var $addToCart = $('#button-cart'),
         $productPrice = $('#productPrice'),
         $comparePrice = $('#comparePrice'),
@@ -180,15 +179,7 @@
       // Update variant image, if one is set
       // Call timber.switchImage function in shop.js
       if (variant.featured_image) {
-        var newImg = variant.featured_image,
-            el = $featuredImage[0];
-        $(function() {
-          Shopify.Image.switchImage(newImg, el, timber.switchImage);
-          {% if settings.product_sticky_layout == true %}
-          $('body,html').animate({scrollTop: 125}, 800);
-          return false;
-          {% endif %}
-        });
+          $('#product-image-carousel').slick( 'slickGoTo', variant.featured_image.position - 1 );
       }
 
       // Select a valid variant if available
@@ -294,7 +285,7 @@
       var form = $('#' + selector.domIdPrefix).closest('form');
       for (var i=0,length=variant.options.length; i<length; i++) {
         var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
-        if (radioButton.size()) {
+        if (radioButton.length) {
           radioButton.get(0).checked = true;
         }
       }
