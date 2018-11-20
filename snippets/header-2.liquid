@@ -10,9 +10,17 @@
   </div>
   <!-- Header Icon -->
   <div class="header-icons">
-    <a href="/account" class="header-wrapicon1 dis-block">
-      <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
-    </a>
+    {% if shop.customer_accounts_enabled %}
+        {% if customer %}
+          <a href="/account" class="header-wrapicon1 dis-block">
+            <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+          </a>
+        {% else %}
+          <a href="/account/login" class="header-wrapicon1 dis-block">
+            <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+          </a>
+        {% endif %}
+    {% endif %}
     <span class="linedivide1"></span>
     <div class="header-wrapicon2">
       {% include 'header-cart' %}
@@ -56,9 +64,17 @@
           {% include 'header-currency' %}
         </div>
         <!--  -->
-        <a href="#" class="header-wrapicon1 dis-block m-l-30">
-          <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
-        </a>
+        {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account" class="header-wrapicon1 dis-block m-l-30">
+                <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+              </a>
+            {% else %}
+              <a href="/account/login" class="header-wrapicon1 dis-block m-l-30">
+                <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+              </a>
+            {% endif %}
+        {% endif %}
         <span class="linedivide1"></span>
         <div class="header-wrapicon2 m-r-13">
           {% include 'header-cart' %}
@@ -89,9 +105,17 @@
     <div class="btn-show-menu">
       <!-- Header Icon mobile -->
       <div class="header-icons-mobile">
-        <a href="#" class="header-wrapicon1 dis-block">
-          <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
-        </a>
+        {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account" class="header-wrapicon1 dis-block">
+                <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+              </a>
+            {% else %}
+              <a href="/account/login" class="header-wrapicon1 dis-block">
+                <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
+              </a>
+            {% endif %}
+        {% endif %}
         <span class="linedivide2"></span>
         {% include 'header-cart-mob' %}
       </div>
