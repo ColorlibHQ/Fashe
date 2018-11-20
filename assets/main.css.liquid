@@ -1018,6 +1018,7 @@ li.sale-noti > a {
   display: flex;
   align-items: center;
   margin-right: 15px;
+  position: relative;
 }
 .linedivide2 {
   display: block;
@@ -1030,10 +1031,19 @@ li.sale-noti > a {
 
 .header-icons-mobile .header-cart {
   width: 300px;
-  top: 190%;
-  right: -80px;  
+  bottom: -10px;
+  left: 0;
   z-index: 1100;
-  transform-origin: top right;
+  transform-origin: top left;
+  top: auto;
+  transform: translateY( 100% ) scale(0);
+}
+.header-icons-mobile .header-cart.show-header-dropdown {
+  -webkit-transform: translateY( 100% ) scale(1);
+  -moz-transform: translateY( 100% ) scale(1);
+  -ms-transform: translateY( 100% ) scale(1);
+  -o-transform: translateY( 100% ) scale(1);
+  transform: translateY( 100% ) scale(1);
 }
 
 /*[ Menu mobile ]
@@ -2366,4 +2376,9 @@ footer#footer {
 #footer .s-text7 {
   color: {{ settings.color_footer_text }};
 }
-
+button:disabled {
+  background-color: {{ settings.color_skin }} !important;
+  width: 100%;
+  opacity: .7;
+  cursor: default;
+}
