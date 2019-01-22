@@ -132,7 +132,9 @@ $(document).ready(function() {
         swal("Added to cart Successfully !", "success");
 
         $.getJSON('/cart.js', function(cart) {
-          $('#cart-total').html(cart.item_count);
+          $('.header-icons-noti').each(function(){
+            $(this).html(cart.item_count);
+          })
           Currency.convertAll(shopCurrency, Currency.cookie.read());
         });
 
@@ -340,7 +342,9 @@ var cart = {
 
         $.getJSON('/cart.js', function(cart) {
           setTimeout(function () {
-            $('#cart-total').html(cart.item_count);
+            $('.header-icons-noti').each(function(){
+              $(this).html(cart.item_count);
+            })
           }, 100);
           //Currency.convertAll(shopCurrency, Currency.cookie.read());
         });
@@ -363,7 +367,9 @@ var cart = {
       success: function(json) {
         $('#cart > button').button('reset');
         setTimeout(function () {
-          $('#cart-total').html(json['item_count']);
+          $('.header-icons-noti').each(function(){
+            $(this).html(cart.item_count);
+          })
         }, 100);
         // Currency.convertAll(shopCurrency, Currency.cookie.read());
 
