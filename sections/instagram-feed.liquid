@@ -22,34 +22,34 @@
       '</div>  </a>  </div>',
       target: "instafeed",
       after: function () {
-      $("#instagram_block_home .flex-w").owlCarousel({
-      autoPlay: false,
-      items: {{ section.settings.no_of_products }},
-      loop: true,
-      navSpeed: 1000,
-      dotsSpeed: 1000,
-      autoplaySpeed: 1000,
-      nav: true,
-      dots: false,
-      navText: ['<i class="ion-chevron-left"></i>', '<i class="ion-chevron-right"></i>'],
-        responsive: {
-          0: {
-            items: 1
-          },
-          480: {
-            items: 1
-          },
-          640: {
-            items: 2
-          },
-          991: {
-            items: 3
-          },
-          1200: {
-            items: {{ section.settings.no_of_products }}
+        $("#instagram_block_home .flex-w").owlCarousel({
+          autoPlay: false,
+          items: {{ section.settings.no_of_products }},
+          loop: true,
+          navSpeed: 1000,
+          dotsSpeed: 1000,
+          autoplaySpeed: 1000,
+          nav: true,
+          dots: false,
+          navText: ['<i class="ion-chevron-left"></i>', '<i class="ion-chevron-right"></i>'],
+          responsive: {
+            0: {
+              items: 1
+            },
+            480: {
+              items: 1
+            },
+            640: {
+              items: 2
+            },
+            991: {
+              items: 3
+            },
+            1200: {
+              items: {{ section.settings.no_of_products }}
+            }
           }
-        }
-      });
+        });
     }
   });
   feed.run();

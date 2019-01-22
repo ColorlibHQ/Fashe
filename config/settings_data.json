@@ -1,1 +1,390 @@
-{"current":{"type_base_family":"Google_Poppins_300,400,500,600,700,800_sans","type_header_family":"Google_Montserrat_400,400i,500,500i,700,700i,900,900i_sans","type_accent_family":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif","favicon_enable":true,"img_size_product":"700x933","img_size_grid":"1200x1600","product_new_time":"7","product_grid_img_carousel":false,"color_skin":"#ee3333","color_top_header":"#ffffff","color_top_header_label":"#2c2c2c","color_bottom_header_border":"#ffffff","color_center_header":"#ffffff","color_menu_links":"#2c2c2c","color_footer_newsletter_bar":"#303031","color_footer":"#292929","color_footer_heading":"#ffffff","color_footer_links":"#919191","color_social_links":"#363636","color_footer_text":"#818181","color_footer_border":"#363636","show_third_tab":true,"third_tab_title":"Additional Information","third_tab_text":"<p>You can use this tab for adding shipping details, return policies and information or measurements etc. <\/p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi<\/p>","product_vertical_related":false,"product_quantity_enable":true,"product_quantity_message":true,"product_vendor_enable":true,"product_show_saved_amount":true,"product_show_compare_at_price":true,"related_products_enable":true,"product_reviews_enable":true,"show_contact_top_image":true,"show_map":true,"map_code":"<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d2950.6822073234102!2d-83.71685604946924!3d42.30664594636449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883cac2c20114b69%3A0x96fe590afa21efb6!2s2300+Traverwood+Dr%2C+Ann+Arbor%2C+MI+48105!5e0!3m2!1sen!2s!4v1461260551915\" width=\"100%\" height=\"503\" frameborder=\"0\" style=\"border:0\" allowfullscreen=\"\"><\/iframe>","product_count_per_page":"6","show_collection_top_image":true,"show_collection_sidebar":true,"category_count":"5","collection_sidebar_filters":"groups","show_collection_side_image":false,"collection_side_link":"#","show_collection_side_listing":false,"collection_side_listing_title":"Random Products","collection_side_listing":"frontpage","show_about_top_image":true,"cart_notes_enable":true,"show_cart_top_image":true,"ajax_cart_method":"page","show_blog_top_image":true,"no_articles":"2","show_blog_side_listing":true,"blog_side_listing_title":"Featured Products","blog_side_listing":"featured","shipping_calculator":"Enabled","shipping_calculator_heading":"Get shipping estimates","shipping_calculator_default_country":"United States","shipping_calculator_submit_button_label":"Calculate shipping","shipping_calculator_submit_button_label_disabled":"Calculating...","show_pupup":false,"popup_title":"newsletter","show_pupup_image":true,"popup_heading":"SUBSCRIBE TO OUR NEWSLETTER","popup_description":"Enter your email address to receive all news, updates on new arrivals, special offers and other discount information.","popup_btn_text":"Subscribe","popup_no_link_text":"Don’ts show","social_sidebar_enable":true,"social_twitter_link":"https:\/\/twitter.com\/shopify","social_facebook_link":"https:\/\/facebook.com\/shopify","social_pinterest_link":"https:\/\/pinterest.com\/shopify","social_google_plus_link":"https:\/\/plus.google.com\/+shopify","social_instagram_link":"https:\/\/instagram.com\/shopify","social_tumblr_link":"","social_youtube_link":"","social_vimeo_link":"","social_fancy_link":"","show_dollar_symbol":false,"superscript_decimals":true,"show_multiple_currencies":true,"currency_format":"money_format","supported_currencies":"USD EUR GBP PKR CAD JPY","default_currency":"USD","checkout_header_image":"","checkout_logo_image":"","checkout_logo_position":"left","checkout_logo_size":"medium","checkout_body_background_image":"","checkout_body_background_color":"#ffffff","checkout_input_background_color_mode":"white","checkout_sidebar_background_image":"","checkout_sidebar_background_color":"#fafafa","checkout_heading_font":"Helvetica Neue","checkout_body_font":"Helvetica Neue","checkout_accent_color":"#1990c6","checkout_button_color":"#1990c6","checkout_error_color":"#ff6d6d","product_sticky_layout":false,"product_vertical_thumbs":false,"product_enable_zoom":true,"color_skin_2":"#ed1616","bg_color":"#ffffff","color_top_header_border":"#ed1616","color_menu_bg":"#ed1616","social_follow_bar":true,"social_sharing_products":true,"social_sharing_blog":true,"social_sharing_count":true,"social_sharing_style":"is-default","share_facebook":true,"share_twitter":true,"share_pinterest":true,"share_fancy":true,"share_google":true,"type_base_size":"13px","show_banner":true,"sidebar_image_link":"collections\/all","collection_prod_image_sizes":"large","product_reviews_star_color":"#e5c649","footer_legallinks_enable":true,"footer_legallinks_linklist":"","type_navigation_size":"15px","type_navigation_transform":true,"type_button_size":"16px","type_button_transform":false,"logo_max_width":"305","logo_use_image":true,"type_header_transform":true,"color_primary":"#49aa9d","color_secondary":"#dcdcdc","color_accent":"#49aa9d","color_borders":"#ececec","color_header_background":"#ffffff","color_header_text":"#585858","color_header_cart_search":"#f2f2f2","color_nav_bg":"#49aa9d","color_nav_text":"#ffffff","color_body_text":"#585858","color_heading_text":"#333333","color_footer_bg":"#f2f2f2","color_footer_social_link":"#bbbbbb","sections":{"header":{"type":"header","settings":{"header_layout":"header-1","use_top_bar":true,"top_bar_message":"Free shipping for standard order over $100","show_email":true,"show_social_links":true,"header_email_text":"fashe@example.com","logo_use_image":true,"logo":"shopify:\/\/shop_images\/logo.png","header_menu_1":"main-menu"}},"footer":{"type":"footer","settings":{"footer_layout":"footer-1","footer_content_enable":true,"footer_about_us":"Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879","footer_social_enable":true,"footer_menu_1":"categories","footer_menu_2":"links","footer_menu_3":"help","footer_newsletter_enable":true,"mailing_list_form_action":"","heading":"Subscribe","footer_content_text":"Copyright © 2018 All rights reserved. Template by <a href=\"https:\/\/colorlib.com\/\">Colorlib<\/a> "}},"1480267833382":{"type":"slideshow","blocks":{"1480267833382-1":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/master-slide-02.jpg","heading":"Women Collection 2018","heading_appear":"fadeInDown","subheading":"New arrivals","subheading_appear":"fadeInUp","slide_link_text":"Shop Now","slide_link":"shopify:\/\/collections","slide_appear":"zoomIn"}},"1480267833382-0":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/master-slide-01.jpg","heading":"Women Collection 2018","heading_appear":"rollIn","subheading":"New arrivals","subheading_appear":"lightSpeedIn","slide_link_text":"Shop Now","slide_link":"shopify:\/\/collections","slide_appear":"slideInUp"}},"1507555687103":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/master-slide-04.jpg","heading":"Women Collection 2018","heading_appear":"rotateInDownLeft","subheading":"New arrivals","subheading_appear":"rotateInUpRight","slide_link_text":"Shop Now","slide_link":"shopify:\/\/collections\/all","slide_appear":"rotateIn"}}},"block_order":["1480267833382-1","1480267833382-0","1507555687103"],"settings":{"autoplay":true,"autoplay_speed":"10000","layout_slider":"slider-1"}},"1503231244573":{"type":"ad-banner","blocks":{"1506803279562":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-02.jpg","link_text":"Dresses","link":"shopify:\/\/collections\/all"}},"1506803308948":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-05.jpg","link_text":"Sunglasses","link":"shopify:\/\/collections\/all"}},"1514473881970":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-03.jpg","link_text":"Watches","link":"shopify:\/\/collections\/all"}},"1514473919786":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-07.jpg","link_text":"Footerwear","link":"shopify:\/\/collections\/all"}},"1514473952044":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-04.jpg","link_text":"Bags","link":"shopify:\/\/collections\/all"}},"1514474049400":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/banner-09.jpg","link_text":"Accessories","link":"shopify:\/\/collections\/all"}}},"block_order":["1506803279562","1506803308948","1514473881970","1514473919786","1514473952044","1514474049400"],"settings":{"feature_advert_design":"feature-advert6"}},"1504781997946":{"type":"service-box","blocks":{"1504781997946-0":{"type":"box","settings":{"feature_service_title":"Free Delivery Worldwide","feature_service_description":"Mirum est notare quam littera gothica"}},"1504781997946-1":{"type":"box","settings":{"feature_service_title":"30 Days Return","feature_service_description":"Simply return it within 30 days for an exchange."}},"1504782065705":{"type":"box","settings":{"feature_service_title":"Store Opening","feature_service_description":"Shop open from Monday to Sunday"}}},"block_order":["1504781997946-0","1504781997946-1","1504782065705"],"settings":{"layout":"feature-service1"}},"1504983008053":{"type":"collection","settings":{"collection_layout":"feature-carousal","heading":"FEATURED PRODUCTS","collection":"frontpage","products_tab_count":"8"}},"1507203403431":{"type":"blog","settings":{"layout":"blog-1","heading":"Our Blog","blog":"news"}},"1508329681974":{"type":"instagram-feed","settings":{"layout":"instafeed","homepage_instagram_feed":true,"insta_title":"@ FOLLOW US ON INSTAGRAM","insta_access_token":"6857779239.1677ed0.4e7f225760f940d48ed3e8dbb743fef5","insta_images_fetch":"10","no_of_products":"5"}},"1514553331574":{"type":"product-deals","blocks":{"1514553331574-0":{"type":"deal","settings":{"product_deal":"boxy2-t-shirt-with-roll-sleeve","custom_image":true,"product_image":"shopify:\/\/shop_images\/shop-item-09.jpg","expiry_deal":"2019\/01\/01"}}},"block_order":["1514553331574-0"],"settings":{"collection_layout":"deals-layout1","image":"shopify:\/\/shop_images\/banner-08.jpg","heading":"The Beauty","subheading":"Lookbook","link_text":"View Collection","link":"shopify:\/\/collections\/all"}}},"content_for_index":["1480267833382","1503231244573","1504983008053","1514553331574","1507203403431","1508329681974","1504781997946"]},"presets":{}}
+{
+   "current":{
+      "type_base_family":"Google_Poppins_300,400,500,600,700,800_sans",
+      "type_header_family":"Google_Montserrat_400,400i,500,500i,700,700i,900,900i_sans",
+      "type_accent_family":"'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif",
+      "favicon_enable":true,
+      "img_size_product":"700x933",
+      "img_size_grid":"1200x1600",
+      "product_new_time":"7",
+      "product_grid_img_carousel":false,
+      "color_skin":"#e65540",
+      "color_top_header":"#f5f5f5",
+      "color_top_header_label":"#888888",
+      "color_center_header":"#ffffff",
+      "color_menu_links":"#333333",
+      "color_footer":"#f0f0f0",
+      "color_footer_heading":"#222222",
+      "color_footer_links":"#666666",
+      "color_social_links":"#888888",
+      "color_footer_text":"#555555",
+      "show_third_tab":true,
+      "third_tab_title":"Additional Information",
+      "third_tab_text":"<p>You can use this tab for adding shipping details, return policies and information or measurements etc. <\/p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi<\/p>",
+      "product_vertical_related":false,
+      "product_quantity_enable":true,
+      "product_quantity_message":true,
+      "product_vendor_enable":true,
+      "product_show_saved_amount":true,
+      "product_show_compare_at_price":true,
+      "related_products_enable":true,
+      "product_reviews_enable":true,
+      "show_contact_top_image":true,
+      "show_map":true,
+      "map_code":"<iframe src=\"https:\/\/www.google.com\/maps\/embed?pb=!1m18!1m12!1m3!1d2950.6822073234102!2d-83.71685604946924!3d42.30664594636449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883cac2c20114b69%3A0x96fe590afa21efb6!2s2300+Traverwood+Dr%2C+Ann+Arbor%2C+MI+48105!5e0!3m2!1sen!2s!4v1461260551915\" width=\"100%\" height=\"503\" frameborder=\"0\" style=\"border:0\" allowfullscreen=\"\"><\/iframe>",
+      "product_count_per_page":"6",
+      "show_collection_top_image":true,
+      "show_collection_sidebar":true,
+      "category_count":"5",
+      "collection_sidebar_filters":"groups",
+      "show_collection_side_image":false,
+      "collection_side_link":"#",
+      "show_collection_side_listing":false,
+      "collection_side_listing_title":"Random Products",
+      "collection_side_listing":"frontpage",
+      "show_about_top_image":true,
+      "cart_notes_enable":true,
+      "show_cart_top_image":true,
+      "ajax_cart_method":"page",
+      "show_blog_top_image":true,
+      "no_articles":"2",
+      "show_blog_side_listing":true,
+      "blog_side_listing_title":"Featured Products",
+      "blog_side_listing":"featured",
+      "shipping_calculator":"Enabled",
+      "shipping_calculator_heading":"Get shipping estimates",
+      "shipping_calculator_default_country":"United States",
+      "shipping_calculator_submit_button_label":"Calculate shipping",
+      "shipping_calculator_submit_button_label_disabled":"Calculating...",
+      "show_pupup":false,
+      "popup_title":"newsletter",
+      "show_pupup_image":true,
+      "popup_heading":"SUBSCRIBE TO OUR NEWSLETTER",
+      "popup_description":"Enter your email address to receive all news, updates on new arrivals, special offers and other discount information.",
+      "popup_btn_text":"Subscribe",
+      "popup_no_link_text":"Don’ts show",
+      "social_sidebar_enable":true,
+      "social_twitter_link":"https:\/\/twitter.com\/shopify",
+      "social_facebook_link":"https:\/\/facebook.com\/shopify",
+      "social_pinterest_link":"https:\/\/pinterest.com\/shopify",
+      "social_google_plus_link":"https:\/\/plus.google.com\/+shopify",
+      "social_instagram_link":"https:\/\/instagram.com\/shopify",
+      "social_tumblr_link":"",
+      "social_youtube_link":"",
+      "social_vimeo_link":"",
+      "social_fancy_link":"",
+      "show_dollar_symbol":false,
+      "superscript_decimals":true,
+      "show_multiple_currencies":true,
+      "currency_format":"money_format",
+      "supported_currencies":"USD EUR GBP PKR CAD JPY",
+      "default_currency":"USD",
+      "checkout_header_image":"",
+      "checkout_logo_image":"",
+      "checkout_logo_position":"left",
+      "checkout_logo_size":"medium",
+      "checkout_body_background_image":"",
+      "checkout_body_background_color":"#ffffff",
+      "checkout_input_background_color_mode":"white",
+      "checkout_sidebar_background_image":"",
+      "checkout_sidebar_background_color":"#fafafa",
+      "checkout_heading_font":"Helvetica Neue",
+      "checkout_body_font":"Helvetica Neue",
+      "checkout_accent_color":"#1990c6",
+      "checkout_button_color":"#1990c6",
+      "checkout_error_color":"#ff6d6d",
+      "product_sticky_layout":false,
+      "product_vertical_thumbs":false,
+      "product_enable_zoom":true,
+      "color_skin_2":"#ed1616",
+      "bg_color":"#ffffff",
+      "color_top_header_border":"#ed1616",
+      "color_menu_bg":"#ed1616",
+      "social_follow_bar":true,
+      "social_sharing_products":true,
+      "social_sharing_blog":true,
+      "social_sharing_count":true,
+      "social_sharing_style":"is-default",
+      "share_facebook":true,
+      "share_twitter":true,
+      "share_pinterest":true,
+      "share_fancy":true,
+      "share_google":true,
+      "type_base_size":"13px",
+      "show_banner":true,
+      "sidebar_image_link":"collections\/all",
+      "collection_prod_image_sizes":"large",
+      "product_reviews_star_color":"#e5c649",
+      "footer_legallinks_enable":true,
+      "footer_legallinks_linklist":"",
+      "type_navigation_size":"15px",
+      "type_navigation_transform":true,
+      "type_button_size":"16px",
+      "type_button_transform":false,
+      "logo_max_width":"305",
+      "logo_use_image":true,
+      "type_header_transform":true,
+      "color_primary":"#49aa9d",
+      "color_secondary":"#dcdcdc",
+      "color_accent":"#49aa9d",
+      "color_borders":"#ececec",
+      "color_header_background":"#ffffff",
+      "color_header_text":"#585858",
+      "color_header_cart_search":"#f2f2f2",
+      "color_nav_bg":"#49aa9d",
+      "color_nav_text":"#ffffff",
+      "color_body_text":"#585858",
+      "color_heading_text":"#333333",
+      "color_footer_bg":"#f2f2f2",
+      "color_footer_social_link":"#bbbbbb",
+      "sections":{
+         "header":{
+            "type":"header",
+            "settings":{
+               "header_layout":"header-1",
+               "use_top_bar":true,
+               "top_bar_message":"Free shipping for standard order over $100",
+               "show_email":true,
+               "show_social_links":true,
+               "header_email_text":"fashe@example.com",
+               "logo_use_image":true,
+               "logo":"shopify:\/\/shop_images\/logo.png",
+               "header_menu_1":"main-menu"
+            }
+         },
+         "footer":{
+            "type":"footer",
+            "settings":{
+               "footer_layout":"footer-1",
+               "footer_content_enable":true,
+               "footer_about_us":"Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879",
+               "footer_social_enable":true,
+               "footer_menu_1":"categories",
+               "footer_menu_2":"links",
+               "footer_menu_3":"help",
+               "footer_newsletter_enable":true,
+               "mailing_list_form_action":"",
+               "heading":"Subscribe",
+               "footer_content_text":"Copyright © 2018 All rights reserved."
+            }
+         },
+         "1480267833382":{
+            "type":"slideshow",
+            "blocks":{
+               "1480267833382-1":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/master-slide-02.jpg",
+                     "heading":"Women Collection 2018",
+                     "heading_appear":"fadeInDown",
+                     "subheading":"New arrivals",
+                     "subheading_appear":"fadeInUp",
+                     "slide_link_text":"Shop Now",
+                     "slide_link":"shopify:\/\/collections",
+                     "slide_appear":"zoomIn"
+                  }
+               },
+               "1480267833382-0":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/master-slide-01.jpg",
+                     "heading":"Women Collection 2018",
+                     "heading_appear":"rollIn",
+                     "subheading":"New arrivals",
+                     "subheading_appear":"lightSpeedIn",
+                     "slide_link_text":"Shop Now",
+                     "slide_link":"shopify:\/\/collections",
+                     "slide_appear":"slideInUp"
+                  }
+               },
+               "1507555687103":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/master-slide-04.jpg",
+                     "heading":"Women Collection 2018",
+                     "heading_appear":"rotateInDownLeft",
+                     "subheading":"New arrivals",
+                     "subheading_appear":"rotateInUpRight",
+                     "slide_link_text":"Shop Now",
+                     "slide_link":"shopify:\/\/collections\/all",
+                     "slide_appear":"rotateIn"
+                  }
+               }
+            },
+            "block_order":[
+               "1480267833382-1",
+               "1480267833382-0",
+               "1507555687103"
+            ],
+            "settings":{
+               "autoplay":true,
+               "autoplay_speed":"10000",
+               "layout_slider":"slider-1"
+            }
+         },
+         "1503231244573":{
+            "type":"ad-banner",
+            "blocks":{
+               "1506803279562":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-02.jpg",
+                     "link_text":"Dresses",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               },
+               "1506803308948":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-05.jpg",
+                     "link_text":"Sunglasses",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               },
+               "1514473881970":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-03.jpg",
+                     "link_text":"Watches",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               },
+               "1514473919786":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-07.jpg",
+                     "link_text":"Footerwear",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               },
+               "1514473952044":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-04.jpg",
+                     "link_text":"Bags",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               },
+               "1514474049400":{
+                  "type":"image",
+                  "settings":{
+                     "image":"shopify:\/\/shop_images\/banner-09.jpg",
+                     "link_text":"Accessories",
+                     "link":"shopify:\/\/collections\/all"
+                  }
+               }
+            },
+            "block_order":[
+               "1506803279562",
+               "1506803308948",
+               "1514473881970",
+               "1514473919786",
+               "1514473952044",
+               "1514474049400"
+            ],
+            "settings":{
+               "feature_advert_design":"feature-advert6"
+            }
+         },
+         "1504781997946":{
+            "type":"service-box",
+            "blocks":{
+               "1504781997946-0":{
+                  "type":"box",
+                  "settings":{
+                     "feature_service_title":"Free Delivery Worldwide",
+                     "feature_service_description":"Mirum est notare quam littera gothica"
+                  }
+               },
+               "1504781997946-1":{
+                  "type":"box",
+                  "settings":{
+                     "feature_service_title":"30 Days Return",
+                     "feature_service_description":"Simply return it within 30 days for an exchange."
+                  }
+               },
+               "1504782065705":{
+                  "type":"box",
+                  "settings":{
+                     "feature_service_title":"Store Opening",
+                     "feature_service_description":"Shop open from Monday to Sunday"
+                  }
+               }
+            },
+            "block_order":[
+               "1504781997946-0",
+               "1504781997946-1",
+               "1504782065705"
+            ],
+            "settings":{
+               "layout":"feature-service1"
+            }
+         },
+         "1504983008053":{
+            "type":"collection",
+            "settings":{
+               "collection_layout":"feature-carousal",
+               "heading":"FEATURED PRODUCTS",
+               "collection":"frontpage",
+               "products_tab_count":"8"
+            }
+         },
+         "1507203403431":{
+            "type":"blog",
+            "settings":{
+               "layout":"blog-1",
+               "heading":"Our Blog",
+               "blog":"news"
+            }
+         },
+         "1508329681974":{
+            "type":"instagram-feed",
+            "settings":{
+               "layout":"instafeed",
+               "homepage_instagram_feed":true,
+               "insta_title":"@ FOLLOW US ON INSTAGRAM",
+               "insta_access_token":"6857779239.1677ed0.4e7f225760f940d48ed3e8dbb743fef5",
+               "insta_images_fetch":"10",
+               "no_of_products":"5"
+            }
+         },
+         "1514553331574":{
+            "type":"product-deals",
+            "blocks":{
+               "1514553331574-0":{
+                  "type":"deal",
+                  "settings":{
+                     "product_deal":"boxy2-t-shirt-with-roll-sleeve",
+                     "custom_image":true,
+                     "product_image":"shopify:\/\/shop_images\/shop-item-09.jpg",
+                     "expiry_deal":"2019\/01\/01"
+                  }
+               }
+            },
+            "block_order":[
+               "1514553331574-0"
+            ],
+            "settings":{
+               "collection_layout":"deals-layout1",
+               "image":"shopify:\/\/shop_images\/banner-08.jpg",
+               "heading":"The Beauty",
+               "subheading":"Lookbook",
+               "link_text":"View Collection",
+               "link":"shopify:\/\/collections\/all"
+            }
+         }
+      },
+      "content_for_index":[
+         "1480267833382",
+         "1503231244573",
+         "1504983008053",
+         "1514553331574",
+         "1507203403431",
+         "1508329681974",
+         "1504781997946"
+      ]
+   },
+   "presets":{
+
+   }
+}
