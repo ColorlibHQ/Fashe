@@ -368,7 +368,7 @@ var cart = {
         $('#cart > button').button('reset');
         setTimeout(function () {
           $('.header-icons-noti').each(function(){
-            $(this).html(cart.item_count);
+            $(this).html(json.item_count);
           })
         }, 100);
         // Currency.convertAll(shopCurrency, Currency.cookie.read());
