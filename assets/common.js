@@ -140,7 +140,7 @@ $(document).ready(function() {
 
         $('html, body').animate({ scrollTop: 0 }, 'slow');
 
-        $('#cart').load('/ #cart #subcart');
+        $('.header-cart').load('/ .container-menu-header #subcart');
 
         //        $('#cart > .top-cart-contain ul').load('/ #cart > .top-cart-contain ul li');
         //  $('#cart > ul').load('/ #cart > ul li');
@@ -348,7 +348,7 @@ var cart = {
           }, 100);
           //Currency.convertAll(shopCurrency, Currency.cookie.read());
         });
-        $('#cart').load('/ #cart #subcart');
+        $('.header-cart').load('/ .container-menu-header #subcart');
       },
       error: function(xhr, ajaxOptions, thrownError) {
         alert(xhr.responseText);
@@ -376,7 +376,7 @@ var cart = {
         if (getURLVar('route') == '/cart' || getURLVar('route') == '/checkout') {
           location = '/cart';
         } else {
-          $('#cart').load('/ #cart #subcart');
+          $('.header-cart').load('/ .container-menu-header #subcart');
         }
       },
       error: function(xhr, ajaxOptions, thrownError) {
