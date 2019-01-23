@@ -1,8 +1,8 @@
 <img src="{{ 'icon-header-02.png' | asset_url }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-<span class="header-icons-noti" id="cart-total">{{ cart.item_count }}</span>
+<span class="header-icons-noti cart-total">{{ cart.item_count }}</span>
 <!-- Header cart noti -->
 <div class="header-cart header-dropdown">
-  {% if cart.item_count < 1 %} 
+  {% if cart.item_count < 1 %}
   <ul class="header-cart-wrapitem">
     <li>
       <p class="text-center cart-empty">{{ 'cart.general.no_items'| t }}</p>
@@ -24,6 +24,9 @@
         <span class="header-cart-item-info">
           {{ item.quantity }} &times; {{ item.line_price | money }}
         </span>
+		<button type="button" onclick="cart.remove('{{ item.variant_id }}');" title="Remove" class="btn btn-xs">
+          x
+		</button>
         {% comment %}<button type="button" onclick="cart.remove('{{ item.variant_id }}');" title="Remove" class="btn btn-danger btn-xs">
         <i class="ion-android-close"></i>
         </button>{% endcomment %}

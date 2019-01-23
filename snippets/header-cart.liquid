@@ -1,9 +1,9 @@
 <img src="{{ 'icon-header-02.png' | asset_url }}" class="header-icon1 js-show-header-dropdown" alt="ICON">
-<span class="header-icons-noti" id="cart-total">{{ cart.item_count }}</span>
+<span class="header-icons-noti cart-total">{{ cart.item_count }}</span>
 <!-- Header cart noti -->
 <div id="cart" class="header-cart header-dropdown">
   <div id="subcart">
-    {% if cart.item_count < 1 %} 
+    {% if cart.item_count < 1 %}
     <ul class="header-cart-wrapitem">
       <li>
         <p class="text-center cart-empty">{{ 'cart.general.no_items'| t }}</p>
