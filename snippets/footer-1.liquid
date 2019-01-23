@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer id="footer" class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-  <div class="flex-w p-b-90">
+  <div class="footer__columns flex-w p-b-90">
     <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
       <h4 class="s-text12 p-b-30">
         {{ 'layout.footer.contact' | t }}
@@ -9,7 +9,7 @@
         <p class="s-text7 w-size27">
           {{ section.settings.footer_about_us }}
         </p>
-        <div class="flex-m p-t-30">
+        <div class="footer__social-icons flex-m p-t-30">
           {% if section.settings.footer_social_enable %}
           {% include 'social-button' %}
           {% endif %}

@@ -11,8 +11,7 @@
       accessToken: '{{ section.settings.insta_access_token }}',
       limit: "{{ section.settings.insta_images_fetch }}",
       resolution: "standard_resolution",
-      template: '<div class="block4 wrap-pic-w" >'+
-      '<img src="\{\{image\}\}">'+
+      template: '<div class="block4 wrap-pic-w" style="background-image:url(\{\{image\}\})">'+
       '<a href="\{\{image\}\}" target="_blank" class="block4-overlay sizefull ab-t-l trans-0-4">'+
       '<span class="block4-overlay-heart s-text9 flex-m trans-0-4 p-l-40 p-t-25">'+
       '<i class="icon_heart_alt fs-20 p-r-12" aria-hidden="true"></i>'+
@@ -53,7 +52,7 @@
     }
   });
   feed.run();
-  }); 
+  });
   {% endif %}
 </script>
 

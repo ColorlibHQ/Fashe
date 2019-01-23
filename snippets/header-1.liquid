@@ -38,13 +38,16 @@
               <a href="/account" class="header-wrapicon1 dis-block">
                 <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
               </a>
+              <div class="header-dropdwn">
+                <a href="/account/logout">{{ 'customer.login.logout' | t }}</a>
+              </div><!-- header-dropdwn -->
             {% else %}
               <a href="/account/login" class="header-wrapicon1 dis-block">
                 <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
               </a>
             {% endif %}
         {% endif %}
-        
+
         <span class="linedivide1"></span>
         <div class="header-wrapicon2">
           {% include 'header-cart' %}
@@ -54,7 +57,7 @@
   </div>
   <!-- Header Mobile -->
   <div class="wrap_header_mobile">
-    <!-- Logo moblie -->	
+    <!-- Logo moblie -->
     {% if section.settings.logo %}
     <a href="/" class="logo-mobile">
       <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ section.settings.logo.alt | default: shop.name }}">
@@ -75,7 +78,7 @@
               </a>
             {% endif %}
         {% endif %}
-        
+
         <span class="linedivide2"></span>
         {% include 'header-cart-mob' %}
       </div>
@@ -105,7 +108,7 @@
             </span>
             {% endif %}
 
- 
+
           </div>
         </li>
         <li class="item-topbar-mobile p-l-10">

@@ -72,6 +72,9 @@
                     <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                   </button>
                 </div>
+				<button class="remove s-text7 flex-c-m m-l-30 m-t-10 p-l-10 p-r-10 p-t-5 p-b-5 bg1 bo-rad-23 hov1 trans-0-4" onclick="cart.remove('{{ item.variant_id }}');">
+					{{ 'cart.general.remove' | t }}
+				</button>
               </td>
               <td class="column-5">{{ item.line_price | money }}</td>
             </tr>
@@ -205,7 +208,7 @@ Update Totals
     submitButton: theme.strings.shippingCalcSubmitButton,
     submitButtonDisabled: theme.strings.shippingCalcSubmitButtonDisabled,
     customerIsLoggedIn: theme.strings.shippingCalcCustomerIsLoggedIn,
-    moneyFormat: theme.strings.shippingCalcMoneyFormat                                     
+    moneyFormat: theme.strings.shippingCalcMoneyFormat
   } );
 </script>
 {% endunless %}

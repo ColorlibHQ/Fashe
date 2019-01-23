@@ -657,7 +657,23 @@
             "id":"color_footer_text",
             "label":"Footer Text Color",
             "default":"#555555"
-         }
+		 },
+		 {
+            "type":"header",
+            "content":"Other Colors"
+		 },
+		 {
+            "type":"color",
+            "id":"color_countdown",
+            "label":"Countdown Background Color",
+            "default":"transparent"
+		 },
+		 {
+            "type":"color",
+            "id":"color_countdown_text",
+            "label":"Countdown Text Color",
+            "default":"#555555"
+		 }
       ]
    },
    {

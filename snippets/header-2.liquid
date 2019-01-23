@@ -15,6 +15,9 @@
           <a href="/account" class="header-wrapicon1 dis-block">
             <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
           </a>
+					<div class="header-dropdwn">
+						<a href="/account/logout">{{ 'customer.login.logout' | t }}</a>
+					</div><!-- header-dropdwn -->
         {% else %}
           <a href="/account/login" class="header-wrapicon1 dis-block">
             <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
@@ -53,7 +56,7 @@
       </a>
       {% else %}
       <a href="/" itemprop="url" class="navbar-brand img-responsive">{{ shop.name }}</a>
-      {% endif %} 
+      {% endif %}
       <div class="topbar-child2">
         {% if section.settings.show_email %}
         <span class="topbar-email">
@@ -69,6 +72,9 @@
               <a href="/account" class="header-wrapicon1 dis-block m-l-30">
                 <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
               </a>
+							<div class="header-dropdwn">
+								<a href="/account/logout">{{ 'customer.login.logout' | t }}</a>
+							</div><!-- header-dropdwn -->
             {% else %}
               <a href="/account/login" class="header-wrapicon1 dis-block m-l-30">
                 <img src="{{ 'icon-header-01.png' | asset_url }}" class="header-icon1" alt="ICON">
@@ -95,7 +101,7 @@
   </div>
   <!-- Header Mobile -->
   <div class="wrap_header_mobile">
-    <!-- Logo moblie -->	
+    <!-- Logo moblie -->
     {% if section.settings.logo %}
     <a href="/" class="logo-mobile">
       <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ section.settings.logo.alt | default: shop.name }}">
