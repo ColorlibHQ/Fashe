@@ -35,7 +35,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     <!-- CSS ================================================== -->
-    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }} 
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
     {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' | stylesheet_tag }}
     {{ 'https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css' | stylesheet_tag }}
     {{ 'icon-font.min.css' | asset_url | stylesheet_tag }}
@@ -48,7 +48,7 @@
     {{ 'slick.css' | asset_url | stylesheet_tag }}
     {{ 'lightbox.min.css' | asset_url | stylesheet_tag }}
     {{ 'util.css' | asset_url | stylesheet_tag }}
-    {{ 'main.css' | asset_url | stylesheet_tag }}    
+    {{ 'main.css' | asset_url | stylesheet_tag }}
     {{ 'quickview.css' | asset_url | stylesheet_tag }}
     {{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
     {% if template == 'blog' or template == 'article' %}
@@ -94,12 +94,25 @@
     {% section 'header' %}
     <div class="contentforlayout">
       {{ content_for_layout }}
-      <!-- End Content -->  
+      <!-- End Content -->
 
       {% include 'quickview' %}
 
       {% section 'footer' %}
     </div>
+
+	{% if settings.fixed_search_bar_enable %}
+	<!-- Search Input -->
+	<form action="/search" method="POST" role="search" >
+		<div id="search" class="fixed-search-bar search-product bo4 of-hidden">
+			<input type="text" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'layout.search_bar.placeholder' | t }}" class="s-text7 size6 p-l-23 p-r-50" aria-label="{{ 'layout.search_bar.placeholder' | t }}" />
+			<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+				<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+			</button>
+		</div>
+	</form>
+	{% endif %}
+
     <!-- Back to top -->
     <div class="btn-back-to-top bg0-hov" id="myBtn">
       <span class="symbol-btn-back-to-top">
@@ -123,7 +136,7 @@
       });
     </script>
     {{ 'slick.min.js' | asset_url | script_tag }}
-    {{ 'slick-custom.js' | asset_url | script_tag }} 
+    {{ 'slick-custom.js' | asset_url | script_tag }}
     {{ 'countdowntime.js' | asset_url | script_tag }}
     {{ 'lightbox.min.js' | asset_url | script_tag }}
     {{ 'sweetalert.min.js' | asset_url | script_tag }}
@@ -150,7 +163,7 @@
     <!--===============================================================================================-->
 
     {{ 'main.js' | asset_url | script_tag }}
-    {{ 'owl.carousel.min.js' | asset_url | script_tag }} 
+    {{ 'owl.carousel.min.js' | asset_url | script_tag }}
 
     {{ 'common.js' | asset_url | script_tag }}
     {{ 'jquery.magnific-popup.min.js' | asset_url | script_tag }}

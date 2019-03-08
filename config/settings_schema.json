@@ -580,6 +580,13 @@
             "label":"Slide All images in product grid?",
             "default":true,
             "info":"Used for Product grid carousel enable\/disable"
+		 },
+		 {
+            "type":"checkbox",
+            "id":"fixed_search_bar_enable",
+            "label":"Fixed Search Bar",
+			"default":false,
+			"info":"Displayed at the bottom of the page"
          }
       ]
    },

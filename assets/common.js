@@ -94,10 +94,14 @@ $(document).ready(function () {
 	// product page add to cart
 	$('#button-cart').on('click', function (e) {
 		e.preventDefault();
+
+		var product_id = $('#form_buy #productSelect').val();
+		var quantity = $('#form_buy input.num-product').val();
+
 		$.ajax({
 			url: '/cart/add.js',
 			type: 'post',
-			data: $('#form_buy input[type=\'text\'], #form_buy select'),
+			data: 'id=' + product_id + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
 			dataType: 'json',
 			beforeSend: function () {
 				$('#button-cart').button('loading');
@@ -149,6 +153,39 @@ $(document).ready(function () {
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				alert(xhr.responseText);
+			}
+		});
+	});
+
+	//cart remove button
+	$('#cart_form button.remove').on('click', function (e) {
+		e.preventDefault();
+		var key = $( this ).data('key');
+		if( key === undefined ) {
+			return;
+		}
+		cart.remove( key );
+	});
+
+	//cart update button
+	$('#cart_form button.update-cart').on('click', function (e) {
+		e.preventDefault();
+
+		var updates = '';
+
+		$('#cart_form input[name="updates[]"').each( function() {
+			var id = $(this).data('key');
+			var quantity = $(this).val();
+			updates += 'updates['+ id +']=' + quantity + '&';
+		});
+
+ 		$.ajax({
+			url: '/cart/update.js',
+			type: 'post',
+			data: updates,
+			dataType: 'json',
+			success: function (json) {
+				location.reload();
 			}
 		});
 	});
@@ -365,9 +402,6 @@ var cart = {
 			type: 'post',
 			data: 'updates[' + key + ']=0',
 			dataType: 'json',
-			beforeSend: function () {
-				$('#cart').removeClass('show-header-dropdown');
-			},
 			success: function (json) {
 				$('#cart > button').button('reset');
 				setTimeout(function () {
