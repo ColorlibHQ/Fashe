@@ -22,7 +22,7 @@
           {{ item.product.title }}
         </a>
         <span class="header-cart-item-info">
-          {{ item.quantity }} &times; {{ item.line_price | money }}
+          {{ item.quantity }} &times; {{ item.price | money }}
         </span>
 		<button type="button" onclick="cart.remove('{{ item.variant_id }}');" title="Remove" class="btn btn-xs">
           x

@@ -294,8 +294,8 @@ iframe {
   display: none;
   position: fixed;
   width: 40px;
-  height: 40px;
-  bottom: 40px;
+  bottom: 15px;
+  right: 15px;
   right: 40px;
   background-color: black;
   opacity: 0.5;
@@ -326,6 +326,28 @@ iframe {
     right: 15px;
   }
 }
+
+
+/*[ Fixed search bar ]
+///////////////////////////////////////////////////////////
+*/
+.fixed-search-bar {
+	position: fixed;
+	right: 68px;
+	bottom: 13px;
+	width: 200px;
+}
+
+.fixed-search-bar input {
+	height: 40px;
+}
+
+@media (max-width: 576px) {
+	.fixed-search-bar {
+		right: 50%;
+		margin-right: -100px;
+	}
+  }
 
 /*[ Restyle Select2 ]
 ///////////////////////////////////////////////////////////
@@ -1042,6 +1064,11 @@ li.sale-noti > a {
   height: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.btn-show-menu:only-child {
+	width: 100%;
+	justify-content: flex-end;
 }
 
 .hamburger {
