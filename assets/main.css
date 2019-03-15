@@ -851,6 +851,15 @@ li.sale-noti > a {
   transform: scale(0);
 }
 
+
+@media (max-width: 450px){
+	.header-cart {
+		width: 100vw;
+		right: -85px;
+	}
+}
+
+
 .show-header-dropdown {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -1050,9 +1059,7 @@ li.sale-noti > a {
 }
 
 .header-icons-mobile .header-cart {
-  width: 300px;
   top: 190%;
-  right: -80px;
   z-index: 1100;
   transform-origin: top right;
 }
