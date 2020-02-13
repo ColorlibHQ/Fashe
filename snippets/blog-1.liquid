@@ -6,7 +6,7 @@
       </h3>
     </div>
     <div class="row">
-      {% for article in blogs[section.settings.blog].articles %}
+      {% for article in blogs[section.settings.blog].articles: limit 3 %}
       <div class="col-sm-10 col-md-4 p-b-30 m-l-r-auto">
         <!-- Block3 -->
         <div class="block3">
