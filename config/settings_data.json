@@ -11,7 +11,7 @@
     "fixed_search_bar_enable": true,
     "color_skin": "#af9284",
     "color_top_header": "#af9284",
-    "color_top_header_label": "#362828",
+    "color_top_header_label": "#f0f0f0",
     "color_center_header": "#362828",
     "color_menu_links": "#af9284",
     "color_footer": "#f0f0f0",
@@ -142,7 +142,7 @@
       "header": {
         "type": "header",
         "settings": {
-          "header_layout": "header-2",
+          "header_layout": "header-1",
           "use_top_bar": true,
           "top_bar_message": "Kostenloser Versand ab 25 Euro",
           "show_email": true,
