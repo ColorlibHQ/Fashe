@@ -1,0 +1,40 @@
+{% raw %}
+{% if paginate.last_page > 1 %}
+  <div class="pagination" id="pagination">
+    {% if paginate.current_page > 1 %}
+    <span class="prev"><a {% if paginate.current_page != 1 %} onclick="setPage({{paginate.current_page | minus: 1}})"{% endif %} href="javascript:;" rel="prev">&larr;</a></span>
+    {% endif %}
+    {% if paginate.current_page > 1 %}
+    <span class="page"><a onclick="setPage(1)" href="javascript:">1</a></span>
+    {% endif %}
+    {% if paginate.current_page > 4 %}
+    <span class="deco">…</span>
+    {% endif %}
+    {% if paginate.current_page > 3 %}
+    <span class="page"><a onclick="setPage({{paginate.current_page | minus: 2}})" href="javascript:;">{{paginate.current_page | minus: 2}}</a></span>
+    {% endif %}
+    {% if paginate.current_page > 2 %}
+    <span class="page"><a onclick="setPage({{paginate.current_page | minus: 1}})" href="javascript:;">{{paginate.current_page | minus: 1}}</a></span>
+    {% endif %}
+    <span class="page current">{{paginate.current_page}}</span>
+    {% assign prevPage = paginate.last_page | minus: 1 %}
+    {% if prevPage > paginate.current_page %}
+    <span class="page"><a onclick="setPage({{paginate.current_page | plus: 1}})" href="javascript:;">{{paginate.current_page | plus: 1}}</a></span>
+    {% endif %}
+    {% assign _prevPage = paginate.last_page | minus: 2 %}
+    {% if _prevPage > paginate.current_page %}
+    <span class="page"><a onclick="setPage({{paginate.current_page | plus: 2}})" href="javascript:;">{{paginate.current_page | plus: 2}}</a></span>
+    {% endif %}
+    {% assign __prevPage = paginate.last_page | minus: 3 %}
+    {% if __prevPage > paginate.current_page %}
+    <span class="deco">…</span>
+    {% endif %}
+    {% if paginate.last_page > paginate.current_page %}
+    <span class="page"><a onclick="setPage({{paginate.last_page}})" href="javascript:;">{{paginate.last_page}}</a></span>
+    {% endif %}
+    {% if paginate.current_page < paginate.last_page %}
+    <span class="next"><a {% if paginate.current_page != paginate.last_page %} onclick="setPage({{paginate.current_page | plus: 1}})"{% endif %} href="javascript:;" rel="next">&rarr;</a></span>
+    {% endif %}
+  </div>
+{% endif %}
+{% endraw %}

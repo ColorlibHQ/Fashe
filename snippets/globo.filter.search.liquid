@@ -1,0 +1,425 @@
+{% raw %}
+{% assign root_url = {% endraw %}"{%- if routes.root_url != "/" -%}{{ routes.root_url }}{%- endif -%}"{% raw %} %}
+
+{% assign zero_character_result = true %}
+{% if result.term %}{% assign zero_character_result = false %}{% endif %}
+
+{% assign product_list_layout = 'grid' %}
+
+{% assign products_suggestions_title = translation.search.products | default: "Products" %}
+{% assign keywords_suggestions_title = translation.search.suggestions | default: "Suggestions" %}
+
+{% if zero_character_result %}
+  {% assign product_list_layout = 'grid' %}  {% if translation.search.zero_character_products_suggestions_title %}
+  {% assign products_suggestions_title = translation.search.zero_character_products_suggestions_title %}
+  {% endif %}
+  {% if translation.search.zero_character_keywords_suggestions_title %}
+  {% assign keywords_suggestions_title = translation.search.zero_character_keywords_suggestions_title %}
+  {% endif %}
+{% elsif result.isEmpty %}
+{% assign product_list_layout = 'grid' %}  {% if translation.search.no_result_products_suggestions_title %}
+  {% assign products_suggestions_title = translation.search.no_result_products_suggestions_title %}
+  {% endif %}
+  {% if translation.search.no_result_keywords_suggestions_title %}
+  {% assign keywords_suggestions_title = translation.search.no_result_keywords_suggestions_title %}
+  {% endif %}
+{% endif %}
+
+{% if layout == 1 %}
+  <div id="glFilter-search-popup" class="ui-menu gl-filter-search-fullscreen gl-filter-animate">
+    <div class="gl-backdrop gl-close-layer"></div>
+    <div class="gl-fullscreen-layer gl-animate-transition">
+      <div class="gl-fullscreen-header">
+        <form class="gl-d-searchbox" method="GET" action="{% endraw %}{{ routes.search_url }}{% raw %}">
+          <label class="gl-icon gl-d-searchbox-icon" for="gl-d-searchbox-input">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px">
+              <path d="M0 0h24v24H0V0z" fill="none"></path>
+              <path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+            </svg>
+          </label>
+          <input type="text" class="gl-d-searchbox-input" id="gl-d-searchbox-input" placeholder="{{translation.product.search}}" name="q" value="{{result.term | escape}}" autocapitalize="off" autocomplete="off" autocorrect="off">
+        </form>
+        <button type="button" class="gl-d-close-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M11.414 10l6.293-6.293a1 1 0 10-1.414-1.414L10 8.586 3.707 2.293a1 1 0 00-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 101.414 1.414L10 11.414l6.293 6.293A.998.998 0 0018 17a.999.999 0 00-.293-.707L11.414 10z" fill="#5C5F62"/></svg></button>
+      </div>
+      <div class="gl-fullscreen-suggestions">
+        {% if result.isEmpty and result.term %}
+          <div>{% if translation.search.not_found %}{{translation.search.not_found}}{% else %}Sorry, nothing found for{% endif %}&nbsp;<b>{{result.term | escape}}</b></div>
+        {% endif %}
+        
+      </div>
+      <div class="gl-fullscreen-initial-content">
+        {% if false and result.loading %}
+        <div class="gl-fullscreen-loading-content">
+          <svg class="lds-spinner" width="60px" height="60px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(30 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(60 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(90 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(120 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(150 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(180 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(210 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(240 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(270 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(300 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(330 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate></rect></g></svg>
+        </div>
+        {% else %}
+          <div class="gl-row">
+            {% if result.suggestions or result.collections or result.pages %}
+            <div class="gl-col-left">
+              <div class="gl-list gl-fullscreen-top-searches">
+                                {% if result.suggestions %}
+                <div class="gl-list__group">
+                  <div class="gl-list__title">{{keywords_suggestions_title | escape}}</div>
+                  <div class="gl-list__content">
+                    <ul>
+                      {% for suggestion in result.suggestions %}
+                      <li>
+                        <a href="{% endraw %}{{ routes.search_url }}{% raw %}?q={{suggestion.keyword | url_encode}}">{{suggestion.keyword | escape}}<span class="count">{{suggestion.count}}</span></a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+                                                {% if result.collections %}
+                <div class="gl-list__group">
+                  <div class="gl-list__title">{{translation.search.collections | default: "Collections"}}</div>
+                  <div class="gl-list__content">
+                    <ul>
+                      {% for collection in result.collections %}
+                      <li><a href="{{root_url}}/collections/{{collection.handle}}">{{collection.title | escape}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+                              </div>
+            </div>
+            {% endif %} 
+            <div class="gl-col-right">
+                            {% if result.products %}
+              <div class="gl-list gl-fullscreen-top-clicked">
+                <div class="gl-fullscreen-results__meta">
+                  <div class="gl-list__title">{{products_suggestions_title}}</div>
+                  {% if result.term and result.isEmpty == false %}
+                    <a href="{% if result.url %}{{result.url}}{% else %}{% endraw %}{{ routes.search_url }}{% raw %}?q={{result.term | url_encode}}{% endif %}">
+                      {% if translation.search.view_all_products %}{{translation.search.view_all_products}}{% else %}View all products{% endif %}
+                    </a>
+                  {% endif %}
+                </div>
+                <div class="gl-list__content">
+                  {% if product_list_layout == 'carousel' %}
+                  <div class="gl-owl--carousel owl-carousel" id="gl-fullscreen-recommended-products">
+                    {% for product in result.products %}
+                    <div class="gl-card">
+                      <div class="gl-card-media">
+                        <div class="gl-card-thumbnail">
+                          <a class="spf-image-ratio" href="{{root_url}}/products/{{product.handle}}">
+                            {% if product.image %}
+                            <img 
+                              class="gflazyload"
+                              srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                              src="{{product.image.src | img_url: image_size}}"
+                              data-src="{{product.image.src | img_lazyload_url}}"
+                              data-sizes="auto"
+                              data-aspectratio="{{product.image.aspect_ratio}}"
+                              data-parent-fit="contain"
+                              alt="{{product.image.alt | escape}}"
+                            />
+                            {% else %}
+                            <img src="{{'https://cdn.shopify.com/s/images/themes/product-1.png' | img_url: '200x'}}">
+                            {% endif %}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="gl-card-content gl-card-flex">
+                        <div class="gl-card-title" title="{{product.title | escape}}">
+                          <a href="{{root_url}}/products/{{product.handle}}">{{product.title | escape}}</a>
+                        </div>
+                                                {% if product.vendor %}
+                        <div class="gf-search-item-product-vendor">{{product.vendor | escape}}</div>
+                        {% endif %}
+                                                                                                <div class="gl-card-flex"></div>
+                                                <div class="gl-card-pricing">
+                          <span class="gl-card-price">
+                            {{ product.price | money}}
+                          </span>
+                        </div>
+                                              </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% else %}
+                  <div class="gl-fullscreen-results__content">
+                    {% for product in result.products %}
+                    <div class="gl-card">
+                      <div class="gl-card-media">
+                        <div class="gl-card-thumbnail">
+                          <a class="spf-image-ratio" href="{{root_url}}/products/{{product.handle}}">
+                            {% if product.image %}
+                            <img 
+                              class="gflazyload"
+                              srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                              src="{{product.image.src | img_url: image_size}}"
+                              data-src="{{product.image.src | img_lazyload_url}}"
+                              data-sizes="auto"
+                              data-aspectratio="{{product.image.aspect_ratio}}"
+                              data-parent-fit="contain"
+                              alt="{{product.image.alt | escape}}"
+                            />
+                            {% else %}
+                            <img src="{{'https://cdn.shopify.com/s/images/themes/product-1.png' | img_url: '200x'}}">
+                            {% endif %}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="gl-card-content gl-card-flex">
+                        <div class="gl-card-title" title="{{product.title | escape}}">
+                          <a href="{{root_url}}/products/{{product.handle}}">{{product.title | escape}}</a>
+                        </div>
+                                                {% if product.vendor %}
+                        <div class="gf-search-item-product-vendor">{{product.vendor | escape}}</div>
+                        {% endif %}
+                                                                                                <div class="gl-card-flex"></div>
+                                                <div class="gl-card-pricing">
+                          <span class="gl-card-price">
+                            {{ product.price | money}}
+                          </span>
+                        </div>
+                                              </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+                          </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if layout == 2 %}
+  {% if result.isEmpty and result.term %}
+    <li class="gf-search-no-result" aria-label="{% if translation.search.not_found %}{{translation.search.not_found }}{% else %}Sorry, nothing found for{% endif %} "{{result.term | escape}}": {{result.term | escape}}">
+      <p>{% if translation.search.not_found %}{{translation.search.not_found }}{% else %}Sorry, nothing found for{% endif %}&nbsp;<b>{{result.term | escape}}</b></p>
+    </li>
+  {% endif %}
+    {% if result.suggestions %}
+    <li class="gf-search-suggestions">
+      <a class="gf-search-header">{{keywords_suggestions_title}}</a>
+      <ul>
+        {% for suggestion in result.suggestions %}
+          <li aria-label="{{keywords_suggestions_title | escape}}: {{suggestion.keyword | escape}}">
+            <a href="{% endraw %}{{ routes.search_url }}{% raw %}?q={{suggestion.keyword | url_encode}}">{{suggestion.keyword | escape}}<span class="count">{{suggestion.count}}</span></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+      {% if result.collections %}
+    <li class="gf-search-collections">
+      <a class="gf-search-header">{{translation.search.collections | default: "Collections"}}</a>
+      <ul>
+        {% for collection in result.collections %}
+          <li aria-label="{{translation.search.collections | default: "Collections"}}: {{collection.title | escape}}"><a href="{{root_url}}/collections/{{collection.handle}}">{{collection.title | escape}}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+      {% if result.products %}
+    <li class="gf-search-products">
+      <a class="gf-search-header">{{products_suggestions_title}}</a>
+      <ul>
+        {% for product in result.products %}
+          <li aria-label="{{products_suggestions_title | escape}}: {{product.title | escape}}">
+            <a aria-label="{{product.handle}}" href="{{root_url}}/products/{{product.handle}}">
+              <div class="gf-search-left">
+                {% if product.image %}
+                <img 
+                  class="gflazyload"
+                  srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  src="{{product.image.src | img_url: image_size}}"
+                  data-src="{{product.image.src | img_lazyload_url}}"
+                  data-sizes="auto"
+                  data-aspectratio="{{product.image.aspect_ratio}}"
+                  data-parent-fit="contain"
+                  alt="{{product.image.alt | escape}}"
+                />
+                {% else %}
+                <img src="{{'https://cdn.shopify.com/s/images/themes/product-1.png' | img_url: '100x'}}">
+                {% endif %}
+              </div>
+              <div class="gf-search-right">
+                <div class="gf-search-item-product-title">{{product.title | escape}}</div>
+                                {% if product.vendor %}
+                <div class="gf-search-item-product-vendor">{{product.vendor | escape}}</div>
+                {% endif %}
+                                                                                <div class="gf-search-item-product-price">
+                  <span class="gf-search-item-product">{{ product.price | money}}</span>
+                </div>
+                              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+    {% if result.term and result.isEmpty == false %}
+  <li class="gf-search-item gf-search-item-product gf-search-viewall">
+    <a href="{% if result.url %}{{result.url}}{% else %}{% endraw %}{{ routes.search_url }}{% raw %}?q={{result.term | url_encode}}{% endif %}">
+      {% if translation.search.view_all %}{{translation.search.view_all}}{% else %}Search for{% endif %} "{{result.term | escape}}"
+    </a>
+  </li>
+  {% endif %}
+{% endif %}
+
+{% if layout == 3 %}
+  {% if result.isEmpty and result.term %}
+  <div class="gl-fullscreen-suggestions">
+    <div>{% if translation.search.not_found %}{{translation.search.not_found }}{% else %}Sorry, nothing found for{% endif %}&nbsp;<b>{{result.term | escape}}</b></div>
+  </div>
+  {% endif %}
+  <div class="gl-grid-layer">
+    <div class="gl-fullscreen-layer">
+      <div class="gl-fullscreen-initial-content">
+        {% if false and result.loading %}
+        <div class="gl-fullscreen-loading-content">
+          <svg class="lds-spinner" width="60px" height="60px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(30 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(60 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(90 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(120 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(150 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(180 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(210 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(240 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(270 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(300 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"></animate></rect></g><g transform="rotate(330 50 50)"><rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#000"><animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animate></rect></g></svg>
+        </div>
+        {% else %}
+          <div class="gl-row">
+            {% if result.suggestions or result.collections or result.pages or result.popular_keywords %}
+            <div class="gl-col-left">
+              <div class="gl-list gl-fullscreen-top-searches">
+                                {% if result.suggestions %}
+                <div class="gl-list__group">
+                  <div class="gl-list__title">{{keywords_suggestions_title}}</div>
+                  <div class="gl-list__content">
+                    <ul>
+                      {% for suggestion in result.suggestions %}
+                      <li aria-label="{{keywords_suggestions_title}}: {{suggestion.keyword | escape}}">
+                        <a href="{% endraw %}{{ routes.search_url }}{% raw %}?q={{suggestion.keyword | url_encode}}">{{suggestion.keyword | escape}}<span class="count">{{suggestion.count}}</span></a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+                                {% if result.collections %}
+                <div class="gl-list__group">
+                  <div class="gl-list__title">{{translation.search.collections | default: "Collections"}}</div>
+                  <div class="gl-list__content">
+                    <ul>
+                      {% for collection in result.collections %}
+                      <li aria-label="{{translation.search.collections | default: "Collections"}}: {{collection.title | escape}}"><a href="{{root_url}}/collections/{{collection.handle}}">{{collection.title | escape}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                {% endif %}
+                              </div>
+            </div>
+            {% endif %} 
+            <div class="gl-col-right">
+                            <div class="gf-search-products">
+                <div class="gl-list__title">{{products_suggestions_title}}</div>
+                  {% if result.products %}
+                  <div class="gl-list__content">
+                    {% if product_list_layout == 'carousel' %}
+                    <ul class="gl-owl--carousel owl-carousel" id="gl-fullscreen-recommended-products">
+                      {% for product in result.products %}
+                      <li aria-label="{{products_suggestions_title | escape}}: {{product.title | escape}}" class="gl-card">
+                        <div class="gl-card-media">
+                          <div class="gl-card-thumbnail">
+                            <a aria-label="{{products_suggestions_title | escape}}: {{product.title | escape}}" class="spf-image-ratio" href="{{root_url}}/products/{{product.handle}}">
+                              {% if product.image %}
+                              <img 
+                                class="gflazyload"
+                                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                src="{{product.image.src | img_url: image_size}}"
+                                data-src="{{product.image.src | img_lazyload_url}}"
+                                data-sizes="auto"
+                                data-aspectratio="{{product.image.aspect_ratio}}"
+                                data-parent-fit="contain"
+                                alt="{{product.image.alt | escape}}"
+                              />
+                              {% else %}
+                              <img src="{{'https://cdn.shopify.com/s/images/themes/product-1.png' | img_url: '200x'}}">
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="gl-card-content gl-card-flex">
+                          <div class="gl-card-title" title="{{product.title | escape}}">
+                            <a aria-label="{{products_suggestions_title | escape}}: {{product.title | escape}}" href="{{root_url}}/products/{{product.handle}}">{{product.title | escape}}</a>
+                          </div>
+                                                    {% if product.vendor %}
+                          <div class="gf-search-item-product-vendor">{{product.vendor | escape}}</div>
+                          {% endif %}
+                                                                                                        <div class="gl-card-flex"></div>
+                                                    <div class="gl-card-pricing">
+                            <span class="gl-card-price">
+                              {{ product.price | money}}
+                            </span>
+                          </div>
+                                                  </div>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                    {% else %}
+                    <div class="gl-fullscreen-results__content">
+                      {% for product in result.products %}
+                      <div aria-label="{{products_suggestions_title | escape}}: {{product.title | escape}}" class="gl-card">
+                        <div class="gl-card-media">
+                          <div class="gl-card-thumbnail">
+                            <a class="spf-image-ratio" href="{{root_url}}/products/{{product.handle}}">
+                              {% if product.image %}
+                              <img 
+                                class="gflazyload"
+                                srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                src="{{product.image.src | img_url: image_size}}"
+                                data-src="{{product.image.src | img_lazyload_url}}"
+                                data-sizes="auto"
+                                data-aspectratio="{{product.image.aspect_ratio}}"
+                                data-parent-fit="contain"
+                                alt="{{product.image.alt | escape}}"
+                              />
+                              {% else %}
+                              <img src="{{'https://cdn.shopify.com/s/images/themes/product-1.png' | img_url: '200x'}}">
+                              {% endif %}
+                            </a>
+                          </div>
+                        </div>
+                        <div class="gl-card-content gl-card-flex">
+                          <div class="gl-card-title" title="{{product.title | escape}}">
+                            <a href="{{root_url}}/products/{{product.handle}}">{{product.title | escape}}</a>
+                          </div>
+                                                    {% if product.vendor %}
+                          <div class="gf-search-item-product-vendor">{{product.vendor | escape}}</div>
+                          {% endif %}
+                                                                                                        <div class="gl-card-flex"></div>
+                                                    <div class="gl-card-pricing">
+                            <span class="gl-card-price">
+                              {{ product.price | money}}
+                            </span>
+                          </div>
+                                                  </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+                  </div>
+                  {% else %}
+                    <li aria-label="{{products_suggestions_title | escape}}: {{translation.search.product_not_found | default: "No products were found"}}">{{translation.search.product_not_found | default: "No products were found"}}</li>
+                  {% endif %}
+                </div>
+              </div>
+                          </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if result.term and result.isEmpty == false %}
+    <div class="gf-search-item gf-search-item-product gf-search-viewall">
+      <a href="{% if result.url %}{{result.url}}{% else %}{% endraw %}{{ routes.search_url }}{% raw %}?q={{result.term | url_encode}}{% endif %}">
+        {% if translation.search.view_all %}{{translation.search.view_all}}{% else %}Search for{% endif %} "{{result.term | escape}}"
+      </a>
+    </div>
+  {% endif %}
+{% endif %}
+{% endraw %}

@@ -1,0 +1,11 @@
+{% raw %}
+{% assign root_url = {% endraw %}"{%- if routes.root_url != "/" -%}{{ routes.root_url }}{%- endif -%}"{% raw %} %}
+<div class="spf-col-xl-12 spf-col-lg-12 spf-col-md-12 spf-col-sm-12">
+  {% if translation.product.no_results %}
+    {{translation.product.no_results}}
+  {% else %}
+    No products found
+  {% endif %}
+</div>
+
+{% endraw %}

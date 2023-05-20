@@ -1,0 +1,167 @@
+{% layout none %}
+{% assign swatch_options = 'Colour,Color' | downcase | split: ","  %}
+{% assign image_options = '' | downcase | split: ","  %}
+{% assign text_options = 'Size' | downcase | split: ","  %}
+
+  <div id="gfqv-modal" class="gfqv-modal" tabindex="-1" role="dialog">
+    <link rel="preload stylesheet" href="{{ 'v5.globo.quickview.css' | asset_url }}" as="style">
+    <div class="gfqv-modal-content">
+      <div class="gfqv-container">
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        <div itemscope itemtype="http://schema.org/Product" class="product">
+          <span class="gfqv-close-modal"></span>
+          <div class="gfqv-product-wrapper">
+            <div class="spf-row">
+              <div class="spf-col-md-6 spf-col-sm-12 spf-col-xs-12 product-images-wrapper">
+                <div class="gfqv-product-images-wrapper">
+                  <div class="gfqv-product-gallery">
+                    <figure class="gfqv-product-images owl-carousel">
+                      {% for image in product.images %}
+                      <div class="gfqv-product-image">
+                        <img src="{{image | img_url: '600x600'}}"
+                            data-src="{{image | img_url: 'original'}}"
+                            alt="{{ product.title }}"
+                            srcset="{{image | img_url: '600x'}} 600w, {{image | img_url: '150x'}} 150w, {{image | img_url: '300x'}} 300w, {{image | img_url: '768x'}} 768w, {{image | img_url: '70x'}} 70w, {{image | img_url: '480x'}} 480w, {{image | img_url: '370x'}} 370w, {{image | img_url: '540x'}} 540w, {{image | img_url: '1000x'}} 1000w" sizes="(max-width: 600px) 100vw, 600px">
+                      </div>
+                      {% endfor %}
+                    </figure>
+                  </div>
+                  <div class="gfqv-product-thumbnails">
+                    <div class="gfqv-thumbnails">
+                      {% for image in product.images %}
+                      <div class="gfqv-thumbnail" data-index="{{forloop.index0}}">
+                        <img src="{{image | img_url: '70x70'}}"
+                            class=""
+                            alt="{{ product.title }}"
+                            srcset="{{image | img_url: '70x'}} 70w, {{image | img_url: '150x'}} 150w, {{image | img_url: '235x'}} 235w, {{image | img_url: '768x'}} 768w" sizes="(max-width: 70px) 100vw, 70px" />
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="spf-col-md-6 spf-col-sm-12 spf-col-xs-12 spf-col-md-offset-1 gfqv-product-summary">
+                <div class="gfqv-product-details">
+                  <h1 itemprop="name" class="gfqv-product-title"><a href="{{ product.url | within: collection }}">{{product.title}}</a></h1>
+                  <div class="gfqv-product-rating"><span class="shopify-product-reviews-badge" data-id="{{product.id}}"></span></div>
+                  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                    <div class="gfqv-product-card__price-wrapper">
+                      {% if current_variant.compare_at_price > current_variant.price %}
+                      <span class="gfqv-product-card__oldprice{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ current_variant.compare_at_price | money }}</span>
+                      <span class="gfqv-product-card__saleprice{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ current_variant.price | money }}</span>
+                      {% else %}
+                      <span class="gfqv-product-card__price{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ current_variant.price | money }}</span>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  <div itemprop="description" class="gfqv-description">
+                    {{ product.description }}                  </div>
+
+                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="gfqv-product-form">
+                    <select name="id" id="gfqv-select">
+                      {% for variant in product.variants %}
+                      <option data-option1="{{variant.option1 | escape}}" data-option2="{{variant.option2 | escape}}" data-option3="{{variant.option3 | escape}}" data-price="{{variant.price}}" data-compare_at_price="{{variant.compare_at_price}}" data-available="{{variant.available}}" data-image-index="{% if variant.image %}{{variant.image.position}}{% endif %}" {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                      {% endfor %}
+                    </select>
+                    {% unless product.variants.size == 1 and product.variants.first.title == 'Default Title' %}
+                    <div class="gfqv-swatchs">
+                    {% for option in product.options_with_values %}
+                    {% assign option_index_number = forloop.index %}
+                    {% assign option_index = 'option' | append: forloop.index %}
+                    {% assign option_name_lower = option.name | downcase %}
+                    <div class="gfqv-swatch" data-option="{{option_index_number}}">
+                      <label>{{option.name}}: <span class="gfqv-current-value">{{current_variant[option_index]}}</span></label>
+                      <ul class="gfqv-swatch-values">
+                        {% for value in option.values %}
+                        {% assign value_lower = value | downcase %}
+                        {% assign available = false %}
+                        {% assign has_image = false %}
+                        {% assign outer_class = '' %}
+                        {% capture value_html %}<span class="gfqv-product__swatch-inner"><span class="gfqv-swatch-text">{{value}}</span></span>{% endcapture %}
+                        {% for variant in product.variants %}
+                          {% if variant[option_index] == value %}
+                            {% if has_image == false and variant.image %}
+                              {% if image_options contains option_name_lower %}
+                                {% assign has_image = true %}
+                                {% assign outer_class = ' gfqv-product__swatch-outer-image' %}
+                                {% capture value_html %}
+                                  <span class="gfqv-product__swatch-inner">
+                                    <span style="background-image: url('{{variant.image | img_url: '100x'}}')" class="gfqv-swatch-image">{{value}}</span>
+                                  </span>
+                                {% endcapture %}
+                              {% endif %}
+                            {% endif %}
+                            {% if variant.available %}
+                              {% assign available = true %}
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                        {% if image_options contains option_name_lower or swatch_options contains option_name_lower %}
+                          {% unless has_image %}
+                            {% for metafiled in shop.metafields.globo.swatches %}
+                              {% if metafiled[0] == option_name_lower %}
+                                {% for color in metafiled[1] %}
+                                  {% if color[0] == value_lower %}
+                                    {% if color[1].mode == 1 and color[1].color_1 %}
+                                      {% assign outer_class = ' gfqv-product__swatch-outer-image' %}
+                                      {% capture value_html %}
+                                        <span class="gfqv-product__swatch-inner">
+                                          <span class="gfqv-swatch-color" style="background-color: {{ color[1].color_1 }}"></span>
+                                        </span>
+                                      {% endcapture %}
+                                    {% elsif color[1].mode == 2 and color[1].color_1 and color[1].color_2 %}
+                                      {% assign outer_class = ' gfqv-product__swatch-outer-image' %}
+                                      {% capture value_html %}
+                                        <span class="gfqv-product__swatch-inner">
+                                          <span class="gfqv-swatch-color" style="background-color: {{ color[1].color_1 }}"></span>
+                                          <span class="gfqv-swatch-color" style="border-right-color: {{ color[1].color_2 }}"></span>
+                                        </span>
+                                      {% endcapture %}
+                                    {% elsif color[1].mode == 3 and color[1].image %}
+                                      {% assign outer_class = ' gfqv-product__swatch-outer-image' %}
+                                      {% capture value_html %}
+                                        <span class="gfqv-product__swatch-inner">
+                                          <span style="background-image: url('{{color[1].image}}')" class="gfqv-swatch-image">{{value}}</span>
+                                        </span>
+                                      {% endcapture %}
+                                    {% endif %}
+                                    {% break %}
+                                  {% endif %}
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endunless %}
+                        {% endif %}
+                        <li class="gfqv-swatch-value{% if current_variant[option_index] == value %} is-selected{% endif %}{% unless available %} is-soldout{% endunless %}{% if image_options contains option_name_lower %} size-large{% elsif swatch_options contains option_name_lower %} size-medium{% endif %}" data-value="{{value | escape}}">
+                          <span class="gfqv-product__swatch-outer{{outer_class}}">
+                            {{value_html}}
+                          </span>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    {% endunless %}
+                    <div class="variations_button">
+                      <div class="quantity">
+                        <span class="decrease ion-ios-minus-empty"></span>
+                        <input type="number" step="1" min="1" max="20" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric" />
+                        <span class="increase ion-ios-plus-empty"></span>
+                      </div>
+                    </div>
+                    <div id="gfqv-btn-wrap">
+                      <button data-available="Add to cart" data-soldout="Sold out" data-unavailable="Unavailable" {% unless product.available %}disabled{% endunless %} type="submit" id="gfqv-btn">{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
+                    </div>
+                  </form>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% unless product == empty %}<script type="application/json" id="ProductJson-product-template">{{ product | json }}</script>{% endunless %}
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,144 @@
+{% raw %}
+  {% assign root_url = {% endraw %}"{%- if routes.root_url != "/" -%}{{ routes.root_url }}{%- endif -%}"{% raw %} %}
+  {% assign currencyFormat = {% endraw %}{{ shop.money_format | json }}{% raw %} %}
+  {% assign swatch_options = 'Colour~~Color' | downcase | split: "~~" | uniq  %}
+  {% assign image_options  = '' | downcase | split: "~~" | uniq  %}
+  {% assign text_options   = 'Size' | downcase | split: "~~" | uniq  %}
+  {% assign show_selected_variant_info = true %}
+ 
+  {% assign image_size     = '360x504' %}
+  {% assign images_count   = product.images | size %}
+  {% assign variants_count = product.variants | size %}
+  {% assign options_count  = product.options | size %}
+  {% assign no_image = 'https://cdn.shopify.com/s/images/themes/product-1.png' %}
+
+  {% assign featured_image            = product.featured_image %}
+  {% assign product_price             = product.price %}
+  {% assign product_compare_at_price  = product.compare_at_price %}
+  {% assign second_image_index        = 2 %}
+  {% assign selected_or_first_available_variant = product.selected_or_first_available_variant %}
+  {% assign variant_url = '' %}
+  {% if product.selected_or_first_available_variant %}{% assign variant_url = '?variant=' | append: product.selected_or_first_available_variant.id %}{% endif %}  {% if show_selected_variant_info and product.selected_variant %}
+    {% assign selected_or_first_available_variant = product.selected_variant %}
+    {% assign product_price             = selected_or_first_available_variant.price %}
+    {% assign product_compare_at_price  = selected_or_first_available_variant.compare_at_price %}
+    {% if selected_or_first_available_variant.image %}
+      {% assign featured_image = selected_or_first_available_variant.image %}
+    {% endif %}
+  {% endif %}
+
+  {% for image in product.images %}
+    {% if image.id == featured_image.id %}
+      {% if forloop.index == images_count %}
+        {% assign second_image_index = 1 %}
+      {% else %}
+        {% assign second_image_index = forloop.index | plus: 1 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+            <div {% if showPageData %} data-page="{{page}}"{% endif %} class="spf-col-xl-4 spf-col-lg-4 spf-col-md-6 spf-col-sm-6 spf-col-6">
+  <div class="spf-product-card spf-product-card__left spf-product-card__template-1{% unless product.available %} spf-soldout{% endunless %}">
+    <div class="spf-product-card__inner">
+      {% unless product.available %}
+            <span translatable class="spf-product__label spf-product__label-soldout">{{translation.product.sold_out | default: "Sold out"}}</span>
+                  {% elsif product_compare_at_price > product_price %}
+      <span translatable class="spf-product__label spf-product__label-sale sale-text">
+                {{translation.product.sale | default: "Sale"}}
+              </span>
+            {% endunless %}
+              <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{root_url}}{{ product.url | within: collection }}')" class="open-quick-view"><svg width="15" height="15" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M1664 960q-152-236-381-353 61 104 61 225 0 185-131.5 316.5t-316.5 131.5-316.5-131.5-131.5-316.5q0-121 61-225-229 117-381 353 133 205 333.5 326.5t434.5 121.5 434.5-121.5 333.5-326.5zm-720-384q0-20-14-34t-34-14q-125 0-214.5 89.5t-89.5 214.5q0 20 14 34t34 14 34-14 14-34q0-86 61-147t147-61q20 0 34-14t14-34zm848 384q0 34-20 69-140 230-376.5 368.5t-499.5 138.5-499.5-139-376.5-368q-20-35-20-69t20-69q140-229 376.5-368t499.5-139 499.5 139 376.5 368q20 35 20 69z"/></svg></a>
+            <a class="spf-product-card__image-wrapper{% if images_count > 1 %} hover-effect{% endif %}" href="{{root_url}}{{ product.url | within: collection }}{{variant_url}}" style="padding-top:140%;">
+        {% if images_count > 0 %}
+          {% for image in product.images %}
+            <img
+              data-variants="{% if image.variant_ids %}{{image.variant_ids | join: ','}}{% endif %}"
+              class="gflazyload spf-product-card__image spf-product-card__image-{% if featured_image.id == image.id %}main{% elsif forloop.index == second_image_index %}secondary{% else %}hidden{% endif %}"
+              srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+              src="{{image.src | img_url: image_size}}"
+              data-src="{{image.src | img_lazyload_url}}"
+              data-sizes="auto"
+              data-aspectratio="{{image.aspect_ratio}}"
+              data-parent-fit="contain"
+              alt="{{image.alt | escape}}"
+              />
+          {% endfor %}
+        {% else %}
+        <img data-variants="" class="gflazyload spf-product-card__image spf-product-card__image-main" src="{{no_image}}" alt="{{product.title | escape}}">
+        {% endif %}
+      </a>
+      <form class="spf-product__form" action="/cart/add" method="post">
+        <select name="id" class="spf-product__variants">
+          {% for variant in product.variants %}
+          <option data-option1="{{variant.option1 | escape}}" data-option2="{{variant.option2 | escape}}" data-option3="{{variant.option3 | escape}}" data-price="{{variant.price}}" data-compare_at_price="{{variant.compare_at_price}}" data-available="{{variant.available}}" data-image="{% if variant.image.src %}{{variant.image.src | img_url: image_size }}{% endif %}" {% if variant.id == selected_or_first_available_variant.id %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endfor %}
+        </select>
+                <button translatable {% unless product.available %}disabled{% endunless %} type="submit" class="spf-product__form-btn-addtocart" data-available="{{translation.product.add_to_cart | default: "Add to cart"}}" data-soldout="{{translation.product.sold_out | default: "Sold out"}}" data-unavailable="{{translation.product.unavailable | default: "Unavailable"}}"><span>{% if product.available %}{{translation.product.add_to_cart | default: "Add to cart"}}{% else %}{{translation.product.sold_out | default: "Sold out"}}{% endif %}</span></button>
+              </form>
+    </div>
+
+    <div class="spf-product__info">      {% if product.vendor %}<div class="spf-product-card__vendor"><a href="/collections/vendors?q={{product.vendor | url_encode}}">{{product.vendor}}</a></div>{% endif %}      <div class="h4 spf-product-card__title">
+        <a translatable href="{{root_url}}{{ product.url | within: collection }}{{variant_url}}">{{product.title}}</a>
+              </div>
+                  <div class="spf-product-card__price-wrapper">
+        {% if product_compare_at_price > product_price %}
+        <span class="spf-product-card__oldprice{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ product_compare_at_price | money }}</span>
+        <span class="spf-product-card__saleprice{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ product_price | money }}</span>
+        {% else %}
+        <span class="spf-product-card__price{% unless currencyFormat contains 'money' %} money{% endunless %}">{{ product_price | money }}</span>
+        {% endif %}
+      </div>
+                    {% for option in product.options %}
+        {% assign option_index = 'option' | append: forloop.index %}
+        {% assign option_name  = option.name | downcase %}
+        {% assign option_index_number = forloop.index %}        {% if swatch_options contains option_name or text_options contains option_name or image_options contains option_name %}
+        <div class="spf-product__swatchs">
+          {% for value in option.values %}
+            {% assign available = false %}
+            {% assign swatch_image = false %}
+            {% for variant in product.variants %}
+              {% if variant[option_index] == value %}
+                {% if swatch_image == false and variant.image %}
+                  {% assign swatch_image = variant.image.src %}
+                {% endif %}
+                {% if variant.available %}
+                  {% assign available = true %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            {% assign option_value  = value | downcase %}
+            <span data-option="{{option_index_number}}" class="spf-product__swatch{% if product.selected_variant and product.selected_variant[option_index] == value %} is-selected{% endif %}{% unless available %} soldout{% endunless %}" title="{{value | escape}}">
+              <span translatable class="spf-product__swatch-inner">
+                {% if image_options contains option_name and swatch_image %}
+                  <span class="spf-product__swatch-image" style="background-image: url('{{ swatch_image | img_url: '24x' }}')"></span>
+                {% elsif swatch_options contains option_name %}
+                  {% if swatches[option_name] and swatches[option_name][option_value] %}
+                    {% if swatches[option_name][option_value].mode == 1 %}
+                      <span class="spf-product__swatch-color" style="background-color: {{ swatches[option_name][option_value].color_1 }}"></span>
+                    {% elsif swatches[option_name][option_value].mode == 2 %}
+                      <span class="spf-product__swatch-color" style="background-color: {{ swatches[option_name][option_value].color_1 }}"></span>
+                      <span class="spf-product__swatch-color" style="border-right-color: {{ swatches[option_name][option_value].color_2 }}"></span>
+                    {% elsif swatches[option_name][option_value].mode == 3 %}
+                      <span class="spf-product__swatch-image" style="background-image: url('{{ swatches[option_name][option_value].image }}')"></span>
+                    {% endif %}
+                  {% elsif option_name contains 'colo' %}
+                    {% assign value_handle = option_value | handle %}
+                    {% assign value_jpg    = value_handle | append: '.jpg' %}
+                    {% assign value_png    = value_handle | append: '.png' %}
+                    {% assign value_jpeg   = value_handle | append: '.jpeg' %}
+                    <span class="spf-product__swatch-image" style="background-color: {{ option_value | replace:"'", "\'" | escape_once }};{% if images contains value_jpg %}background-image: url('{{ value_jpg | asset_img_url: '50x' | prepend: 'https:' }}'){% elsif images contains value_png %}background-image: url('{{ value_png | asset_img_url: '50x' | prepend: 'https:' }}'){% elsif images contains value_jpeg %}background-image: url('{{ value_jpeg | asset_img_url: '50x' | prepend: 'https:' }}'){% endif %}"></span>
+                  {% else %}
+                    <span class="spf-product__swatch-text">{{value}}</span>
+                  {% endif %}
+                {% else %}
+                  <span class="spf-product__swatch-text">{{value}}</span>
+                {% endif %}
+              </span>
+            </span>
+          {% endfor %}
+        </div>
+        {% endif %}        {% endfor %}
+          </div>
+  </div>
+</div>
+      {% endraw %}

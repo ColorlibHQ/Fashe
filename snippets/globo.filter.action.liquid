@@ -1,0 +1,17 @@
+{% assign globo_search = true %}
+{% assign globo_search_overlay = true %}
+{%- assign home_filter = false -%}
+{%- if request.page_type != 'index' -%}{%- assign home_filter = false -%}{%- endif -%}
+{% if globo_search %}{%- capture searchTemplate -%}{% render 'globo.filter.search' %}{%- endcapture -%}<script id="gspfSearchResult" type="template/html">{{- searchTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>{% endif %}
+{% if request.page_type == 'collection' or request.page_type == 'search' or home_filter %}
+{%- capture productTemplate -%}{% render 'globo.filter.product' %}{%- endcapture -%}
+<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- capture treeTemplate -%}{% render 'globo.filter.tree' %}{%- endcapture -%}
+<script id="gspfFilterTree" type="template/html">{{- treeTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- capture sortTemplate -%}{% render 'globo.filter.sort' %}{%- endcapture -%}
+<script id="gspfFilterSort" type="template/html">{{- sortTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- capture noResultsTemplate -%}{% render 'globo.filter.no_results' %}{%- endcapture -%}
+<script id="gspfNoResults" type="template/html">{{- noResultsTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- capture paginationTemplate -%}{% render 'globo.filter.pagination' %}{%- endcapture -%}
+<script id="gspfPagination" type="template/html">{{- paginationTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{% endif %}
