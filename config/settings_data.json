@@ -19,6 +19,8 @@
     "color_footer_links": "#625252",
     "color_social_links": "#625252",
     "color_footer_text": "#362828",
+    "color_countdown": "#af9284",
+    "color_countdown_text": "#ffffff",
     "show_third_tab": true,
     "third_tab_title": "Additional Information",
     "third_tab_text": "<p>You can use this tab for adding shipping details, return policies and information or measurements etc. <\/p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi<\/p>",
