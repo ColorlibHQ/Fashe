@@ -174,11 +174,12 @@
           "1480267833382-1": {
             "type": "image",
             "settings": {
-              "heading": "Women Collection 2018",
+              "image": "shopify:\/\/shop_images\/spa-tools-and-decorations.jpg",
+              "heading": "Wellness für Zuhause",
               "heading_appear": "fadeInDown",
-              "subheading": "New arrivals",
+              "subheading": "mit Mt. Sapola",
               "subheading_appear": "fadeInUp",
-              "slide_link_text": "Shop Now",
+              "slide_link_text": "Alle Kategorien",
               "slide_link": "shopify:\/\/collections",
               "slide_appear": "zoomIn"
             }
