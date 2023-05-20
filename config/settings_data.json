@@ -76,9 +76,9 @@
     "social_fancy_link": "",
     "show_dollar_symbol": false,
     "superscript_decimals": true,
-    "show_multiple_currencies": true,
+    "show_multiple_currencies": false,
     "currency_format": "money_format",
-    "supported_currencies": "USD EUR GBP PKR CAD JPY",
+    "supported_currencies": "EUR",
     "default_currency": "USD",
     "checkout_header_image": "",
     "checkout_logo_image": "",
@@ -142,13 +142,14 @@
       "header": {
         "type": "header",
         "settings": {
-          "header_layout": "header-1",
+          "header_layout": "header-2",
           "use_top_bar": true,
-          "top_bar_message": "Free shipping for standard order over $100",
+          "top_bar_message": "Kostenloser Versand ab 25 Euro",
           "show_email": true,
           "show_social_links": true,
-          "header_email_text": "fashe@example.com",
+          "header_email_text": "info@mtsapola.de",
           "logo_use_image": true,
+          "logo": "shopify:\/\/shop_images\/mtsapola-logo-weiss.png",
           "header_menu_1": "main-menu"
         }
       },
