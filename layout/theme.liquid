@@ -67,7 +67,7 @@
     {{ '//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css' | stylesheet_tag }}
     {% endcomment %}
     <!-- Header hook for plugins ================================================== -->
-    {{ content_for_header }}
+    {% include 'globo.filter.script' %}{{ content_for_header }}
     {% include 'oldIE-js' %}
     {{ 'jquery-3.2.1.min.js' | asset_url | script_tag }}
     {{ 'shipping-cart.js' | asset_url | script_tag }}
@@ -214,5 +214,6 @@
     {% include 'currencies' %}
 
 
-  </body>
+  {% include 'globo.filter.action' %}
+	</body>
 </html>

@@ -45,7 +45,7 @@
           </span>
         </div>
         <!-- Product -->
-        <div data-section-id="{% if section.id %}{{section.id}}{% endif %}" data-sectionId="{% if section.id %}{{section.id}}{% endif %}" {% if section.blocks %}data-blocks='{ {%- capture blocks_json -%}{% for block in section.blocks %}{%- capture block_json -%}"{{ block.type }}":{{ block.settings | json }}{%- endcapture -%}{{ block_json | prepend: ","  }}{% endfor %}{%- endcapture -%}{{ blocks_json | remove_first: "," }} }' {% endif %} data-settings='{% if section.settings %}{{section.settings | json}}{% endif %}' data-globo-filter-items class="row" id="custom-products">
+        <div class="row" id="custom-products">
           {% for product in collection.products %}
           {% if settings.show_collection_sidebar != false %}
           <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
