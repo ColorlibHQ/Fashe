@@ -171,6 +171,19 @@
       "1480267833382": {
         "type": "slideshow",
         "blocks": {
+          "1507555687103": {
+            "type": "image",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/diy-organic-candle.jpg",
+              "heading": "Mt. Sapola",
+              "heading_appear": "rotateInDownLeft",
+              "subheading": "Original thailändische Aromatherapie",
+              "subheading_appear": "rotateInUpRight",
+              "slide_link_text": "Jetzt Shoppen",
+              "slide_link": "shopify:\/\/collections\/all",
+              "slide_appear": "rotateIn"
+            }
+          },
           "1480267833382-1": {
             "type": "image",
             "settings": {
@@ -179,40 +192,15 @@
               "heading_appear": "fadeInDown",
               "subheading": "Wellness für Zuhause",
               "subheading_appear": "fadeInUp",
-              "slide_link_text": "Alle Kategorien",
+              "slide_link_text": "Jetzt Shoppen",
               "slide_link": "shopify:\/\/collections",
               "slide_appear": "zoomIn"
-            }
-          },
-          "1480267833382-0": {
-            "type": "image",
-            "settings": {
-              "heading": "Women Collection 2018",
-              "heading_appear": "rollIn",
-              "subheading": "New arrivals",
-              "subheading_appear": "lightSpeedIn",
-              "slide_link_text": "Shop Now",
-              "slide_link": "shopify:\/\/collections",
-              "slide_appear": "slideInUp"
-            }
-          },
-          "1507555687103": {
-            "type": "image",
-            "settings": {
-              "heading": "Women Collection 2018",
-              "heading_appear": "rotateInDownLeft",
-              "subheading": "New arrivals",
-              "subheading_appear": "rotateInUpRight",
-              "slide_link_text": "Shop Now",
-              "slide_link": "shopify:\/\/collections\/all",
-              "slide_appear": "rotateIn"
             }
           }
         },
         "block_order": [
-          "1480267833382-1",
-          "1480267833382-0",
-          "1507555687103"
+          "1507555687103",
+          "1480267833382-1"
         ],
         "settings": {
           "autoplay": true,
