@@ -206,7 +206,7 @@
           "1480267833382-1"
         ],
         "custom_css": [
-          "h2 {text-shadow: 2px 2px;}"
+          "h2 {text-shadow: 0px 0px 10px black;}"
         ],
         "settings": {
           "autoplay": true,
