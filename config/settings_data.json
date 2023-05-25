@@ -205,6 +205,9 @@
           "1507555687103",
           "1480267833382-1"
         ],
+        "custom_css": [
+          "h2 {text-shadow: 2px 2px;}"
+        ],
         "settings": {
           "autoplay": true,
           "autoplay_speed": "10000",
