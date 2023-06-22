@@ -42,7 +42,7 @@
     "collection_sidebar_filters": "groups",
     "show_collection_side_image": false,
     "collection_side_link": "#",
-    "show_collection_side_listing": true,
+    "show_collection_side_listing": false,
     "collection_side_listing_title": "Random Products",
     "collection_side_listing": "",
     "show_about_top_image": true,
