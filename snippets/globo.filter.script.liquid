@@ -59,7 +59,8 @@
       home_filter: {{home_filter}},
       page: {{request.page_type | json}},
       cache: {% if shop.metafields.globo.cacheInitRequest == false %}false{% else %}true{% endif %},
-      layout: "theme"
+      layout: "theme",
+      useCustomTemplate: false
     },
     taxes: null,
     special_countries: null,
@@ -72,6 +73,7 @@
       id: globo_filters_json[page_id] || globo_filters_json['default'] || 0,
       layout: 1,
       showCount: true,
+      showRefine: true,
       isLoadMore: 0,
       filter_on_search_page: true
     },
@@ -90,6 +92,8 @@
       term: {{ search.terms | escape | json }},
       limit: 12,
       products_count: {{collection.products_count | default: 0}},
+      enableCollectionSearch: true,
+      showSelectedVariantInfo: true,
       excludeTags: null
     },
     customer: {% if customer %}{id: {{customer.id}}, tags: {{customer.tags | json}}}{% else %}false{% endif %},
