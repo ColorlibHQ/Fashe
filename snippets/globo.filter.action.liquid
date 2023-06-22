@@ -1,17 +1,37 @@
-{% assign globo_search = true %}
-{% assign globo_search_overlay = true %}
-{%- assign home_filter = false -%}
-{%- if request.page_type != 'index' -%}{%- assign home_filter = false -%}{%- endif -%}
-{% if globo_search %}{%- capture searchTemplate -%}{% render 'globo.filter.search' %}{%- endcapture -%}<script id="gspfSearchResult" type="template/html">{{- searchTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>{% endif %}
-{% if request.page_type == 'collection' or request.page_type == 'search' or home_filter %}
+{%- assign assets_url = 'abcdefghi.png' | asset_img_url: '50x' | split: 'abcdefghi_50x.png' -%}
+{%- assign files_url  = 'abcdefghi.png' | file_img_url: '50x' | split: 'abcdefghi_50x.png' -%}
+<script>
+window.themeAssetsUrl = '{{ assets_url[0] }}';
+window.filesUrl = '{{ files_url[0] }}';
+</script>
+{% assign isEnableGloboSearch = true %}
+{%- assign isEnableHomeFilter = false -%}
+{%- if request.page_type != 'index' -%}{%- assign isEnableHomeFilter = false -%}{%- endif -%}
+{%- if isEnableGloboSearch -%}
+{%- capture searchTemplate -%}{% render 'globo.filter.search' %}{%- endcapture -%}
+{%- unless searchTemplate contains 'Liquid error' -%}
+<script id="gspfSearchResult" type="template/html">{{- searchTemplate | replace: "<script>", "<scripttag>" | replace: "</>", "</scripttag>" -}}</script>
+{%- endunless -%}
+{%- endif -%}
+{% if request.page_type == 'collection' or request.page_type == 'search' or isEnableHomeFilter %}
 {%- capture productTemplate -%}{% render 'globo.filter.product' %}{%- endcapture -%}
+{%- unless productTemplate contains 'Liquid error' -%}
 <script id="gspfProduct" type="template/html">{{- productTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- endunless -%}
 {%- capture treeTemplate -%}{% render 'globo.filter.tree' %}{%- endcapture -%}
+{%- unless treeTemplate contains 'Liquid error' -%}
 <script id="gspfFilterTree" type="template/html">{{- treeTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- endunless -%}
 {%- capture sortTemplate -%}{% render 'globo.filter.sort' %}{%- endcapture -%}
+{%- unless sortTemplate contains 'Liquid error' -%}
 <script id="gspfFilterSort" type="template/html">{{- sortTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- endunless -%}
 {%- capture noResultsTemplate -%}{% render 'globo.filter.no_results' %}{%- endcapture -%}
+{%- unless noResultsTemplate contains 'Liquid error' -%}
 <script id="gspfNoResults" type="template/html">{{- noResultsTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- endunless -%}
 {%- capture paginationTemplate -%}{% render 'globo.filter.pagination' %}{%- endcapture -%}
+{%- unless paginationTemplate contains 'Liquid error' -%}
 <script id="gspfPagination" type="template/html">{{- paginationTemplate | replace: "<script>", "<scripttag>" | replace: "</script>", "</scripttag>" -}}</script>
+{%- endunless -%}
 {% endif %}
