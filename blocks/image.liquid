@@ -20,23 +20,46 @@
 
 {% schema %}
 {
-  "name": "Image",
+  "name": "t:blocks.image.name",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:blocks.image.settings.image.label"
+    },
     {
       "type": "select",
       "id": "ratio",
-      "label": "Ratio",
+      "label": "t:blocks.image.settings.ratio.label",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "square", "label": "Square (1:1)" },
-        { "value": "portrait", "label": "Portrait (3:4)" },
-        { "value": "landscape", "label": "Landscape (4:3)" },
-        { "value": "wide", "label": "Wide (16:9)" }
+        {
+          "value": "adapt",
+          "label": "t:blocks.image.settings.ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:blocks.image.settings.ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:blocks.image.settings.ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:blocks.image.settings.ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:blocks.image.settings.ratio.options__5.label"
+        }
       ],
       "default": "landscape"
     }
   ],
-  "presets": [{ "name": "Image" }]
+  "presets": [
+    {
+      "name": "t:blocks.image.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

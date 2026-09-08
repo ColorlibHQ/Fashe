@@ -29,17 +29,26 @@
 
 {% schema %}
 {
-  "name": "Scrolling text",
+  "name": "t:sections.marquee.name",
   "tag": "div",
   "settings": [
     {
       "type": "select",
       "id": "text_size",
-      "label": "Text size",
+      "label": "t:sections.marquee.settings.text_size.label",
       "options": [
-        { "value": "text-sm", "label": "Small" },
-        { "value": "h3", "label": "Medium" },
-        { "value": "h1", "label": "Large" }
+        {
+          "value": "text-sm",
+          "label": "t:sections.marquee.settings.text_size.options__1.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.marquee.settings.text_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.marquee.settings.text_size.options__3.label"
+        }
       ],
       "default": "h3"
     },
@@ -50,7 +59,7 @@
       "max": 90,
       "step": 5,
       "unit": "s",
-      "label": "Speed",
+      "label": "t:sections.marquee.settings.speed.label",
       "default": 30
     },
     {
@@ -60,28 +69,45 @@
       "max": 64,
       "step": 4,
       "unit": "px",
-      "label": "Padding",
+      "label": "t:sections.marquee.settings.padding.label",
       "default": 20
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.marquee.settings.color_scheme.label",
       "default": "scheme_3"
     }
   ],
   "blocks": [
     {
       "type": "item",
-      "name": "Text",
-      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free shipping over $100" }]
+      "name": "t:sections.marquee.blocks.item.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.marquee.blocks.item.settings.text.label",
+          "default": "Free shipping over $100"
+        }
+      ]
     }
   ],
   "max_blocks": 10,
   "presets": [
     {
-      "name": "Scrolling text",
-      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }]
+      "name": "t:sections.marquee.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
     }
   ]
 }

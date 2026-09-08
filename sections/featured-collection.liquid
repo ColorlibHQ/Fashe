@@ -53,31 +53,63 @@
 
 {% schema %}
 {
-  "name": "Featured collection",
+  "name": "t:sections.featured-collection.name",
   "tag": "section",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "New arrivals" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:sections.featured-collection.settings.eyebrow.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.featured-collection.settings.heading.label",
+      "default": "New arrivals"
+    },
     {
       "type": "select",
       "id": "heading_size",
-      "label": "Heading size",
+      "label": "t:sections.featured-collection.settings.heading_size.label",
       "options": [
-        { "value": "h3", "label": "Small" },
-        { "value": "h2", "label": "Medium" },
-        { "value": "h1", "label": "Large" }
+        {
+          "value": "h3",
+          "label": "t:sections.featured-collection.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.featured-collection.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.featured-collection.settings.heading_size.options__3.label"
+        }
       ],
       "default": "h2"
     },
-    { "type": "richtext", "id": "description", "label": "Description" },
-    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.featured-collection.settings.description.label"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-collection.settings.collection.label"
+    },
     {
       "type": "select",
       "id": "layout",
-      "label": "Layout",
+      "label": "t:sections.featured-collection.settings.layout.label",
       "options": [
-        { "value": "grid", "label": "Grid" },
-        { "value": "carousel", "label": "Carousel" }
+        {
+          "value": "grid",
+          "label": "t:sections.featured-collection.settings.layout.options__1.label"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.featured-collection.settings.layout.options__2.label"
+        }
       ],
       "default": "grid"
     },
@@ -87,7 +119,7 @@
       "min": 2,
       "max": 24,
       "step": 1,
-      "label": "Products to show",
+      "label": "t:sections.featured-collection.settings.products_to_show.label",
       "default": 8
     },
     {
@@ -96,28 +128,48 @@
       "min": 2,
       "max": 5,
       "step": 1,
-      "label": "Columns on desktop",
+      "label": "t:sections.featured-collection.settings.columns.label",
       "default": 4
     },
     {
       "type": "select",
       "id": "columns_mobile",
-      "label": "Columns on mobile",
+      "label": "t:sections.featured-collection.settings.columns_mobile.label",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "t:sections.featured-collection.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.featured-collection.settings.columns_mobile.options__2.label"
+        }
       ],
       "default": "2"
     },
-    { "type": "checkbox", "id": "show_view_all", "label": "Show view all link", "default": true },
-    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "t:sections.featured-collection.settings.show_view_all.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "t:sections.featured-collection.settings.view_all_label.label",
+      "default": "View all"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.featured-collection.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
-  "presets": [{ "name": "Featured collection" }]
+  "presets": [
+    {
+      "name": "t:sections.featured-collection.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

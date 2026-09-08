@@ -14,28 +14,53 @@
 
 {% schema %}
 {
-  "name": "Group",
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "name": "t:blocks.group.name",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "select",
       "id": "direction",
-      "label": "Direction",
+      "label": "t:blocks.group.settings.direction.label",
       "options": [
-        { "value": "column", "label": "Vertical" },
-        { "value": "row", "label": "Horizontal" }
+        {
+          "value": "column",
+          "label": "t:blocks.group.settings.direction.options__1.label"
+        },
+        {
+          "value": "row",
+          "label": "t:blocks.group.settings.direction.options__2.label"
+        }
       ],
       "default": "column"
     },
     {
       "type": "select",
       "id": "alignment",
-      "label": "Alignment",
+      "label": "t:blocks.group.settings.alignment.label",
       "options": [
-        { "value": "flex-start", "label": "Start" },
-        { "value": "center", "label": "Centre" },
-        { "value": "flex-end", "label": "End" },
-        { "value": "stretch", "label": "Stretch" }
+        {
+          "value": "flex-start",
+          "label": "t:blocks.group.settings.alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.group.settings.alignment.options__2.label"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:blocks.group.settings.alignment.options__3.label"
+        },
+        {
+          "value": "stretch",
+          "label": "t:blocks.group.settings.alignment.options__4.label"
+        }
       ],
       "default": "stretch"
     },
@@ -46,14 +71,21 @@
       "max": 48,
       "step": 4,
       "unit": "px",
-      "label": "Gap",
+      "label": "t:blocks.group.settings.gap.label",
       "default": 16
     }
   ],
   "presets": [
     {
-      "name": "Group",
-      "blocks": [{ "type": "heading" }, { "type": "text" }]
+      "name": "t:blocks.group.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
     }
   ]
 }

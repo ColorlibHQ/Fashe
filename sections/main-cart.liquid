@@ -39,18 +39,20 @@
 
 {% schema %}
 {
-  "name": "Cart",
+  "name": "t:sections.main-cart.name",
   "tag": "div",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-cart.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "templates": ["cart"]
+    "templates": [
+      "cart"
+    ]
   }
 }
 {% endschema %}

@@ -53,18 +53,20 @@
 
 {% schema %}
 {
-  "name": "Search results",
+  "name": "t:sections.main-search.name",
   "tag": "div",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-search.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "templates": ["search"]
+    "templates": [
+      "search"
+    ]
   }
 }
 {% endschema %}

@@ -46,26 +46,26 @@
 
 {% schema %}
 {
-  "name": "Product grid",
+  "name": "t:sections.main-collection.name",
   "tag": "div",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_description",
-      "label": "Show collection description",
+      "label": "t:sections.main-collection.settings.show_description.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "enable_filtering",
-      "label": "Enable filtering",
+      "label": "t:sections.main-collection.settings.enable_filtering.label",
       "default": true,
-      "info": "Filters come from the Search & Discovery app."
+      "info": "t:sections.main-collection.settings.enable_filtering.info"
     },
     {
       "type": "checkbox",
       "id": "enable_sorting",
-      "label": "Enable sorting",
+      "label": "t:sections.main-collection.settings.enable_sorting.label",
       "default": true
     },
     {
@@ -74,7 +74,7 @@
       "min": 8,
       "max": 48,
       "step": 4,
-      "label": "Products per page",
+      "label": "t:sections.main-collection.settings.products_per_page.label",
       "default": 24
     },
     {
@@ -83,28 +83,36 @@
       "min": 2,
       "max": 5,
       "step": 1,
-      "label": "Columns on desktop",
+      "label": "t:sections.main-collection.settings.columns_desktop.label",
       "default": 4
     },
     {
       "type": "select",
       "id": "columns_mobile",
-      "label": "Columns on mobile",
+      "label": "t:sections.main-collection.settings.columns_mobile.label",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "t:sections.main-collection.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection.settings.columns_mobile.options__2.label"
+        }
       ],
       "default": "2"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-collection.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "templates": ["collection"]
+    "templates": [
+      "collection"
+    ]
   }
 }
 {% endschema %}

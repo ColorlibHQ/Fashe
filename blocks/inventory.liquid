@@ -30,7 +30,7 @@
 
 {% schema %}
 {
-  "name": "Inventory status",
+  "name": "t:blocks.inventory.name",
   "settings": [
     {
       "type": "range",
@@ -38,10 +38,14 @@
       "min": 1,
       "max": 25,
       "step": 1,
-      "label": "Low stock threshold",
+      "label": "t:blocks.inventory.settings.threshold.label",
       "default": 10
     }
   ],
-  "presets": [{ "name": "Inventory status" }]
+  "presets": [
+    {
+      "name": "t:blocks.inventory.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

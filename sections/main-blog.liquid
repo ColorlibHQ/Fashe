@@ -40,7 +40,7 @@
 
 {% schema %}
 {
-  "name": "Blog posts",
+  "name": "t:sections.main-blog.name",
   "tag": "div",
   "settings": [
     {
@@ -49,20 +49,32 @@
       "min": 3,
       "max": 24,
       "step": 3,
-      "label": "Posts per page",
+      "label": "t:sections.main-blog.settings.posts_per_page.label",
       "default": 12
     },
-    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
-    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "t:sections.main-blog.settings.show_excerpt.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.main-blog.settings.show_author.label",
+      "default": false
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-blog.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "templates": ["blog"]
+    "templates": [
+      "blog"
+    ]
   }
 }
 {% endschema %}

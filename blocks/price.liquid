@@ -12,15 +12,19 @@
 
 {% schema %}
 {
-  "name": "Price",
+  "name": "t:blocks.price.name",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_tax_note",
-      "label": "Show tax and shipping note",
+      "label": "t:blocks.price.settings.show_tax_note.label",
       "default": true
     }
   ],
-  "presets": [{ "name": "Price" }]
+  "presets": [
+    {
+      "name": "t:blocks.price.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

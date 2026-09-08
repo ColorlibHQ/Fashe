@@ -25,6 +25,7 @@ page.
 | External CDNs | 4 (bootstrapcdn, jsdelivr, cdnjs ×2) | none |
 | Currency switching | Hard-coded currency list | Shopify Markets |
 | Filtering | none | Search & Discovery filters |
+| Translatable editor labels | partial | all 386 |
 | `{% include %}` (deprecated) | 148 uses | 0 — `{% render %}` throughout |
 | Cart | Page reload | Ajax cart drawer via the Section Rendering API |
 | Colour schemes | 14 individual colour settings | 4 editable colour schemes, per section |
@@ -49,7 +50,8 @@ assets/          base.css (design system), theme.js (custom elements)
 blocks/          14 theme blocks — reusable and nestable across sections
 config/          settings_schema.json, settings_data.json (4 colour schemes, 2 presets)
 layout/          theme.liquid, password.liquid
-locales/         en.default.json — every storefront string
+locales/         en.default.json (213 storefront strings)
+                 en.default.schema.json (386 theme-editor strings)
 sections/        36 sections + 2 section groups (header, footer)
 snippets/        18 shared partials (product card, price, cart, facets, schema…)
 templates/       19 JSON templates + gift_card.liquid
@@ -113,11 +115,8 @@ rewrite's design; none are verified against a live store yet (see Known gaps).
 
 ## Known gaps
 
-- Section and block **schema labels are plain English**. Storefront strings are all
-  translated through `locales/en.default.json`; translating the editor labels needs a
-  `locales/en.default.schema.json` and `t:` keys. Required before a Theme Store
-  submission, not required to run the theme.
-- Only `en.default.json` ships. Add more locale files for other languages.
+- Only English ships. Both locale files are complete and fully keyed, so adding a
+  language is a matter of translating `en.default.json` and `en.default.schema.json`.
 - Not yet rendered against a live store — see CHANGELOG.
 
 ## Licence

@@ -48,17 +48,26 @@
 
 {% schema %}
 {
-  "name": "Contact form",
+  "name": "t:sections.contact-form.name",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact us" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.contact-form.settings.heading.label",
+      "default": "Contact us"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.contact-form.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
-  "presets": [{ "name": "Contact form" }]
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

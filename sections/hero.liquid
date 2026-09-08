@@ -48,12 +48,28 @@
 
 {% schema %}
 {
-  "name": "Hero banner",
+  "name": "t:sections.hero.name",
   "tag": "section",
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "video", "id": "video", "label": "Background video", "info": "Replaces the image when set." },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.hero.settings.image.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.hero.settings.video.label",
+      "info": "t:sections.hero.settings.video.info"
+    },
     {
       "type": "range",
       "id": "height",
@@ -61,7 +77,7 @@
       "max": 100,
       "step": 5,
       "unit": "vh",
-      "label": "Height",
+      "label": "t:sections.hero.settings.height.label",
       "default": 80
     },
     {
@@ -71,41 +87,69 @@
       "max": 80,
       "step": 5,
       "unit": "%",
-      "label": "Image overlay",
+      "label": "t:sections.hero.settings.overlay_opacity.label",
       "default": 20
     },
     {
       "type": "select",
       "id": "content_position",
-      "label": "Content position",
+      "label": "t:sections.hero.settings.content_position.label",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" },
-        { "value": "right", "label": "Right" }
+        {
+          "value": "left",
+          "label": "t:sections.hero.settings.content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.hero.settings.content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.hero.settings.content_position.options__3.label"
+        }
       ],
       "default": "center"
     },
     {
       "type": "checkbox",
       "id": "boxed",
-      "label": "Show content in a box",
+      "label": "t:sections.hero.settings.boxed.label",
       "default": false
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.hero.settings.color_scheme.label",
       "default": "scheme_3",
-      "info": "Used for the text over the image, and for the box when enabled."
+      "info": "t:sections.hero.settings.color_scheme.info"
     }
   ],
   "presets": [
     {
-      "name": "Hero banner",
+      "name": "t:sections.hero.presets.preset__1.name",
       "blocks": [
-        { "type": "heading", "settings": { "heading": "New season essentials", "size": "h0", "alignment": "center" } },
-        { "type": "text", "settings": { "text": "<p>Considered pieces, made to be worn every day.</p>", "alignment": "center" } },
-        { "type": "button", "settings": { "label": "Shop now", "alignment": "center" } }
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "New season essentials",
+            "size": "h0",
+            "alignment": "center"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Considered pieces, made to be worn every day.</p>",
+            "alignment": "center"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Shop now",
+            "alignment": "center"
+          }
+        }
       ]
     }
   ]

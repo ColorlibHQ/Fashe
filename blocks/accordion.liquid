@@ -14,13 +14,37 @@
 
 {% schema %}
 {
-  "name": "Collapsible row",
+  "name": "t:blocks.accordion.name",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping and returns" },
-    { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Add details about delivery times and your returns policy.</p>" },
-    { "type": "page", "id": "page", "label": "Content from page", "info": "Overrides the content above." },
-    { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:blocks.accordion.settings.heading.label",
+      "default": "Shipping and returns"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:blocks.accordion.settings.content.label",
+      "default": "<p>Add details about delivery times and your returns policy.</p>"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "t:blocks.accordion.settings.page.label",
+      "info": "t:blocks.accordion.settings.page.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "t:blocks.accordion.settings.open.label",
+      "default": false
+    }
   ],
-  "presets": [{ "name": "Collapsible row" }]
+  "presets": [
+    {
+      "name": "t:blocks.accordion.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

@@ -34,12 +34,12 @@
 
 {% schema %}
 {
-  "name": "Announcement bar",
+  "name": "t:sections.announcement-bar.name",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.announcement-bar.settings.color_scheme.label",
       "default": "scheme_3"
     },
     {
@@ -49,25 +49,25 @@
       "max": 12,
       "step": 1,
       "unit": "s",
-      "label": "Rotate every",
+      "label": "t:sections.announcement-bar.settings.interval.label",
       "default": 5
     }
   ],
   "blocks": [
     {
       "type": "announcement",
-      "name": "Announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label",
           "default": "Free shipping on orders over $100"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
         }
       ]
     }
@@ -75,12 +75,18 @@
   "max_blocks": 5,
   "presets": [
     {
-      "name": "Announcement bar",
-      "blocks": [{ "type": "announcement" }]
+      "name": "t:sections.announcement-bar.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
     }
   ],
   "enabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   }
 }
 {% endschema %}

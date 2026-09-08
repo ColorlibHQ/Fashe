@@ -77,20 +77,30 @@
 
 {% schema %}
 {
-  "name": "Variant picker",
+  "name": "t:blocks.variant-picker.name",
   "settings": [
     {
       "type": "select",
       "id": "style",
-      "label": "Colour options",
+      "label": "t:blocks.variant-picker.settings.style.label",
       "options": [
-        { "value": "swatch", "label": "Swatches" },
-        { "value": "button", "label": "Buttons" }
+        {
+          "value": "swatch",
+          "label": "t:blocks.variant-picker.settings.style.options__1.label"
+        },
+        {
+          "value": "button",
+          "label": "t:blocks.variant-picker.settings.style.options__2.label"
+        }
       ],
       "default": "swatch",
-      "info": "Swatches use the colours and images set on your product options."
+      "info": "t:blocks.variant-picker.settings.style.info"
     }
   ],
-  "presets": [{ "name": "Variant picker" }]
+  "presets": [
+    {
+      "name": "t:blocks.variant-picker.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

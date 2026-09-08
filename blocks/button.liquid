@@ -12,28 +12,50 @@
 
 {% schema %}
 {
-  "name": "Button",
+  "name": "t:blocks.button.name",
   "settings": [
-    { "type": "text", "id": "label", "label": "Label", "default": "Shop now" },
-    { "type": "url", "id": "link", "label": "Link" },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:blocks.button.settings.label.label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:blocks.button.settings.link.label"
+    },
     {
       "type": "select",
       "id": "style",
-      "label": "Style",
+      "label": "t:blocks.button.settings.style.label",
       "options": [
-        { "value": "solid", "label": "Solid" },
-        { "value": "outline", "label": "Outline" },
-        { "value": "link", "label": "Text link" }
+        {
+          "value": "solid",
+          "label": "t:blocks.button.settings.style.options__1.label"
+        },
+        {
+          "value": "outline",
+          "label": "t:blocks.button.settings.style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:blocks.button.settings.style.options__3.label"
+        }
       ],
       "default": "solid"
     },
     {
       "type": "text_alignment",
       "id": "alignment",
-      "label": "Alignment",
+      "label": "t:blocks.button.settings.alignment.label",
       "default": "left"
     }
   ],
-  "presets": [{ "name": "Button" }]
+  "presets": [
+    {
+      "name": "t:blocks.button.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

@@ -6,22 +6,26 @@
 
 {% schema %}
 {
-  "name": "Custom Liquid",
+  "name": "t:sections.custom-liquid.name",
   "tag": "section",
   "settings": [
     {
       "type": "liquid",
       "id": "custom_liquid",
-      "label": "Liquid",
-      "info": "Add app snippets or other Liquid code."
+      "label": "t:sections.custom-liquid.settings.custom_liquid.label",
+      "info": "t:sections.custom-liquid.settings.custom_liquid.info"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.custom-liquid.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
-  "presets": [{ "name": "Custom Liquid" }]
+  "presets": [
+    {
+      "name": "t:sections.custom-liquid.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

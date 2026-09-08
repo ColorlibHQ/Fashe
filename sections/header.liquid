@@ -215,58 +215,66 @@
 
 {% schema %}
 {
-  "name": "Header",
+  "name": "t:sections.header.name",
   "class": "section-header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Menu",
+      "label": "t:sections.header.settings.menu.label",
       "default": "main-menu"
     },
     {
       "type": "select",
       "id": "layout",
-      "label": "Layout",
+      "label": "t:sections.header.settings.layout.label",
       "options": [
-        { "value": "left", "label": "Logo left, menu centre" },
-        { "value": "center", "label": "Logo centre, menu in drawer" }
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.layout.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.layout.options__2.label"
+        }
       ],
       "default": "left"
     },
     {
       "type": "checkbox",
       "id": "sticky",
-      "label": "Stick to top on scroll",
+      "label": "t:sections.header.settings.sticky.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_search",
-      "label": "Show search",
+      "label": "t:sections.header.settings.show_search.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_account",
-      "label": "Show account link",
+      "label": "t:sections.header.settings.show_account.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_bottom_border",
-      "label": "Show bottom border",
+      "label": "t:sections.header.settings.show_bottom_border.label",
       "default": true
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.header.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   }
 }
 {% endschema %}

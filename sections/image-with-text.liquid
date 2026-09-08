@@ -43,58 +43,108 @@
 
 {% schema %}
 {
-  "name": "Image with text",
+  "name": "t:sections.image-with-text.name",
   "tag": "section",
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-with-text.settings.image.label"
+    },
     {
       "type": "select",
       "id": "image_ratio",
-      "label": "Image ratio",
+      "label": "t:sections.image-with-text.settings.image_ratio.label",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "square", "label": "Square (1:1)" },
-        { "value": "portrait", "label": "Portrait (3:4)" },
-        { "value": "landscape", "label": "Landscape (4:3)" }
+        {
+          "value": "adapt",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__4.label"
+        }
       ],
       "default": "landscape"
     },
     {
       "type": "select",
       "id": "image_position",
-      "label": "Image position on desktop",
+      "label": "t:sections.image-with-text.settings.image_position.label",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "right", "label": "Right" }
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.image_position.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.image_position.options__2.label"
+        }
       ],
       "default": "left"
     },
     {
       "type": "select",
       "id": "vertical_alignment",
-      "label": "Vertical alignment",
+      "label": "t:sections.image-with-text.settings.vertical_alignment.label",
       "options": [
-        { "value": "start", "label": "Top" },
-        { "value": "center", "label": "Middle" },
-        { "value": "end", "label": "Bottom" }
+        {
+          "value": "start",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__2.label"
+        },
+        {
+          "value": "end",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__3.label"
+        }
       ],
       "default": "center"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.image-with-text.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "presets": [
     {
-      "name": "Image with text",
+      "name": "t:sections.image-with-text.presets.preset__1.name",
       "blocks": [
-        { "type": "heading", "settings": { "heading": "Made to last" } },
-        { "type": "text" },
-        { "type": "button", "settings": { "style": "outline" } }
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Made to last"
+          }
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button",
+          "settings": {
+            "style": "outline"
+          }
+        }
       ]
     }
   ]

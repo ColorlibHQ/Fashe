@@ -39,16 +39,20 @@
 
 {% schema %}
 {
-  "name": "Buy buttons",
+  "name": "t:blocks.buy-buttons.name",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_dynamic_checkout",
-      "label": "Show dynamic checkout buttons",
+      "label": "t:blocks.buy-buttons.settings.show_dynamic_checkout.label",
       "default": true,
-      "info": "Shows the customer's preferred payment method, such as Shop Pay or PayPal."
+      "info": "t:blocks.buy-buttons.settings.show_dynamic_checkout.info"
     }
   ],
-  "presets": [{ "name": "Buy buttons" }]
+  "presets": [
+    {
+      "name": "t:blocks.buy-buttons.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

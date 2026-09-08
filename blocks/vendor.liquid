@@ -10,15 +10,19 @@
 
 {% schema %}
 {
-  "name": "Vendor",
+  "name": "t:blocks.vendor.name",
   "settings": [
     {
       "type": "checkbox",
       "id": "link_to_vendor",
-      "label": "Link to vendor page",
+      "label": "t:blocks.vendor.settings.link_to_vendor.label",
       "default": false
     }
   ],
-  "presets": [{ "name": "Vendor" }]
+  "presets": [
+    {
+      "name": "t:blocks.vendor.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

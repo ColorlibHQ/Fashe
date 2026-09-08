@@ -17,7 +17,9 @@ fashion-storefront intent.
 - Native swatch support from Shopify product option values.
 - Product and BlogPosting JSON-LD.
 - Shopify Markets country/currency and language selectors.
-- Full storefront translation coverage in `locales/en.default.json`.
+- Full storefront translation coverage in `locales/en.default.json` (213 strings).
+- Full theme-editor translation coverage in `locales/en.default.schema.json` (386 strings)
+  — every section, block, preset and setting label, info string and select option.
 
 ### Removed
 - jQuery 3.2.1, Bootstrap 4, Popper, Slick, Owl Carousel, bxSlider, Animsition,
@@ -38,5 +40,5 @@ fashion-storefront intent.
 
 ### Not yet verified
 - The theme has not been rendered against a live store in this build. Run
-  `shopify theme dev` against a development store before release, and check the
-  product, collection, cart and search templates with real data.
+  `shopify theme dev` against a development store and check the product, collection,
+  cart and search templates with real data.

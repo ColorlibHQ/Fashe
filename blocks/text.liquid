@@ -4,16 +4,25 @@
 
 {% schema %}
 {
-  "name": "Text",
+  "name": "t:blocks.text.name",
   "settings": [
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Share what makes this product different.</p>" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:blocks.text.settings.text.label",
+      "default": "<p>Share what makes this product different.</p>"
+    },
     {
       "type": "text_alignment",
       "id": "alignment",
-      "label": "Alignment",
+      "label": "t:blocks.text.settings.alignment.label",
       "default": "left"
     }
   ],
-  "presets": [{ "name": "Text" }]
+  "presets": [
+    {
+      "name": "t:blocks.text.presets.preset__1.name"
+    }
+  ]
 }
 {% endschema %}

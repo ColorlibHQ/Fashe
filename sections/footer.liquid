@@ -105,68 +105,104 @@
 
 {% schema %}
 {
-  "name": "Footer",
+  "name": "t:sections.footer.name",
   "settings": [
     {
       "type": "checkbox",
       "id": "show_social",
-      "label": "Show social icons",
+      "label": "t:sections.footer.settings.show_social.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_payment_icons",
-      "label": "Show payment icons",
+      "label": "t:sections.footer.settings.show_payment_icons.label",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_policy_links",
-      "label": "Show policy links",
+      "label": "t:sections.footer.settings.show_policy_links.label",
       "default": true
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.footer.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "blocks": [
     {
       "type": "menu",
-      "name": "Menu",
+      "name": "t:sections.footer.blocks.menu.name",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
-        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.footer.blocks.menu.settings.heading.label",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "t:sections.footer.blocks.menu.settings.menu.label",
+          "default": "footer"
+        }
       ]
     },
     {
       "type": "text",
-      "name": "Text",
+      "name": "t:sections.footer.blocks.text.name",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "About" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell customers what your store is about.</p>" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.footer.blocks.text.settings.heading.label",
+          "default": "About"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.footer.blocks.text.settings.text.label",
+          "default": "<p>Tell customers what your store is about.</p>"
+        }
       ]
     },
     {
       "type": "newsletter",
-      "name": "Newsletter",
+      "name": "t:sections.footer.blocks.newsletter.name",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Newsletter" },
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>New arrivals and offers, straight to your inbox.</p>" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.footer.blocks.newsletter.settings.heading.label",
+          "default": "Newsletter"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.footer.blocks.newsletter.settings.text.label",
+          "default": "<p>New arrivals and offers, straight to your inbox.</p>"
+        }
       ]
     },
     {
       "type": "image",
-      "name": "Image",
+      "name": "t:sections.footer.blocks.image.name",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.footer.blocks.image.settings.image.label"
+        }
       ]
     }
   ],
   "enabled_on": {
-    "groups": ["footer"]
+    "groups": [
+      "footer"
+    ]
   }
 }
 {% endschema %}

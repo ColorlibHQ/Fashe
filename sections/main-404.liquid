@@ -11,18 +11,20 @@
 
 {% schema %}
 {
-  "name": "404 page",
+  "name": "t:sections.main-404.name",
   "tag": "div",
   "settings": [
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-404.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "enabled_on": {
-    "templates": ["404"]
+    "templates": [
+      "404"
+    ]
   }
 }
 {% endschema %}

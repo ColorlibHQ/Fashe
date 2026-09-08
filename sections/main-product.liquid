@@ -80,63 +80,111 @@
 
 {% schema %}
 {
-  "name": "Product information",
+  "name": "t:sections.main-product.name",
   "tag": "div",
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "select",
       "id": "media_layout",
-      "label": "Media layout on desktop",
+      "label": "t:sections.main-product.settings.media_layout.label",
       "options": [
-        { "value": "stacked", "label": "Stacked" },
-        { "value": "grid", "label": "Grid" }
+        {
+          "value": "stacked",
+          "label": "t:sections.main-product.settings.media_layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.main-product.settings.media_layout.options__2.label"
+        }
       ],
       "default": "stacked"
     },
     {
       "type": "select",
       "id": "media_ratio",
-      "label": "Media ratio",
+      "label": "t:sections.main-product.settings.media_ratio.label",
       "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "square", "label": "Square (1:1)" },
-        { "value": "portrait", "label": "Portrait (3:4)" },
-        { "value": "tall", "label": "Tall (2:3)" }
+        {
+          "value": "adapt",
+          "label": "t:sections.main-product.settings.media_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-product.settings.media_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-product.settings.media_ratio.options__3.label"
+        },
+        {
+          "value": "tall",
+          "label": "t:sections.main-product.settings.media_ratio.options__4.label"
+        }
       ],
       "default": "portrait"
     },
     {
       "type": "checkbox",
       "id": "sticky_info",
-      "label": "Stick product details on scroll",
+      "label": "t:sections.main-product.settings.sticky_info.label",
       "default": true
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.main-product.settings.color_scheme.label",
       "default": "scheme_1"
     }
   ],
   "presets": [
     {
-      "name": "Product information",
+      "name": "t:sections.main-product.presets.preset__1.name",
       "blocks": [
-        { "type": "vendor" },
-        { "type": "title" },
-        { "type": "price" },
-        { "type": "variant-picker" },
-        { "type": "quantity" },
-        { "type": "buy-buttons" },
-        { "type": "inventory" },
-        { "type": "description" },
-        { "type": "accordion", "settings": { "heading": "Shipping and returns" } }
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant-picker"
+        },
+        {
+          "type": "quantity"
+        },
+        {
+          "type": "buy-buttons"
+        },
+        {
+          "type": "inventory"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns"
+          }
+        }
       ]
     }
   ],
   "enabled_on": {
-    "templates": ["product"]
+    "templates": [
+      "product"
+    ]
   }
 }
 {% endschema %}

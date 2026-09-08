@@ -8,29 +8,46 @@
 
 {% schema %}
 {
-  "name": "Rich text",
+  "name": "t:sections.rich-text.name",
   "tag": "section",
-  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
   "settings": [
     {
       "type": "text_alignment",
       "id": "alignment",
-      "label": "Alignment",
+      "label": "t:sections.rich-text.settings.alignment.label",
       "default": "center"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Colour scheme",
+      "label": "t:sections.rich-text.settings.color_scheme.label",
       "default": "scheme_2"
     }
   ],
   "presets": [
     {
-      "name": "Rich text",
+      "name": "t:sections.rich-text.presets.preset__1.name",
       "blocks": [
-        { "type": "heading", "settings": { "alignment": "center" } },
-        { "type": "text", "settings": { "alignment": "center" } }
+        {
+          "type": "heading",
+          "settings": {
+            "alignment": "center"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "alignment": "center"
+          }
+        }
       ]
     }
   ]
