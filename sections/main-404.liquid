@@ -1,0 +1,28 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width" style="text-align: center; padding-block: var(--space-2xl);">
+    <p class="eyebrow">404</p>
+    <h1 class="h1">{{ 'general.404.title' | t }}</h1>
+    <p>{{ 'general.404.subtext' | t }}</p>
+    <p style="margin-top: 1.5rem;">
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.404.link' | t }}</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 page",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["404"]
+  }
+}
+{% endschema %}

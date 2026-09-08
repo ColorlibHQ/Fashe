@@ -1,5 +1,0 @@
-{% if article.tags.size > 0 %}
-{% for tag in article.tags %}
-	<a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
-{% endfor %}
-{% endif %}

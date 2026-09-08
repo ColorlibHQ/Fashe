@@ -1,0 +1,49 @@
+<section class="section">
+  <div class="page-width customer customer--wide">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem;">
+      <h1 class="h2">{{ 'customer.account.title' | t }}</h1>
+      <a href="{{ routes.account_logout_url }}" class="button--link">{{ 'customer.log_out' | t }}</a>
+    </div>
+
+    <div class="customer__grid customer__grid--two" style="margin-top: var(--space-lg);">
+      <div>
+        <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
+        {%- paginate customer.orders by 20 -%}
+          {%- if customer.orders.size > 0 -%}
+            <table>
+              <thead>
+                <tr>
+                  <th>{{ 'customer.orders.order_number' | t }}</th>
+                  <th>{{ 'customer.orders.date' | t }}</th>
+                  <th>{{ 'customer.orders.total' | t }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: format: 'date' }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+            {% render 'pagination', paginate: paginate %}
+          {%- else -%}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+      <div>
+        <h2 class="h4">{{ 'customer.account.details' | t }}</h2>
+        {{ customer.default_address | format_address }}
+        <p><a href="{{ routes.account_addresses_url }}" class="button--link">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Account", "tag": "div", "settings": [] }
+{% endschema %}

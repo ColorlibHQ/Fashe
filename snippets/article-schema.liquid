@@ -1,0 +1,23 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "articleBody": {{ article.content | strip_html | json }},
+  {% if article.image %}"image": [{{ article.image | image_url: width: 1200 | prepend: "https:" | json }}],{% endif %}
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ shop.url | append: article.url | json }}
+  }
+}
+</script>

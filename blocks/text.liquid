@@ -1,0 +1,19 @@
+<div class="rte" style="text-align: {{ block.settings.alignment }};" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>
+
+{% schema %}
+{
+  "name": "Text",
+  "settings": [
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Share what makes this product different.</p>" },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "left"
+    }
+  ],
+  "presets": [{ "name": "Text" }]
+}
+{% endschema %}

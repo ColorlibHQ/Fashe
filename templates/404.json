@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "main-404", "settings": { "color_scheme": "scheme_1" } }
+  },
+  "order": ["main"]
+}

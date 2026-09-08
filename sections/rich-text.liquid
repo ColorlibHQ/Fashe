@@ -1,0 +1,38 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width page-width--reading">
+    <div class="stack" style="text-align: {{ section.settings.alignment }}; align-items: {% if section.settings.alignment == 'center' %}center{% elsif section.settings.alignment == 'right' %}flex-end{% else %}flex-start{% endif %};" data-animate>
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text",
+      "blocks": [
+        { "type": "heading", "settings": { "alignment": "center" } },
+        { "type": "text", "settings": { "alignment": "center" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

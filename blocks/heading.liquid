@@ -1,0 +1,31 @@
+<h2 class="{{ block.settings.size }}" style="text-align: {{ block.settings.alignment }};" {{ block.shopify_attributes }}>
+  {{ block.settings.heading | escape }}
+</h2>
+
+{% schema %}
+{
+  "name": "Heading",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Heading" },
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" },
+        { "value": "h0", "label": "Display" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "left"
+    }
+  ],
+  "presets": [{ "name": "Heading" }]
+}
+{% endschema %}

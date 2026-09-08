@@ -1,0 +1,24 @@
+{%- if product.vendor != blank -%}
+  <div class="eyebrow" {{ block.shopify_attributes }}>
+    {%- if block.settings.link_to_vendor -%}
+      <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+    {%- else -%}
+      {{ product.vendor }}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Vendor",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "link_to_vendor",
+      "label": "Link to vendor page",
+      "default": false
+    }
+  ],
+  "presets": [{ "name": "Vendor" }]
+}
+{% endschema %}

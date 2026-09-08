@@ -1,0 +1,80 @@
+{%- comment -%}
+  Usage: {% render 'cart-items', context: 'drawer' %}
+{%- endcomment -%}
+<div class="cart-items" data-context="{{ context }}">
+  {%- for item in cart.items -%}
+    {%- liquid
+      assign qty_id = 'Quantity-' | append: context | append: '-' | append: forloop.index
+      assign qty_name = 'updates[' | append: item.key | append: ']'
+    -%}
+    <div class="cart-item" data-line="{{ forloop.index }}" data-key="{{ item.key }}">
+      <a href="{{ item.url }}" class="media media--portrait" tabindex="-1" aria-hidden="true">
+        {%- if item.image -%}
+          {{
+            item.image
+            | image_url: width: 300
+            | image_tag: loading: 'lazy', widths: '110, 220, 330', sizes: '5.5rem', alt: item.image.alt
+          }}
+        {%- endif -%}
+      </a>
+
+      <div class="cart-item__details">
+        <h3 class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title | escape }}</a></h3>
+
+        {%- if item.product.has_only_default_variant == false or item.properties.size > 0 or item.selling_plan_allocation != nil -%}
+          <div class="cart-item__options">
+            {%- if item.product.has_only_default_variant == false -%}
+              {%- for option in item.options_with_values -%}
+                <span>{{ option.name }}: {{ option.value }}</span>{% unless forloop.last %} &middot; {% endunless %}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- for property in item.properties -%}
+              {%- unless property.last == blank or property.first[0] == '_' -%}
+                <span>{{ property.first }}: {{ property.last }}</span>
+              {%- endunless -%}
+            {%- endfor -%}
+            {%- if item.selling_plan_allocation -%}
+              <span>{{ item.selling_plan_allocation.selling_plan.name }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="price">
+          {%- if item.original_price > item.final_price -%}
+            <span class="price__sale">{{ item.final_price | money }}</span>
+            <s class="price__compare">{{ item.original_price | money }}</s>
+          {%- else -%}
+            <span>{{ item.final_price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        {%- if item.line_level_discount_allocations.size > 0 -%}
+          <ul class="cart-item__discounts text-xs" role="list">
+            {%- for discount in item.line_level_discount_allocations -%}
+              <li>{{ discount.discount_application.title }} (-{{ discount.amount | money }})</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="cart-item__footer">
+          {% render 'quantity-input',
+            id: qty_id,
+            name: qty_name,
+            value: item.quantity,
+            title: item.product.title,
+            min: 0,
+            data_index: forloop.index
+          %}
+          <a
+            href="{{ item.url_to_remove }}"
+            class="button--link text-xs"
+            data-remove-line="{{ forloop.index }}"
+            aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
+          >
+            {{ 'sections.cart.remove' | t }}
+          </a>
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>

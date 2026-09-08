@@ -1,0 +1,96 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <div class="section-header__text">
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); text-align: {{ section.settings.alignment }};">
+      {%- for block in section.blocks -%}
+        <div data-animate {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="media media--square" style="width: {{ block.settings.image_width }}px; margin-inline: {% if section.settings.alignment == 'center' %}auto{% else %}0{% endif %}; margin-bottom: 1rem;">
+              {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy', widths: '75, 150, 225, 300', sizes: '150px', alt: block.settings.image.alt }}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h3 class="h5">{{ block.settings.heading | escape }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="rte text-sm">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank -%}
+            <p style="margin-top: 0.75rem;">
+              <a href="{{ block.settings.link | default: '#' }}" class="button--link text-sm">{{ block.settings.link_label | escape }}</a>
+            </p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Multicolumn",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why shop with us" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 40,
+          "max": 160,
+          "step": 8,
+          "unit": "px",
+          "label": "Image width",
+          "default": 64
+        },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Free shipping" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>On all orders over $100.</p>" },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multicolumn",
+      "blocks": [{ "type": "column" }, { "type": "column" }, { "type": "column" }]
+    }
+  ]
+}
+{% endschema %}

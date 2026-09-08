@@ -1,0 +1,60 @@
+<div
+  class="block-group"
+  style="
+    display: flex;
+    flex-direction: {{ block.settings.direction }};
+    gap: {{ block.settings.gap }}px;
+    align-items: {{ block.settings.alignment }};
+    {% if block.settings.direction == 'row' %}flex-wrap: wrap;{% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Group",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        { "value": "column", "label": "Vertical" },
+        { "value": "row", "label": "Horizontal" }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Start" },
+        { "value": "center", "label": "Centre" },
+        { "value": "flex-end", "label": "End" },
+        { "value": "stretch", "label": "Stretch" }
+      ],
+      "default": "stretch"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Group",
+      "blocks": [{ "type": "heading" }, { "type": "text" }]
+    }
+  ]
+}
+{% endschema %}

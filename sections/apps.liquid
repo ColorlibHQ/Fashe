@@ -1,0 +1,14 @@
+<section class="section">
+  <div class="page-width">
+    {% content_for 'blocks' %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Apps",
+  "tag": "section",
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Apps" }]
+}
+{% endschema %}

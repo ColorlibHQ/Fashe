@@ -1,0 +1,55 @@
+<section class="section">
+  <div class="page-width customer customer--wide">
+    <h1 class="h2">{{ 'customer.addresses.title' | t }}</h1>
+
+    <details style="margin-block: var(--space-lg);">
+      <summary class="button">{{ 'customer.addresses.add_new' | t }}</summary>
+      <div style="margin-top: 1.5rem; max-width: 40rem;">
+        {%- form 'customer_address', customer.new_address -%}
+          {% render 'address-fields', form: form, address: customer.new_address %}
+          <button type="submit" class="button" style="margin-top: 1rem;">{{ 'customer.addresses.add' | t }}</button>
+        {%- endform -%}
+      </div>
+    </details>
+
+    {%- paginate customer.addresses by 10 -%}
+      <div class="customer__grid customer__grid--two">
+        {%- for address in customer.addresses -%}
+          <div style="border: 1px solid rgb(var(--color-border)); padding: 1.25rem;">
+            {%- if address == customer.default_address -%}
+              <p class="badge" style="margin-bottom: 0.75rem;">{{ 'customer.addresses.default' | t }}</p>
+            {%- endif -%}
+            {{ address | format_address }}
+
+            <details style="margin-top: 1rem;">
+              <summary class="button--link text-sm">{{ 'customer.addresses.edit' | t }}</summary>
+              <div style="margin-top: 1rem;">
+                {%- form 'customer_address', address -%}
+                  {% render 'address-fields', form: form, address: address %}
+                  <button type="submit" class="button button--small" style="margin-top: 1rem;">{{ 'customer.addresses.update' | t }}</button>
+                {%- endform -%}
+              </div>
+            </details>
+
+            <form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}" style="margin-top: 0.5rem;">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="button--link text-sm" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t | escape }}">
+                {{ 'customer.addresses.delete' | t }}
+              </button>
+            </form>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+
+    <p style="margin-top: var(--space-lg);">
+      <a href="{{ routes.account_url }}" class="button--link">{{ 'customer.account.return' | t }}</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Addresses", "tag": "div", "settings": [] }
+{% endschema %}

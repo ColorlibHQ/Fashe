@@ -1,0 +1,42 @@
+<div {{ block.shopify_attributes }}>
+  {%- if block.settings.image != blank -%}
+    <div class="media media--{{ block.settings.ratio }}">
+      {{
+        block.settings.image
+        | image_url: width: 1500
+        | image_tag:
+          loading: 'lazy',
+          widths: '300, 500, 750, 1100, 1500',
+          sizes: '(min-width: 990px) 50vw, 100vw',
+          alt: block.settings.image.alt
+      }}
+    </div>
+  {%- else -%}
+    <div class="media media--{{ block.settings.ratio }}">
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Image",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "landscape", "label": "Landscape (4:3)" },
+        { "value": "wide", "label": "Wide (16:9)" }
+      ],
+      "default": "landscape"
+    }
+  ],
+  "presets": [{ "name": "Image" }]
+}
+{% endschema %}

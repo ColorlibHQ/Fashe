@@ -1,0 +1,43 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width" style="max-width: 40rem; text-align: center;" data-animate>
+    {%- if section.settings.heading != blank -%}
+      <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+    <div style="margin-top: 1.5rem;">
+      {%- assign newsletter_id = 'Newsletter-' | append: section.id -%}
+      {% render 'newsletter-form', id: newsletter_id %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join the list" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2"
+    },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Be first to know about new arrivals and offers.</p>" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_2"
+    }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

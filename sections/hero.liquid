@@ -1,0 +1,113 @@
+{%- liquid
+  assign align = section.settings.content_position
+  assign justify = 'center'
+  if align == 'left'
+    assign justify = 'start'
+  elsif align == 'right'
+    assign justify = 'end'
+  endif
+-%}
+
+<div
+  class="banner color-{{ section.settings.color_scheme }}"
+  style="
+    --banner-height: {{ section.settings.height }}vh;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --content-justify: {{ justify }};
+    --content-align: {{ align }};
+  "
+>
+  <div class="banner__media">
+    {%- if section.settings.video != blank -%}
+      {{
+        section.settings.video
+        | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1500x'
+      }}
+    {%- elsif section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750, 1100, 1500, 2000, 2400, 3000',
+          sizes: '100vw',
+          alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="page-width">
+    <div class="banner__content{% if section.settings.boxed %} banner__content--boxed{% endif %}" data-animate>
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "tag": "section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "video", "id": "video", "label": "Background video", "info": "Replaces the image when set." },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "Show content in a box",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_3",
+      "info": "Used for the text over the image, and for the box when enabled."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner",
+      "blocks": [
+        { "type": "heading", "settings": { "heading": "New season essentials", "size": "h0", "alignment": "center" } },
+        { "type": "text", "settings": { "text": "<p>Considered pieces, made to be worn every day.</p>", "alignment": "center" } },
+        { "type": "button", "settings": { "label": "Shop now", "alignment": "center" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

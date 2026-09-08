@@ -1,94 +1,172 @@
-<!--Footer Start-->
-{% include section.settings.footer_layout %}
-<!--End of Footer-->
+<footer class="footer color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {%- if section.blocks.size > 0 -%}
+      <div class="footer__grid">
+        {%- for block in section.blocks -%}
+          <div
+            class="footer__block{% if block.type == 'newsletter' or block.type == 'text' %} footer__block--wide{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {%- case block.type -%}
+              {%- when 'menu' -%}
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+                {%- endif -%}
+                {%- if block.settings.menu != blank -%}
+                  <ul class="footer__list" role="list">
+                    {%- for link in block.settings.menu.links -%}
+                      <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+
+              {%- when 'text' -%}
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+                {%- endif -%}
+                <div class="rte text-sm">{{ block.settings.text }}</div>
+
+              {%- when 'newsletter' -%}
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="footer__heading">{{ block.settings.heading | escape }}</h2>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte text-sm" style="margin-bottom: 1rem;">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {% render 'newsletter-form', id: 'FooterNewsletter' %}
+
+              {%- when 'image' -%}
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 600
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '150, 300, 450, 600',
+                      sizes: '(min-width: 750px) 12rem, 50vw',
+                      alt: block.settings.image.alt
+                  }}
+                {%- endif -%}
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="footer__bottom">
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'sections.footer.copyright' | t }}</span>
+        {%- if section.settings.show_policy_links -%}
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <a href="{{ policy.url }}">{{ policy.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        {%- if section.settings.show_social -%}
+          <ul class="social-list" role="list">
+            {%- if settings.social_instagram_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_instagram_link }}" aria-label="{{ 'general.social.links.instagram' | t }}">{% render 'icon', name: 'instagram' %}</a></li>
+            {%- endif -%}
+            {%- if settings.social_tiktok_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_tiktok_link }}" aria-label="{{ 'general.social.links.tiktok' | t }}">{% render 'icon', name: 'tiktok' %}</a></li>
+            {%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_facebook_link }}" aria-label="{{ 'general.social.links.facebook' | t }}">{% render 'icon', name: 'facebook' %}</a></li>
+            {%- endif -%}
+            {%- if settings.social_pinterest_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_pinterest_link }}" aria-label="{{ 'general.social.links.pinterest' | t }}">{% render 'icon', name: 'pinterest' %}</a></li>
+            {%- endif -%}
+            {%- if settings.social_youtube_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_youtube_link }}" aria-label="{{ 'general.social.links.youtube' | t }}">{% render 'icon', name: 'youtube' %}</a></li>
+            {%- endif -%}
+            {%- if settings.social_x_link != blank -%}
+              <li><a class="icon-button" href="{{ settings.social_x_link }}" aria-label="{{ 'general.social.links.x' | t }}">{% render 'icon', name: 'x' %}</a></li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+
+        {% render 'localization-form', context: 'footer' %}
+
+        {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+          <ul class="payment-list" role="list" aria-label="{{ 'sections.footer.payment_methods' | t }}">
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
 {% schema %}
 {
-   "name": "Footer",
-   "class": "section-footer",
-   "settings": [
-      {
-         "type": "select",
-         "id": "footer_layout",
-         "label": "Select header layout",
-         "options": [
-            {
-               "value": "footer-1",
-               "label": "Design 1"
-            }
-         ]
-      },
- 	  {
-         "type": "header",
-         "content": "Contact information"
-      },
-      {
-         "type": "checkbox",
-         "id": "footer_content_enable",
-         "label": "Show footer contact info"
-      },
-      {
-         "type": "textarea",
-         "id": "footer_about_us",
-         "label": "Contact About Us"
-      },
-	  {
-         "type": "checkbox",
-         "id": "footer_social_enable",
-         "label": "Show social media icons",
-         "info": "Add accounts in Social media section"
-      },
-      {
-         "type": "header",
-         "content": "Footer Menu Widgets"
-      },
-      {
-         "type": "link_list",
-         "id": "footer_menu_1",
-         "label": "Menu 1"
-      },
-	  {
-         "type": "link_list",
-         "id": "footer_menu_2",
-         "label": "Menu 2"
-      },
-	  {
-         "type": "link_list",
-         "id": "footer_menu_3",
-         "label": "Menu 3"
-      },
-	  {
-         "type": "header",
-         "content": "Newsletter"
-      },
-      {
-         "type": "checkbox",
-         "id": "footer_newsletter_enable",
-         "label": "Show newsletter sign-up"
-      },
-      {
-         "type": "text",
-         "id": "mailing_list_form_action",
-         "label": "MailChimp form action URL",
-         "info": "[Find your MailChimp form action URL](https://docs.shopify.com/manual/configuration/store-customization/communicating-with-customers/accounts-and-newsletters/get-a-mailchimp-form-action-url/)."
-      },
-      {
-         "type": "text",
-         "id": "heading",
-         "label": "Heading",
-         "default": "Sign up for our Newsletter!"
-      },
-      {
-         "type": "header",
-         "content": "Bottom Footer"
-      },
-      {
-        "type": "textarea",
-        "id": "footer_content_text",
-        "label": "Contact text",
-        "info": "Use basic HTML to format text"
-      }
-   ]
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_links",
+      "label": "Show policy links",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "About" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell customers what your store is about.</p>" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Newsletter" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>New arrivals and offers, straight to your inbox.</p>" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
 }
-
 {% endschema %}
-

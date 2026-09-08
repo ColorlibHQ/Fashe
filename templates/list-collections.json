@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": { "image_ratio": "portrait", "color_scheme": "scheme_1" }
+    }
+  },
+  "order": ["main"]
+}

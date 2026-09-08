@@ -1,0 +1,68 @@
+{%- paginate blog.articles by section.settings.posts_per_page -%}
+  <section class="section color-{{ section.settings.color_scheme }} color-scheme">
+    <div class="page-width">
+      <div class="section-header">
+        <div class="section-header__text">
+          <h1 class="h1">{{ blog.title | escape }}</h1>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));">
+        {%- for article in blog.articles -%}
+          <article class="article-card" data-animate>
+            {%- if article.image -%}
+              <a href="{{ article.url }}" class="media media--landscape" tabindex="-1" aria-hidden="true">
+                {{
+                  article.image
+                  | image_url: width: 900
+                  | image_tag: loading: 'lazy', widths: '300, 450, 600, 900', sizes: '(min-width: 990px) 33vw, 100vw', alt: article.image.alt
+                }}
+              </a>
+            {%- endif -%}
+            <div style="margin-top: 1rem;">
+              <p class="article-card__meta">
+                {{ article.published_at | date: format: 'date' }}
+                {%- if section.settings.show_author %} &middot; {{ 'sections.blog.by_author' | t: author: article.author }}{% endif -%}
+              </p>
+              <h2 class="article-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+              {%- if section.settings.show_excerpt -%}
+                <p class="text-sm">{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "label": "Posts per page",
+      "default": 12
+    },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["blog"]
+  }
+}
+{% endschema %}

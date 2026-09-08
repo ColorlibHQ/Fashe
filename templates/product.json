@@ -1,0 +1,89 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "size": "h2"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_tax_note": true
+          }
+        },
+        "variant-picker": {
+          "type": "variant-picker",
+          "settings": {
+            "style": "swatch"
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "buy-buttons": {
+          "type": "buy-buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "inventory": {
+          "type": "inventory",
+          "settings": {
+            "threshold": 10
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "shipping": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns",
+            "content": "<p>Free standard shipping on orders over $100. Returns accepted within 30 days.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant-picker",
+        "quantity",
+        "buy-buttons",
+        "inventory",
+        "description",
+        "shipping"
+      ],
+      "settings": {
+        "media_layout": "stacked",
+        "media_ratio": "portrait",
+        "sticky_info": true,
+        "color_scheme": "scheme_1"
+      }
+    },
+    "related": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h3",
+        "products_to_show": 4,
+        "columns": 4,
+        "color_scheme": "scheme_1"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

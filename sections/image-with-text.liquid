@@ -1,0 +1,102 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <div
+      class="image-with-text"
+      style="
+        display: grid;
+        gap: var(--space-lg);
+        align-items: {{ section.settings.vertical_alignment }};
+      "
+    >
+      <style>
+        @media screen and (min-width: 750px) {
+          #shopify-section-{{ section.id }} .image-with-text {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--space-2xl);
+          }
+          {% if section.settings.image_position == 'right' %}
+            #shopify-section-{{ section.id }} .image-with-text__media { order: 2; }
+          {% endif %}
+        }
+      </style>
+
+      <div class="image-with-text__media" data-animate>
+        <div class="media media--{{ section.settings.image_ratio }}">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1500
+              | image_tag: loading: 'lazy', widths: '400, 600, 900, 1200, 1500', sizes: '(min-width: 750px) 50vw, 100vw', alt: section.settings.image.alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="image-with-text__content stack" data-animate>
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "tag": "section",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position on desktop",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment",
+      "options": [
+        { "value": "start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "blocks": [
+        { "type": "heading", "settings": { "heading": "Made to last" } },
+        { "type": "text" },
+        { "type": "button", "settings": { "style": "outline" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

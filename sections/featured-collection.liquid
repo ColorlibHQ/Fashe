@@ -1,0 +1,123 @@
+{%- liquid
+  assign products = section.settings.collection.products
+  assign limit = section.settings.products_to_show
+-%}
+
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <div class="section-header">
+      <div class="section-header__text">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_view_all and section.settings.collection != blank -%}
+        <a href="{{ section.settings.collection.url }}" class="button button--outline button--small">
+          {{ section.settings.view_all_label | default: 'View all' }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.layout == 'carousel' -%}
+      <div class="carousel" style="--carousel-item: 62%; --carousel-item-desktop: calc((100% - 3 * var(--grid-gap)) / {{ section.settings.columns }});">
+        {%- for product in products limit: limit -%}
+          {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 62vw' %}
+        {%- else -%}
+          {%- for i in (1..limit) -%}
+            {% render 'product-card' %}
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="grid grid--products" style="--columns: {{ section.settings.columns }}; --columns-mobile: {{ section.settings.columns_mobile }};">
+        {%- for product in products limit: limit -%}
+          <div data-animate>
+            {% render 'product-card', product: product, sizes: '(min-width: 990px) 25vw, 50vw' %}
+          </div>
+        {%- else -%}
+          {%- for i in (1..limit) -%}
+            <div>{% render 'product-card' %}</div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "New arrivals" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2"
+    },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "label": "Products to show",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show view all link", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

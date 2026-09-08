@@ -1,0 +1,51 @@
+{%- liquid
+  if template.name == 'product'
+    assign og_title = product.title | strip_html
+    assign og_description = product.description | strip_html | truncate: 200
+    assign og_image = product.featured_media.preview_image
+    assign og_type = 'product'
+  elsif template.name == 'article'
+    assign og_title = article.title | strip_html
+    assign og_description = article.excerpt_or_content | strip_html | truncate: 200
+    assign og_image = article.image
+    assign og_type = 'article'
+  elsif template.name == 'collection'
+    assign og_title = collection.title | strip_html
+    assign og_description = collection.description | strip_html | truncate: 200
+    assign og_image = collection.featured_image
+    assign og_type = 'website'
+  else
+    assign og_title = page_title
+    assign og_description = page_description
+    assign og_type = 'website'
+  endif
+
+  unless og_image
+    assign og_image = settings.share_image
+  endunless
+-%}
+
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:title" content="{{ og_title | default: shop.name | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | default: shop.description | default: shop.name | escape }}">
+
+{%- if og_image -%}
+  <meta property="og:image" content="http:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url: width: 1200 }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="{{ 1200 | divided_by: og_image.aspect_ratio | round }}">
+  {%- if og_image.alt != blank -%}
+    <meta property="og:image:alt" content="{{ og_image.alt | escape }}">
+  {%- endif -%}
+{%- endif -%}
+
+{%- if template.name == 'product' -%}
+  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+{%- endif -%}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | default: shop.name | escape }}">
+<meta name="twitter:description" content="{{ og_description | default: shop.description | default: shop.name | escape }}">

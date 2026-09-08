@@ -1,0 +1,96 @@
+{%- unless product.has_only_default_variant -%}
+  <variant-picker class="variant-picker" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+    {%- for option in product.options_with_values -%}
+      {%- assign option_index = forloop.index -%}
+      <fieldset class="variant-option" style="border: 0; padding: 0; margin: 0;">
+        <legend class="variant-option__label" style="width: 100%;">
+          <span>{{ option.name }}</span>
+          <span class="variant-option__value" data-option-value="{{ option_index }}">{{ option.selected_value }}</span>
+        </legend>
+
+        <div class="variant-option__values">
+          {%- for value in option.values -%}
+            {%- liquid
+              assign input_id = 'Option-' | append: option_index | append: '-' | append: forloop.index
+              assign is_swatch = false
+              if value.swatch and block.settings.style == 'swatch'
+                assign is_swatch = true
+              endif
+            -%}
+            <div style="position: relative;">
+              <input
+                class="variant-option__input"
+                type="radio"
+                id="{{ input_id }}"
+                name="option-{{ option_index }}"
+                value="{{ value | escape }}"
+                data-option-position="{{ option_index }}"
+                {% if value.selected %}checked{% endif %}
+                {% unless value.available %}data-unavailable{% endunless %}
+              >
+              <label
+                class="variant-option__button{% if is_swatch %} variant-option__button--swatch{% endif %}{% unless value.available %} variant-option__button--unavailable{% endunless %}"
+                for="{{ input_id }}"
+                {% if is_swatch %}
+                  title="{{ value.name | escape }}"
+                  style="
+                    {%- if value.swatch.image -%}
+                      background-image: url({{ value.swatch.image | image_url: width: 80 }});
+                    {%- elsif value.swatch.color -%}
+                      background-color: {{ value.swatch.color }};
+                    {%- endif -%}
+                  "
+                {% endif %}
+              >
+                {%- if is_swatch -%}
+                  <span class="visually-hidden">{{ value.name }}</span>
+                {%- else -%}
+                  {{ value.name }}
+                {%- endif -%}
+              </label>
+            </div>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endfor -%}
+
+    <script type="application/json" data-variant-data>
+      [
+        {%- for variant in product.variants -%}
+          {
+            "id": {{ variant.id }},
+            "available": {{ variant.available }},
+            "options": {{ variant.options | json }},
+            "price": {{ variant.price | money | json }},
+            "compare_at_price": {{ variant.compare_at_price | money | json }},
+            "on_sale": {% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %},
+            "inventory_management": {{ variant.inventory_management | json }},
+            "inventory_quantity": {{ variant.inventory_quantity | default: 0 }},
+            "inventory_policy": {{ variant.inventory_policy | json }},
+            "featured_media_id": {{ variant.featured_media.id | default: 0 }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    </script>
+  </variant-picker>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Variant picker",
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Colour options",
+      "options": [
+        { "value": "swatch", "label": "Swatches" },
+        { "value": "button", "label": "Buttons" }
+      ],
+      "default": "swatch",
+      "info": "Swatches use the colours and images set on your product options."
+    }
+  ],
+  "presets": [{ "name": "Variant picker" }]
+}
+{% endschema %}

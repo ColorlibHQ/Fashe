@@ -1,0 +1,70 @@
+{%- paginate search.results by 24 -%}
+  <section class="section color-{{ section.settings.color_scheme }} color-scheme">
+    <div class="page-width">
+      <div class="section-header">
+        <div class="section-header__text" style="width: 100%; max-width: 34rem;">
+          <h1 class="h1">{{ 'templates.search.heading' | t }}</h1>
+          {% render 'search-form', id: 'MainSearch' %}
+        </div>
+      </div>
+
+      {%- if search.performed -%}
+        {%- if search.results_count > 0 -%}
+          <p class="text-sm" style="opacity: 0.7;">
+            {{ 'general.search.results_count' | t: count: search.results_count }}
+          </p>
+
+          <div class="grid grid--products" style="--columns: 4; --columns-mobile: 2; margin-top: 1.5rem;">
+            {%- for item in search.results -%}
+              <div data-animate>
+                {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                    {% render 'product-card', product: item %}
+                  {%- when 'article' -%}
+                    <article class="article-card">
+                      {%- if item.image -%}
+                        <a href="{{ item.url }}" class="media media--landscape" tabindex="-1" aria-hidden="true">
+                          {{ item.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '200, 400, 600, 800', sizes: '(min-width: 990px) 25vw, 50vw', alt: item.image.alt }}
+                        </a>
+                      {%- endif -%}
+                      <div style="margin-top: 0.9rem;">
+                        <p class="article-card__meta">{{ item.published_at | date: format: 'date' }}</p>
+                        <h2 class="article-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h2>
+                      </div>
+                    </article>
+                  {%- when 'page' -%}
+                    <div>
+                      <h2 class="article-card__title"><a href="{{ item.url }}">{{ item.title | escape }}</a></h2>
+                      <p class="text-sm">{{ item.content | strip_html | truncatewords: 25 }}</p>
+                    </div>
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- else -%}
+          <p>{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["search"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width" style="max-width: 44rem;">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h2" style="text-align: center;">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- form 'contact', id: 'ContactForm' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form__message form__message--success">{{ 'templates.contact.form.post_success' | t }}</p>
+      {%- elsif form.errors -%}
+        <div class="form__message form__message--error">
+          <div>
+            <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+            <ul class="form-status-list">
+              {%- for field in form.errors -%}
+                <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="customer__grid customer__grid--two" style="margin-bottom: 1rem;">
+        <div class="field">
+          <label class="field__label" for="ContactName">{{ 'templates.contact.form.name' | t }}</label>
+          <input type="text" id="ContactName" name="contact[{{ 'templates.contact.form.name' | t }}]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" autocomplete="name">
+        </div>
+        <div class="field">
+          <label class="field__label" for="ContactEmail">{{ 'templates.contact.form.email' | t }}</label>
+          <input type="email" id="ContactEmail" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="field__label" for="ContactPhone">{{ 'templates.contact.form.phone' | t }}</label>
+        <input type="tel" id="ContactPhone" name="contact[{{ 'templates.contact.form.phone' | t }}]" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="ContactBody">{{ 'templates.contact.form.comment' | t }}</label>
+        <textarea id="ContactBody" name="contact[{{ 'templates.contact.form.comment' | t }}]" required>{{ form.body }}</textarea>
+      </div>
+
+      <button type="submit" class="button" style="margin-top: 1rem;">{{ 'templates.contact.form.send' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact us" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

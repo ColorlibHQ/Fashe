@@ -1,0 +1,39 @@
+{%- if block.settings.label != blank -%}
+  <div style="text-align: {{ block.settings.alignment }};" {{ block.shopify_attributes }}>
+    <a
+      href="{{ block.settings.link | default: '#' }}"
+      class="button{% if block.settings.style == 'outline' %} button--outline{% elsif block.settings.style == 'link' %} button--link{% endif %}"
+      {% if block.settings.link == blank %}aria-disabled="true"{% endif %}
+    >
+      {{ block.settings.label | escape }}
+    </a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Button",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "Shop now" },
+    { "type": "url", "id": "link", "label": "Link" },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "outline", "label": "Outline" },
+        { "value": "link", "label": "Text link" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "left"
+    }
+  ],
+  "presets": [{ "name": "Button" }]
+}
+{% endschema %}

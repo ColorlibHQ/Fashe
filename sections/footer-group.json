@@ -1,0 +1,37 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-1": {
+          "type": "menu",
+          "settings": { "heading": "Shop", "menu": "footer" }
+        },
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "heading": "About",
+            "text": "<p>Modern wardrobe essentials, made to last.</p>"
+          }
+        },
+        "newsletter-1": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Newsletter",
+            "text": "<p>New arrivals and offers, straight to your inbox.</p>"
+          }
+        }
+      },
+      "block_order": ["menu-1", "text-1", "newsletter-1"],
+      "settings": {
+        "show_social": true,
+        "show_payment_icons": true,
+        "show_policy_links": true,
+        "color_scheme": "scheme_1"
+      }
+    }
+  },
+  "order": ["footer"]
+}

@@ -1,0 +1,56 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <h1 class="h1">{{ 'sections.cart.title' | t }}</h1>
+
+    {%- if cart == empty -%}
+      <div class="cart-empty">
+        <p class="h3">{{ 'sections.cart.empty' | t }}</p>
+        <p>{{ 'sections.cart.empty_subtext' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      <cart-page>
+        <form action="{{ routes.cart_url }}" method="post" id="CartPageForm" class="cart-page__layout" novalidate>
+          <div>
+            {% render 'cart-items', context: 'page' %}
+          </div>
+
+          <aside>
+            {% render 'cart-summary', context: 'page', form_id: 'CartPageForm' %}
+            <noscript>
+              <button type="submit" name="update" class="button button--outline button--full" style="margin-top: 1rem;">
+                {{ 'sections.cart.update' | t }}
+              </button>
+            </noscript>
+            <button type="submit" name="checkout" class="button button--full" style="margin-top: 1rem;">
+              {{ 'sections.cart.checkout' | t }}
+            </button>
+            <p style="margin-top: 1rem; text-align: center;">
+              <a href="{{ routes.all_products_collection_url }}" class="button--link text-sm">
+                {{ 'sections.cart.continue_shopping' | t }}
+              </a>
+            </p>
+          </aside>
+        </form>
+      </cart-page>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["cart"]
+  }
+}
+{% endschema %}

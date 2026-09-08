@@ -1,0 +1,26 @@
+<div class="product__price" data-product-price {{ block.shopify_attributes }}>
+  {% render 'price', product: product, use_variant: true, class: 'price--large' %}
+  {%- if block.settings.show_tax_note -%}
+    <p class="text-xs" style="opacity: 0.6; margin-top: 0.5rem;">
+      {{ 'products.product.included_taxes' | t }}
+      {%- if shop.shipping_policy.body != blank %}
+        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- endif -%}
+    </p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Price",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_tax_note",
+      "label": "Show tax and shipping note",
+      "default": true
+    }
+  ],
+  "presets": [{ "name": "Price" }]
+}
+{% endschema %}

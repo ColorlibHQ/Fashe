@@ -1,0 +1,54 @@
+{%- liquid
+  assign product_form_id = 'ProductForm-' | append: product.id
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<product-form class="product__buy" {{ block.shopify_attributes }}>
+  {%- form 'product', product, id: product_form_id, novalidate: 'novalidate' -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ current_variant.id }}"
+      data-variant-id
+      {% unless current_variant.available %}disabled{% endunless %}
+    >
+
+    <button
+      type="submit"
+      name="add"
+      class="button button--full"
+      data-add-button
+      {% unless current_variant.available %}disabled{% endunless %}
+    >
+      <span data-add-button-text>
+        {%- if current_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+    </button>
+
+    {%- if block.settings.show_dynamic_checkout -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+  {%- endform -%}
+
+  <div class="form__message form__message--error" data-form-error hidden></div>
+</product-form>
+
+{% schema %}
+{
+  "name": "Buy buttons",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "Show dynamic checkout buttons",
+      "default": true,
+      "info": "Shows the customer's preferred payment method, such as Shop Pay or PayPal."
+    }
+  ],
+  "presets": [{ "name": "Buy buttons" }]
+}
+{% endschema %}

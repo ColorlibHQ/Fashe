@@ -1,0 +1,23 @@
+<h1 class="product__title {{ block.settings.size }}" {{ block.shopify_attributes }}>
+  {{ product.title | escape }}
+</h1>
+
+{% schema %}
+{
+  "name": "Product title",
+  "settings": [
+    {
+      "type": "select",
+      "id": "size",
+      "label": "Size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2"
+    }
+  ],
+  "presets": [{ "name": "Product title" }]
+}
+{% endschema %}

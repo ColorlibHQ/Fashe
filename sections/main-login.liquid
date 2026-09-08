@@ -1,0 +1,54 @@
+<section class="section">
+  <div class="page-width customer">
+    <h1 class="h2" style="text-align: center;">{{ 'customer.login_page.title' | t }}</h1>
+
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form__message form__message--success">{{ 'customer.recover_password.success' | t }}</p>
+      {%- endif -%}
+    {%- endform -%}
+
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="form__message form__message--error">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="field__label" for="CustomerEmail">{{ 'customer.login_page.email' | t }}</label>
+        <input type="email" id="CustomerEmail" name="customer[email]" autocomplete="email" required>
+      </div>
+
+      {%- if form.password_needed -%}
+        <div class="field">
+          <label class="field__label" for="CustomerPassword">{{ 'customer.login_page.password' | t }}</label>
+          <input type="password" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+        </div>
+        <p style="margin-top: 0.5rem;">
+          <a href="#recover" class="button--link text-sm">{{ 'customer.login_page.forgot_password' | t }}</a>
+        </p>
+      {%- endif -%}
+
+      <button type="submit" class="button button--full" style="margin-top: 1.5rem;">{{ 'customer.login_page.sign_in' | t }}</button>
+    {%- endform -%}
+
+    <p style="margin-top: 1.5rem; text-align: center;">
+      <a href="{{ routes.account_register_url }}" class="button--link">{{ 'customer.login_page.create_account' | t }}</a>
+    </p>
+
+    <div id="recover" style="margin-top: var(--space-2xl);">
+      {%- form 'recover_customer_password' -%}
+        <h2 class="h4">{{ 'customer.recover_password.title' | t }}</h2>
+        <p class="text-sm">{{ 'customer.recover_password.subtext' | t }}</p>
+        <div class="field" style="margin-top: 1rem;">
+          <label class="field__label" for="RecoverEmail">{{ 'customer.login_page.email' | t }}</label>
+          <input type="email" id="RecoverEmail" name="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="button button--outline" style="margin-top: 1rem;">{{ 'customer.recover_password.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Login", "tag": "div", "settings": [] }
+{% endschema %}

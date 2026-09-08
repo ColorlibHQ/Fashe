@@ -1,0 +1,26 @@
+{%- liquid
+  assign content = block.settings.content
+  if block.settings.page != blank
+    assign content = block.settings.page.content
+  endif
+-%}
+<details class="product__accordion" {% if block.settings.open %}open{% endif %} {{ block.shopify_attributes }}>
+  <summary>
+    {{ block.settings.heading | escape }}
+    {% render 'icon', name: 'chevron-down' %}
+  </summary>
+  <div class="rte">{{ content }}</div>
+</details>
+
+{% schema %}
+{
+  "name": "Collapsible row",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping and returns" },
+    { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Add details about delivery times and your returns policy.</p>" },
+    { "type": "page", "id": "page", "label": "Content from page", "info": "Overrides the content above." },
+    { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+  ],
+  "presets": [{ "name": "Collapsible row" }]
+}
+{% endschema %}

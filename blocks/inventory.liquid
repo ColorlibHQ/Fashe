@@ -1,0 +1,47 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign threshold = block.settings.threshold
+-%}
+<div
+  class="product__inventory"
+  data-inventory
+  data-threshold="{{ threshold }}"
+  data-text-in-stock="{{ 'products.product.inventory_in_stock' | t | escape }}"
+  data-text-out-of-stock="{{ 'products.product.inventory_out_of_stock' | t | escape }}"
+  data-text-low="{{ 'products.product.inventory_low' | t: count: '[count]' | escape }}"
+  {{ block.shopify_attributes }}
+>
+  {%- liquid
+    assign state = 'out'
+    assign label = 'products.product.inventory_out_of_stock' | t
+    if variant.available
+      assign state = 'in'
+      assign label = 'products.product.inventory_in_stock' | t
+      if variant.inventory_management != nil and variant.inventory_quantity > 0 and variant.inventory_quantity <= threshold
+        assign state = 'low'
+        assign label = 'products.product.inventory_low' | t: count: variant.inventory_quantity
+      endif
+    endif
+  -%}
+  <span class="inventory{% if state == 'low' %} inventory--low{% elsif state == 'out' %} inventory--out{% endif %}" data-inventory-text>
+    {{- label -}}
+  </span>
+</div>
+
+{% schema %}
+{
+  "name": "Inventory status",
+  "settings": [
+    {
+      "type": "range",
+      "id": "threshold",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "label": "Low stock threshold",
+      "default": 10
+    }
+  ],
+  "presets": [{ "name": "Inventory status" }]
+}
+{% endschema %}

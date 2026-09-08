@@ -1,0 +1,21 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width page-width--reading">
+    <h1 class="h1" style="text-align: center;">{{ page.title | escape }}</h1>
+    <div class="rte">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ]
+}
+{% endschema %}

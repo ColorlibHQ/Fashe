@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": { "show_image": true, "show_author": true, "color_scheme": "scheme_1" }
+    }
+  },
+  "order": ["main"]
+}

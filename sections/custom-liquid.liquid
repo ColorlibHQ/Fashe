@@ -1,0 +1,27 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {{ section.settings.custom_liquid }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Liquid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Liquid",
+      "info": "Add app snippets or other Liquid code."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [{ "name": "Custom Liquid" }]
+}
+{% endschema %}

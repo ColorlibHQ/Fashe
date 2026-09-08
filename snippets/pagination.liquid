@@ -1,29 +1,29 @@
-<!-- Pagination -->
-<div class="pagination flex-m flex-w p-t-26" id="pagination">
-  {% if paginate.pages > 1 %}
-  {% if paginate.previous %}
-  <a class="item-pagination flex-c-m trans-0-4" href="{{ paginate.previous.url }}" title="{{ paginate.previous.title }}">
-    &lt;
-  </a>
-  {% else %}
-  {% endif %}
-  {% for part in paginate.parts %}
-  {% if part.is_link %}
-  <a class="item-pagination flex-c-m trans-0-4" href="{{ part.url }}" title="">{{ part.title }}</a>
-  {% else %}
-  {% if part.title == paginate.current_page %}
-  <a class="item-pagination flex-c-m trans-0-4 active-pagination" href="#" title="{{ paginate.previous.title }}">
-    {{ part.title }}</a>
-  {% else %}
-  {{ part.title }}
-  {% endif %}
-  {% endif %}
-  {% endfor %}
-  {% if paginate.next %}
-  <a class="item-pagination flex-c-m trans-0-4" href="{{ paginate.next.url }}" title="{{ paginate.next.title }}">
-    &gt;
-  </a>
-  {% else %}
-  {% endif %}
-  {% endif %}
-</div>
+{%- if paginate.pages > 1 -%}
+  <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+    {%- if paginate.previous -%}
+      <a href="{{ paginate.previous.url }}" class="pagination__item" aria-label="{{ 'general.pagination.previous' | t }}">
+        {% render 'icon', name: 'chevron-left' %}
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" class="pagination__item" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+          {{- part.title -}}
+        </a>
+      {%- elsif part.title == paginate.current_page -%}
+        <span class="pagination__item" aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+          {{- part.title -}}
+        </span>
+      {%- else -%}
+        <span class="pagination__item">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a href="{{ paginate.next.url }}" class="pagination__item" aria-label="{{ 'general.pagination.next' | t }}">
+        {% render 'icon', name: 'chevron-right' %}
+      </a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

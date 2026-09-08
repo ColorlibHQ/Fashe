@@ -1,0 +1,101 @@
+{%- comment -%}
+  Design tokens. Everything the stylesheet consumes is declared here from theme
+  settings, so the whole theme can be restyled from the editor.
+{%- endcomment -%}
+
+{%- liquid
+  assign heading_font = settings.heading_font
+  assign heading_font_bold = heading_font | font_modify: 'weight', 'bolder'
+  assign heading_font_italic = heading_font | font_modify: 'style', 'italic'
+  assign body_font = settings.body_font
+  assign body_font_bold = body_font | font_modify: 'weight', 'bolder'
+  assign body_font_italic = body_font | font_modify: 'style', 'italic'
+  assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+-%}
+
+{{ heading_font | font_face: font_display: 'swap' }}
+{{ heading_font_bold | font_face: font_display: 'swap' }}
+{{ heading_font_italic | font_face: font_display: 'swap' }}
+{{ body_font | font_face: font_display: 'swap' }}
+{{ body_font_bold | font_face: font_display: 'swap' }}
+{{ body_font_italic | font_face: font_display: 'swap' }}
+{{ body_font_bold_italic | font_face: font_display: 'swap' }}
+
+{%- for scheme in settings.color_schemes -%}
+  {%- liquid
+    assign bg = scheme.settings.background
+    assign text = scheme.settings.text
+    assign button = scheme.settings.button
+    assign button_label = scheme.settings.button_label
+    assign outline_button = scheme.settings.outline_button
+    assign accent = scheme.settings.accent
+    assign border = scheme.settings.border
+  -%}
+  {% if forloop.first %}:root, {% endif %}.color-{{ scheme.id }} {
+    --color-background: {{ bg | color_extract: 'red' }} {{ bg | color_extract: 'green' }} {{ bg | color_extract: 'blue' }};
+    --color-text: {{ text | color_extract: 'red' }} {{ text | color_extract: 'green' }} {{ text | color_extract: 'blue' }};
+    --color-button: {{ button | color_extract: 'red' }} {{ button | color_extract: 'green' }} {{ button | color_extract: 'blue' }};
+    --color-button-label: {{ button_label | color_extract: 'red' }} {{ button_label | color_extract: 'green' }} {{ button_label | color_extract: 'blue' }};
+    --color-outline-button: {{ outline_button | color_extract: 'red' }} {{ outline_button | color_extract: 'green' }} {{ outline_button | color_extract: 'blue' }};
+    --color-accent: {{ accent | color_extract: 'red' }} {{ accent | color_extract: 'green' }} {{ accent | color_extract: 'blue' }};
+    --color-border: {{ border | color_extract: 'red' }} {{ border | color_extract: 'green' }} {{ border | color_extract: 'blue' }};
+    {% if scheme.settings.background_gradient != blank %}--gradient-background: {{ scheme.settings.background_gradient }};{% else %}--gradient-background: none;{% endif %}
+  }
+{%- endfor -%}
+
+.color-scheme {
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-background));
+}
+
+:root {
+  --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+  --font-body-weight: {{ body_font.weight }};
+  --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+  --font-heading-weight: {{ heading_font.weight }};
+  --font-heading-style: {{ heading_font.style }};
+
+  --heading-tracking: {{ settings.heading_tracking | divided_by: 100.0 }}em;
+  --heading-case: {{ settings.heading_case }};
+
+  {%- assign hs = settings.heading_scale | divided_by: 100.0 -%}
+  {%- assign bs = settings.body_scale | divided_by: 100.0 -%}
+
+  --text-xs: {{ 0.75 | times: bs }}rem;
+  --text-sm: {{ 0.875 | times: bs }}rem;
+  --text-base: {{ 1.0 | times: bs }}rem;
+  --text-lg: {{ 1.125 | times: bs }}rem;
+
+  --text-h0: clamp({{ 2.5 | times: hs }}rem, {{ 6 | times: hs }}vw, {{ 5.5 | times: hs }}rem);
+  --text-h1: clamp({{ 2.0 | times: hs }}rem, {{ 4.5 | times: hs }}vw, {{ 3.5 | times: hs }}rem);
+  --text-h2: clamp({{ 1.6 | times: hs }}rem, {{ 3.2 | times: hs }}vw, {{ 2.5 | times: hs }}rem);
+  --text-h3: {{ 1.5 | times: hs }}rem;
+  --text-h4: {{ 1.25 | times: hs }}rem;
+  --text-h5: {{ 1.125 | times: hs }}rem;
+  --text-h6: {{ 1.0 | times: hs }}rem;
+
+  --page-width: {{ settings.page_width }}px;
+  --page-gutter: 1.25rem;
+  --section-gap: {{ settings.spacing_sections }}px;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --section-padding: clamp(2.5rem, 6vw, 5rem);
+  --grid-gap: clamp(0.75rem, 2vw, 1.5rem);
+
+  --radius-base: {{ settings.radius_base }}px;
+  --radius-media: {{ settings.radius_media }}px;
+
+  --logo-width: {{ settings.logo_width }}px;
+
+  --color-error: 194 61 46;
+  --color-success: 42 122 78;
+}
+
+@media screen and (min-width: 990px) {
+  :root { --page-gutter: 2.5rem; }
+}

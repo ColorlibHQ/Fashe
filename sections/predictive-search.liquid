@@ -1,0 +1,85 @@
+{%- comment -%}
+  Rendered through the Section Rendering API by predictive-search in theme.js.
+{%- endcomment -%}
+<div id="PredictiveSearchResults">
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <div class="predictive-search__group">
+        <p class="predictive-search__heading">{{ 'general.search.products' | t }}</p>
+        <ul class="predictive-search__list" role="list">
+          {%- for product in predictive_search.resources.products -%}
+            <li>
+              <a class="predictive-search__item" href="{{ product.url }}" role="option">
+                {%- if product.featured_image -%}
+                  {{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '3rem', alt: product.featured_image.alt }}
+                {%- endif -%}
+                <span>
+                  {{ product.title | escape }}
+                  {%- if settings.predictive_search_show_price -%}
+                    <br><span class="text-xs">{{ product.price | money }}</span>
+                  {%- endif -%}
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.collections.size > 0 -%}
+      <div class="predictive-search__group">
+        <p class="predictive-search__heading">{{ 'general.search.collections' | t }}</p>
+        <ul class="predictive-search__list" role="list">
+          {%- for collection in predictive_search.resources.collections -%}
+            <li><a class="predictive-search__item" href="{{ collection.url }}" role="option">{{ collection.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.articles.size > 0 -%}
+      <div class="predictive-search__group">
+        <p class="predictive-search__heading">{{ 'general.search.articles' | t }}</p>
+        <ul class="predictive-search__list" role="list">
+          {%- for article in predictive_search.resources.articles -%}
+            <li><a class="predictive-search__item" href="{{ article.url }}" role="option">{{ article.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.pages.size > 0 -%}
+      <div class="predictive-search__group">
+        <p class="predictive-search__heading">{{ 'general.search.pages' | t }}</p>
+        <ul class="predictive-search__list" role="list">
+          {%- for page in predictive_search.resources.pages -%}
+            <li><a class="predictive-search__item" href="{{ page.url }}" role="option">{{ page.title | escape }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- liquid
+      assign total = predictive_search.resources.products.size | plus: predictive_search.resources.collections.size | plus: predictive_search.resources.articles.size | plus: predictive_search.resources.pages.size
+    -%}
+
+    {%- if total > 0 -%}
+      <div class="predictive-search__group">
+        <a class="button--link text-sm" href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}">
+          {{ 'general.search.view_all' | t: terms: predictive_search.terms }}
+        </a>
+      </div>
+    {%- else -%}
+      <div class="predictive-search__group">
+        <p class="text-sm">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}</p>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search suggestions",
+  "settings": []
+}
+{% endschema %}

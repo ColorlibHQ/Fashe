@@ -1,0 +1,131 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <div class="section-header__text">
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="grid" style="grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));">
+      <style>
+        @media screen and (min-width: 750px) {
+          #shopify-section-{{ section.id }} .grid {
+            grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));
+          }
+        }
+      </style>
+
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        <a
+          href="{{ collection.url | default: '#' }}"
+          class="collection-card{% if section.settings.title_position == 'below' %} collection-card--overlay{% endif %}"
+          data-animate
+          {{ block.shopify_attributes }}
+        >
+          <div class="media media--{{ section.settings.image_ratio }}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw', alt: block.settings.image.alt }}
+            {%- elsif collection.featured_image -%}
+              {{ collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw', alt: collection.title }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="collection-card__content">
+            <span>{{ block.settings.heading | default: collection.title | default: 'Collection' | escape }}</span>
+            {% render 'icon', name: 'arrow-right' %}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h3", "label": "Small" },
+        { "value": "h2", "label": "Medium" },
+        { "value": "h1", "label": "Large" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "square", "label": "Square (1:1)" },
+        { "value": "portrait", "label": "Portrait (3:4)" },
+        { "value": "tall", "label": "Tall (2:3)" },
+        { "value": "landscape", "label": "Landscape (4:3)" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "title_position",
+      "label": "Title position",
+      "options": [
+        { "value": "on", "label": "On image" },
+        { "value": "below", "label": "Below image" }
+      ],
+      "default": "on"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "heading", "label": "Custom title" },
+        { "type": "image_picker", "id": "image", "label": "Custom image" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Collection list",
+      "blocks": [{ "type": "collection" }, { "type": "collection" }, { "type": "collection" }]
+    }
+  ]
+}
+{% endschema %}
