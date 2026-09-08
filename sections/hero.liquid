@@ -1,0 +1,157 @@
+{%- liquid
+  assign align = section.settings.content_position
+  assign justify = 'center'
+  if align == 'left'
+    assign justify = 'start'
+  elsif align == 'right'
+    assign justify = 'end'
+  endif
+-%}
+
+<div
+  class="banner color-{{ section.settings.color_scheme }}"
+  style="
+    --banner-height: {{ section.settings.height }}vh;
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --content-justify: {{ justify }};
+    --content-align: {{ align }};
+  "
+>
+  <div class="banner__media">
+    {%- if section.settings.video != blank -%}
+      {{
+        section.settings.video
+        | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1500x'
+      }}
+    {%- elsif section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750, 1100, 1500, 2000, 2400, 3000',
+          sizes: '100vw',
+          alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="page-width">
+    <div class="banner__content{% if section.settings.boxed %} banner__content--boxed{% endif %}" data-animate>
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.hero.name",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.hero.settings.image.label"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.hero.settings.video.label",
+      "info": "t:sections.hero.settings.video.info"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "t:sections.hero.settings.height.label",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "t:sections.hero.settings.overlay_opacity.label",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "t:sections.hero.settings.content_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.hero.settings.content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.hero.settings.content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.hero.settings.content_position.options__3.label"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "t:sections.hero.settings.boxed.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.hero.settings.color_scheme.label",
+      "default": "scheme_3",
+      "info": "t:sections.hero.settings.color_scheme.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "New season essentials",
+            "size": "h0",
+            "alignment": "center"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Considered pieces, made to be worn every day.</p>",
+            "alignment": "center"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "label": "Shop now",
+            "alignment": "center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

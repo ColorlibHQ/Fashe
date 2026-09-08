@@ -1,0 +1,47 @@
+<cart-drawer>
+  <dialog class="drawer color-scheme-1" id="CartDrawer" aria-label="{{ 'sections.cart.title' | t }}">
+    <div class="drawer__inner">
+      <header class="drawer__header">
+        <h2 class="drawer__title">{{ 'sections.cart.title' | t }}</h2>
+        <button type="button" class="icon-button" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">
+          {% render 'icon', name: 'close' %}
+        </button>
+      </header>
+
+      <div class="drawer__body">
+        {%- if cart == empty -%}
+          <div class="cart-empty">
+            <p class="h3">{{ 'sections.cart.empty' | t }}</p>
+            <p class="text-sm">{{ 'sections.cart.empty_subtext' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
+          </div>
+        {%- else -%}
+          {% render 'cart-items', context: 'drawer' %}
+        {%- endif -%}
+      </div>
+
+      {%- if cart != empty -%}
+        <footer class="drawer__footer">
+          <form action="{{ routes.cart_url }}" method="post" id="CartDrawerForm" novalidate>
+            {% render 'cart-summary', context: 'drawer', form_id: 'CartDrawerForm' %}
+            <div class="stack" style="--gap: 0.5rem; gap: 0.5rem; margin-top: 1rem;">
+              <button type="submit" name="checkout" class="button button--full">
+                {{ 'sections.cart.checkout' | t }}
+              </button>
+              <a href="{{ routes.cart_url }}" class="button button--outline button--full">
+                {{ 'sections.cart.view_cart' | t }}
+              </a>
+            </div>
+          </form>
+        </footer>
+      {%- endif -%}
+    </div>
+  </dialog>
+</cart-drawer>
+
+{% schema %}
+{
+  "name": "t:sections.cart-drawer.name",
+  "settings": []
+}
+{% endschema %}

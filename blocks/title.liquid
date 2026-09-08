@@ -1,0 +1,36 @@
+<h1 class="product__title {{ block.settings.size }}" {{ block.shopify_attributes }}>
+  {{ product.title | escape }}
+</h1>
+
+{% schema %}
+{
+  "name": "t:blocks.title.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "size",
+      "label": "t:blocks.title.settings.size.label",
+      "options": [
+        {
+          "value": "h3",
+          "label": "t:blocks.title.settings.size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:blocks.title.settings.size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:blocks.title.settings.size.options__3.label"
+        }
+      ],
+      "default": "h2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.title.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}

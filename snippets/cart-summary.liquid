@@ -1,0 +1,46 @@
+<div class="cart-summary">
+  {%- if settings.cart_show_free_shipping_bar and cart.item_count > 0 -%}
+    {%- liquid
+      assign threshold = settings.cart_free_shipping_threshold | times: 100
+      assign remaining = threshold | minus: cart.total_price
+      assign progress = 100
+      if threshold > 0 and remaining > 0
+        assign progress = cart.total_price | times: 100.0 | divided_by: threshold
+      endif
+    -%}
+    <div class="shipping-bar">
+      {%- if remaining > 0 -%}
+        <span>{{ 'sections.cart.free_shipping_progress_html' | t: amount: remaining | money }}</span>
+      {%- else -%}
+        <span>{{ 'sections.cart.free_shipping_reached' | t }}</span>
+      {%- endif -%}
+      <div class="shipping-bar__track">
+        <div class="shipping-bar__fill" style="width: {{ progress }}%;"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if cart.cart_level_discount_applications.size > 0 -%}
+    {%- for discount in cart.cart_level_discount_applications -%}
+      <div class="cart-summary__row text-sm">
+        <span>{{ discount.title }}</span>
+        <span>-{{ discount.total_allocated_amount | money }}</span>
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+
+  <div class="cart-summary__row cart-summary__total">
+    <span>{{ 'sections.cart.subtotal' | t }}</span>
+    <span>{{ cart.total_price | money_with_currency }}</span>
+  </div>
+
+  <p class="text-xs" style="opacity: 0.65;">{{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}</p>
+
+  {%- if settings.cart_notes -%}
+    <details class="cart-note">
+      <summary class="text-sm">{{ 'sections.cart.note' | t }}</summary>
+      <label class="visually-hidden" for="CartNote-{{ context }}">{{ 'sections.cart.note' | t }}</label>
+      <textarea id="CartNote-{{ context }}" name="note" form="{{ form_id }}">{{ cart.note }}</textarea>
+    </details>
+  {%- endif -%}
+</div>

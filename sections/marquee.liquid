@@ -1,0 +1,114 @@
+{%- if section.blocks.size > 0 -%}
+  <section class="section--flush color-{{ section.settings.color_scheme }} color-scheme" style="overflow: hidden; padding-block: {{ section.settings.padding }}px;">
+    <div class="marquee" aria-label="{{ section.settings.heading | default: 'Highlights' | escape }}">
+      <div class="marquee__track" style="--duration: {{ section.settings.speed }}s;">
+        {%- for i in (1..2) -%}
+          <div class="marquee__group" {% if forloop.last %}aria-hidden="true"{% endif %}>
+            {%- for block in section.blocks -%}
+              <span class="marquee__item {{ section.settings.text_size }}" {{ block.shopify_attributes }}>
+                {{ block.settings.text | escape }}
+              </span>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <style>
+      #shopify-section-{{ section.id }} .marquee { display: flex; }
+      #shopify-section-{{ section.id }} .marquee__track { display: flex; gap: 0; animation: marquee var(--duration) linear infinite; }
+      #shopify-section-{{ section.id }} .marquee__group { display: flex; align-items: center; gap: 3rem; padding-inline-end: 3rem; flex-shrink: 0; }
+      #shopify-section-{{ section.id }} .marquee__item { white-space: nowrap; letter-spacing: 0.02em; }
+      @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      @media (prefers-reduced-motion: reduce) {
+        #shopify-section-{{ section.id }} .marquee__track { animation: none; }
+      }
+    </style>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.marquee.name",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "t:sections.marquee.settings.text_size.label",
+      "options": [
+        {
+          "value": "text-sm",
+          "label": "t:sections.marquee.settings.text_size.options__1.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.marquee.settings.text_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.marquee.settings.text_size.options__3.label"
+        }
+      ],
+      "default": "h3"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 90,
+      "step": 5,
+      "unit": "s",
+      "label": "t:sections.marquee.settings.speed.label",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 8,
+      "max": 64,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.marquee.settings.padding.label",
+      "default": 20
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.marquee.settings.color_scheme.label",
+      "default": "scheme_3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "t:sections.marquee.blocks.item.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.marquee.blocks.item.settings.text.label",
+          "default": "Free shipping over $100"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "t:sections.marquee.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

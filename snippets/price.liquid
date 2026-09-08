@@ -1,24 +1,39 @@
-{% assign formatted_price = price | money %}
+{%- comment -%}
+  Usage: {% render 'price', product: product, use_variant: true, class: 'price--large' %}
+{%- endcomment -%}
+{%- liquid
+  if use_variant and product.selected_or_first_available_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
 
-{% unless settings.show_dollar_symbol %}
-  {% assign formatted_price = formatted_price | remove: '$' %}
-{% endunless %}
+  assign compare_at = target.compare_at_price
+  assign price = target.price
+  assign on_sale = false
+  if compare_at > price
+    assign on_sale = true
+  endif
+-%}
+<div class="price {{ class }}{% if on_sale %} price--on-sale{% endif %}">
+  {%- if product.price_varies and use_variant != true -%}
+    <span class="visually-hidden">{{ 'products.product.price_from' | t }}</span>
+    <span>{{ 'products.product.price_from' | t }} {{ product.price_min | money }}</span>
+  {%- else -%}
+    <span class="{% if on_sale %}price__sale{% endif %}">{{ price | money }}</span>
+    {%- if on_sale -%}
+      <s class="price__compare">{{ compare_at | money }}</s>
+    {%- endif -%}
+  {%- endif -%}
 
-{% comment %}
-  Unless this store uses multiple currencies,
-  if we apply a special style to cents,
-  we will wrap them in a sup (superscript) element.
-{% endcomment %}
-
-{% unless shop.money_format contains 'money' %}
-  {% if settings.superscript_decimals %}
-    {% if shop.money_format contains '{{amount}}' %}
-      {% capture formatted_price %}{{ formatted_price | replace: '.','<sup>' }}</sup>{% endcapture %}
-    {% elsif shop.money_format contains '{{amount_with_comma_separator}}' %}
-      {% capture formatted_price %}{{ formatted_price | replace: ',','<sup>' }}</sup>{% endcapture %}
-    {% endif %}
-  {% endif %}
-{% endunless %}
-
-<h5 class="product-price new-price">{{ formatted_price }}</h5>
-<span class="visually-hidden">{{ price | money }}</span>
+  {%- if target.unit_price_measurement -%}
+    <span class="price__unit">
+      {{ target.unit_price | money }}
+      {{ 'general.accessibility.unit_price_separator' | t }}
+      {%- if target.unit_price_measurement.reference_value != 1 %}
+        {{- target.unit_price_measurement.reference_value }}
+      {%- endif -%}
+      {{ target.unit_price_measurement.reference_unit }}
+    </span>
+  {%- endif -%}
+</div>

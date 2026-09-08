@@ -1,0 +1,118 @@
+{%- paginate collection.products by section.settings.products_per_page -%}
+  <section class="section color-{{ section.settings.color_scheme }} color-scheme">
+    <div class="page-width">
+      <div class="section-header">
+        <div class="section-header__text">
+          <h1 class="h1">{{ collection.title | escape }}</h1>
+          {%- if collection.description != blank and section.settings.show_description -%}
+            <div class="rte">{{ collection.description }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+        {% render 'facets', results: collection %}
+      {%- endif -%}
+
+      <div id="ProductGrid">
+        {%- if collection.products.size > 0 -%}
+          <div
+            class="grid grid--products"
+            style="--columns: {{ section.settings.columns_desktop }}; --columns-mobile: {{ section.settings.columns_mobile }};"
+          >
+            {%- for product in collection.products -%}
+              <div data-animate>
+                {% render 'product-card',
+                  product: product,
+                  sizes: '(min-width: 990px) calc(100vw / 4), (min-width: 750px) 33vw, 50vw'
+                %}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- else -%}
+          <div class="cart-empty">
+            <p class="h3">{{ 'sections.collection.empty' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="button button--outline">
+              {{ 'sections.collection.browse_all' | t }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-collection.name",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:sections.main-collection.settings.show_description.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "t:sections.main-collection.settings.enable_filtering.label",
+      "default": true,
+      "info": "t:sections.main-collection.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "t:sections.main-collection.settings.enable_sorting.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "t:sections.main-collection.settings.products_per_page.label",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "t:sections.main-collection.settings.columns_desktop.label",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.main-collection.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main-collection.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-collection.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "collection"
+    ]
+  }
+}
+{% endschema %}

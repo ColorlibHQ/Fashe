@@ -1,0 +1,10 @@
+<span class="header__cart-icon">
+  {% render 'icon', name: 'cart' %}
+  {%- if cart != empty -%}
+    <span class="header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+  {%- endif -%}
+  <span class="visually-hidden">
+    {{ 'sections.header.cart' | t }}
+    {%- if cart != empty %}, {{ 'sections.header.cart_count' | t: count: cart.item_count }}{% endif -%}
+  </span>
+</span>

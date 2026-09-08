@@ -1,0 +1,190 @@
+{%- liquid
+  assign media_count = product.media.size
+-%}
+
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <div class="product">
+      <div class="product__media">
+        {%- if media_count > 0 -%}
+          <product-gallery>
+            <div
+              class="product__media-list product__media-scroller product__media-list--{{ section.settings.media_layout }}"
+              id="ProductMedia-{{ section.id }}"
+            >
+              {%- for media in product.media -%}
+                {%- liquid
+                  assign media_loading = 'lazy'
+                  assign media_priority = 'auto'
+                  if forloop.first
+                    assign media_loading = 'eager'
+                    assign media_priority = 'high'
+                  endif
+                -%}
+                <div class="media media--{{ section.settings.media_ratio }}" data-media-id="{{ media.id }}">
+                  {%- case media.media_type -%}
+                    {%- when 'image' -%}
+                      {{
+                        media
+                        | image_url: width: 1946
+                        | image_tag:
+                          loading: media_loading,
+                          fetchpriority: media_priority,
+                          widths: '350, 550, 750, 1100, 1500, 1946',
+                          sizes: '(min-width: 990px) 55vw, 100vw',
+                          alt: media.alt
+                      }}
+                    {%- when 'video' -%}
+                      {{ media | video_tag: controls: true, playsinline: true, preload: 'metadata', image_size: '1100x' }}
+                    {%- when 'external_video' -%}
+                      {{ media | external_video_tag: loading: 'lazy' }}
+                    {%- when 'model' -%}
+                      {{ media | model_viewer_tag }}
+                  {%- endcase -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if media_count > 1 -%}
+              <div class="slideshow__dots" role="tablist" aria-label="{{ 'products.product.media_gallery' | t }}">
+                {%- for media in product.media -%}
+                  <button
+                    type="button"
+                    class="slideshow__dot"
+                    role="tab"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    aria-label="{{ 'general.accessibility.slide_of' | t: current: forloop.index, total: media_count }}"
+                    data-index="{{ forloop.index0 }}"
+                  ></button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </product-gallery>
+        {%- else -%}
+          <div class="media media--portrait">
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product__info{% if section.settings.sticky_info %} product__info--sticky{% endif %}">
+        <product-info data-url="{{ product.url }}" data-section="{{ section.id }}">
+          {% content_for 'blocks' %}
+        </product-info>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% render 'product-schema', product: product %}
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "div",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "media_layout",
+      "label": "t:sections.main-product.settings.media_layout.label",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "t:sections.main-product.settings.media_layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.main-product.settings.media_layout.options__2.label"
+        }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "t:sections.main-product.settings.media_ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-product.settings.media_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-product.settings.media_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-product.settings.media_ratio.options__3.label"
+        },
+        {
+          "value": "tall",
+          "label": "t:sections.main-product.settings.media_ratio.options__4.label"
+        }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_info",
+      "label": "t:sections.main-product.settings.sticky_info.label",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-product.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant-picker"
+        },
+        {
+          "type": "quantity"
+        },
+        {
+          "type": "buy-buttons"
+        },
+        {
+          "type": "inventory"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shipping and returns"
+          }
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "product"
+    ]
+  }
+}
+{% endschema %}

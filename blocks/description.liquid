@@ -1,0 +1,17 @@
+{%- if product.description != blank -%}
+  <div class="product__description rte" {{ block.shopify_attributes }}>
+    {{ product.description }}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.description.name",
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:blocks.description.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}

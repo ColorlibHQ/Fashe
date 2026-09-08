@@ -1,0 +1,34 @@
+{%- if shop.published_locales.size > 1 or localization.available_countries.size > 1 -%}
+  <div class="localization">
+    {%- if localization.available_countries.size > 1 -%}
+      {%- form 'localization', class: 'localization__form', id: 'CountryForm-' | append: context -%}
+        <label class="visually-hidden" for="CountrySelect-{{ context }}">{{ 'general.filters.filter_by_label' | t }}</label>
+        <select id="CountrySelect-{{ context }}" name="country_code" data-auto-submit>
+          {%- for country in localization.available_countries -%}
+            <option
+              value="{{ country.iso_code }}"
+              {% if country.iso_code == localization.country.iso_code %}selected{% endif %}
+            >
+              {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+            </option>
+          {%- endfor -%}
+        </select>
+        <noscript><button type="submit" class="button button--small">{{ 'general.filters.apply' | t }}</button></noscript>
+      {%- endform -%}
+    {%- endif -%}
+
+    {%- if shop.published_locales.size > 1 -%}
+      {%- form 'localization', class: 'localization__form', id: 'LocaleForm-' | append: context -%}
+        <label class="visually-hidden" for="LocaleSelect-{{ context }}">{{ 'general.filters.filter_by_label' | t }}</label>
+        <select id="LocaleSelect-{{ context }}" name="locale_code" data-auto-submit>
+          {%- for locale in shop.published_locales -%}
+            <option value="{{ locale.iso_code }}" {% if locale.iso_code == request.locale.iso_code %}selected{% endif %}>
+              {{ locale.endonym_name | capitalize }}
+            </option>
+          {%- endfor -%}
+        </select>
+        <noscript><button type="submit" class="button button--small">{{ 'general.filters.apply' | t }}</button></noscript>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

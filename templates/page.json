@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "main-page", "settings": { "color_scheme": "scheme_1" } }
+  },
+  "order": ["main"]
+}

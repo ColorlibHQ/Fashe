@@ -1,0 +1,191 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header">
+        <div class="section-header__text">
+          <h2 class="{{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="grid" style="grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));">
+      <style>
+        @media screen and (min-width: 750px) {
+          #shopify-section-{{ section.id }} .grid {
+            grid-template-columns: repeat({{ section.settings.columns }}, minmax(0, 1fr));
+          }
+        }
+      </style>
+
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        <a
+          href="{{ collection.url | default: '#' }}"
+          class="collection-card{% if section.settings.title_position == 'below' %} collection-card--overlay{% endif %}"
+          data-animate
+          {{ block.shopify_attributes }}
+        >
+          <div class="media media--{{ section.settings.image_ratio }}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw', alt: block.settings.image.alt }}
+            {%- elsif collection.featured_image -%}
+              {{ collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '300, 500, 750, 1000, 1200', sizes: '(min-width: 750px) 33vw, 50vw', alt: collection.title }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="collection-card__content">
+            <span>{{ block.settings.heading | default: collection.title | default: 'Collection' | escape }}</span>
+            {% render 'icon', name: 'arrow-right' %}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.collection-list.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.collection-list.settings.heading.label",
+      "default": "Shop by category"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "t:sections.collection-list.settings.heading_size.label",
+      "options": [
+        {
+          "value": "h3",
+          "label": "t:sections.collection-list.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.collection-list.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.collection-list.settings.heading_size.options__3.label"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.collection-list.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "square",
+          "label": "t:sections.collection-list.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.collection-list.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "tall",
+          "label": "t:sections.collection-list.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.collection-list.settings.image_ratio.options__4.label"
+        }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "title_position",
+      "label": "t:sections.collection-list.settings.title_position.label",
+      "options": [
+        {
+          "value": "on",
+          "label": "t:sections.collection-list.settings.title_position.options__1.label"
+        },
+        {
+          "value": "below",
+          "label": "t:sections.collection-list.settings.title_position.options__2.label"
+        }
+      ],
+      "default": "on"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "label": "t:sections.collection-list.settings.columns.label",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "t:sections.collection-list.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.collection-list.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.collection-list.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.collection-list.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "t:sections.collection-list.blocks.collection.name",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "t:sections.collection-list.blocks.collection.settings.collection.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.collection-list.blocks.collection.settings.heading.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.collection-list.blocks.collection.settings.image.label"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "t:sections.collection-list.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

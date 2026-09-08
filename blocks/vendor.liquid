@@ -1,0 +1,28 @@
+{%- if product.vendor != blank -%}
+  <div class="eyebrow" {{ block.shopify_attributes }}>
+    {%- if block.settings.link_to_vendor -%}
+      <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+    {%- else -%}
+      {{ product.vendor }}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.vendor.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "link_to_vendor",
+      "label": "t:blocks.vendor.settings.link_to_vendor.label",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.vendor.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}

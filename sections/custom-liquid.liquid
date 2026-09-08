@@ -1,0 +1,31 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    {{ section.settings.custom_liquid }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.custom-liquid.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "t:sections.custom-liquid.settings.custom_liquid.label",
+      "info": "t:sections.custom-liquid.settings.custom_liquid.info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.custom-liquid.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom-liquid.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}

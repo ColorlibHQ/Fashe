@@ -1,0 +1,39 @@
+{%- comment -%}
+  Usage: {% render 'search-form', id: 'DrawerSearch', autofocus: true %}
+{%- endcomment -%}
+<predictive-search
+  class="search-form"
+  data-enabled="{{ settings.predictive_search_enabled }}"
+  data-show-price="{{ settings.predictive_search_show_price }}"
+>
+  <form action="{{ routes.search_url }}" method="get" role="search">
+    <label class="visually-hidden" for="{{ id }}-input">{{ 'general.search.search' | t }}</label>
+    <input
+      id="{{ id }}-input"
+      type="search"
+      name="q"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'general.search.placeholder' | t }}"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+      {% if autofocus %}autofocus{% endif %}
+      {% if settings.predictive_search_enabled %}
+        role="combobox"
+        aria-expanded="false"
+        aria-owns="{{ id }}-results"
+        aria-controls="{{ id }}-results"
+        aria-haspopup="listbox"
+        aria-autocomplete="list"
+      {% endif %}
+    >
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="icon-button search-form__submit" aria-label="{{ 'general.search.submit' | t }}">
+      {% render 'icon', name: 'search' %}
+    </button>
+  </form>
+
+  {%- if settings.predictive_search_enabled -%}
+    <div class="predictive-search" id="{{ id }}-results" role="listbox" tabindex="-1" hidden></div>
+  {%- endif -%}
+</predictive-search>

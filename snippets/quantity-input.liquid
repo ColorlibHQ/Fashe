@@ -1,0 +1,24 @@
+{%- comment -%}
+  Usage: {% render 'quantity-input', id: 'Quantity-1', name: 'quantity', value: 1, title: product.title, min: 1 %}
+{%- endcomment -%}
+<quantity-input class="quantity">
+  <button type="button" class="quantity__button" name="minus" aria-label="{{ 'products.product.decrease_quantity' | t: title: title | escape }}">
+    {% render 'icon', name: 'minus' %}
+  </button>
+  <input
+    class="quantity__input"
+    type="number"
+    id="{{ id }}"
+    name="{{ name | default: 'quantity' }}"
+    value="{{ value | default: 1 }}"
+    min="{{ min | default: 1 }}"
+    {% if max %}max="{{ max }}"{% endif %}
+    step="{{ step | default: 1 }}"
+    inputmode="numeric"
+    aria-label="{{ 'products.product.quantity' | t }}"
+    {% if data_index %}data-index="{{ data_index }}"{% endif %}
+  >
+  <button type="button" class="quantity__button" name="plus" aria-label="{{ 'products.product.increase_quantity' | t: title: title | escape }}">
+    {% render 'icon', name: 'plus' %}
+  </button>
+</quantity-input>

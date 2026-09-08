@@ -1,0 +1,70 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <div class="section-header">
+      <div class="section-header__text">
+        <h1 class="h1">{{ page_title }}</h1>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="collection-card collection-card--overlay" data-animate>
+          <div class="media media--{{ section.settings.image_ratio }}">
+            {%- if collection.featured_image -%}
+              {{
+                collection.featured_image
+                | image_url: width: 900
+                | image_tag: loading: 'lazy', widths: '200, 300, 450, 600, 900', sizes: '(min-width: 990px) 25vw, 50vw', alt: collection.title
+              }}
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="collection-card__content">
+            <span>{{ collection.title | escape }}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-list-collections.name",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.main-list-collections.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "square",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.main-list-collections.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "enabled_on": {
+    "templates": [
+      "list-collections"
+    ]
+  }
+}
+{% endschema %}

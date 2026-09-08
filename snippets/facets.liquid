@@ -1,0 +1,119 @@
+{%- comment -%}
+  Filtering and sorting. Progressive enhancement: works as a plain GET form
+  without JavaScript, upgraded to fetch-and-swap by facet-filters.js.
+{%- endcomment -%}
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+
+<div class="facets" id="FacetsWrapper">
+  <form class="facets__form" id="FacetFiltersForm">
+    {%- if results.terms -%}
+      <input type="hidden" name="q" value="{{ results.terms | escape }}">
+      <input type="hidden" name="options[prefix]" value="last">
+    {%- endif -%}
+
+    {%- for filter in results.filters -%}
+      {%- case filter.type -%}
+        {%- when 'list', 'boolean' -%}
+          <details>
+            <summary class="facets__summary">
+              {{ filter.label | escape }}
+              {%- if filter.active_values.size > 0 %} ({{ filter.active_values.size }}){% endif %}
+              {% render 'icon', name: 'chevron-down' %}
+            </summary>
+            <div class="facets__panel">
+              {%- for value in filter.values -%}
+                <label class="facet-option">
+                  <input
+                    type="checkbox"
+                    name="{{ value.param_name }}"
+                    value="{{ value.value }}"
+                    {% if value.active %}checked{% endif %}
+                    {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                    style="width: auto; min-height: 0;"
+                  >
+                  <span>{{ value.label | escape }}</span>
+                  <span class="facets__count">{{ value.count }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </details>
+
+        {%- when 'price_range' -%}
+          <details>
+            <summary class="facets__summary">
+              {{ filter.label | escape }}
+              {% render 'icon', name: 'chevron-down' %}
+            </summary>
+            <div class="facets__panel">
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-GTE">{{ 'general.filters.from' | t }}</label>
+                <input
+                  id="Filter-{{ filter.label | escape }}-GTE"
+                  type="number"
+                  name="{{ filter.min_value.param_name }}"
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="{{ 'general.filters.from' | t }}"
+                  min="0"
+                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                >
+                <span>&ndash;</span>
+                <label class="visually-hidden" for="Filter-{{ filter.label | escape }}-LTE">{{ 'general.filters.to' | t }}</label>
+                <input
+                  id="Filter-{{ filter.label | escape }}-LTE"
+                  type="number"
+                  name="{{ filter.max_value.param_name }}"
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                  placeholder="{{ 'general.filters.to' | t }}"
+                  min="0"
+                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                >
+              </div>
+            </div>
+          </details>
+      {%- endcase -%}
+    {%- endfor -%}
+
+    <div class="facets__sort">
+      <label for="SortBy" class="text-sm">{{ 'general.filters.sort_by_label' | t }}</label>
+      <select name="sort_by" id="SortBy">
+        {%- for option in results.sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+            {{ option.name | escape }}
+          </option>
+        {%- endfor -%}
+      </select>
+      <noscript><button type="submit" class="button button--small">{{ 'general.filters.apply' | t }}</button></noscript>
+    </div>
+  </form>
+
+  <span class="facets__count-total">
+    {{ 'general.filters.product_count' | t: count: results.products_count | default: results.results_count }}
+  </span>
+</div>
+
+{%- assign has_active = false -%}
+{%- for filter in results.filters -%}
+  {%- if filter.active_values.size > 0 -%}{%- assign has_active = true -%}{%- endif -%}
+{%- endfor -%}
+
+{%- if has_active -%}
+  <div class="facets__active">
+    {%- for filter in results.filters -%}
+      {%- for value in filter.active_values -%}
+        <a href="{{ value.url_to_remove }}" class="facet-pill">
+          {{ value.label | escape }}
+          {% render 'icon', name: 'close' %}
+        </a>
+      {%- endfor -%}
+    {%- endfor -%}
+    <a href="{{ results_url }}" class="facet-pill">{{ 'general.filters.clear_all' | t }}</a>
+  </div>
+{%- endif -%}

@@ -1,0 +1,152 @@
+<section class="section color-{{ section.settings.color_scheme }} color-scheme">
+  <div class="page-width">
+    <div
+      class="image-with-text"
+      style="
+        display: grid;
+        gap: var(--space-lg);
+        align-items: {{ section.settings.vertical_alignment }};
+      "
+    >
+      <style>
+        @media screen and (min-width: 750px) {
+          #shopify-section-{{ section.id }} .image-with-text {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--space-2xl);
+          }
+          {% if section.settings.image_position == 'right' %}
+            #shopify-section-{{ section.id }} .image-with-text__media { order: 2; }
+          {% endif %}
+        }
+      </style>
+
+      <div class="image-with-text__media" data-animate>
+        <div class="media media--{{ section.settings.image_ratio }}">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1500
+              | image_tag: loading: 'lazy', widths: '400, 600, 900, 1200, 1500', sizes: '(min-width: 750px) 50vw, 100vw', alt: section.settings.image.alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="image-with-text__content stack" data-animate>
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.image-with-text.name",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-with-text.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:sections.image-with-text.settings.image_ratio.label",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.image-with-text.settings.image_ratio.options__4.label"
+        }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:sections.image-with-text.settings.image_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.image_position.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.image_position.options__2.label"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "t:sections.image-with-text.settings.vertical_alignment.label",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__2.label"
+        },
+        {
+          "value": "end",
+          "label": "t:sections.image-with-text.settings.vertical_alignment.options__3.label"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.image-with-text.settings.color_scheme.label",
+      "default": "scheme_1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image-with-text.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "heading": "Made to last"
+          }
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button",
+          "settings": {
+            "style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

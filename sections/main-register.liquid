@@ -1,0 +1,42 @@
+<section class="section">
+  <div class="page-width customer">
+    <h1 class="h2" style="text-align: center;">{{ 'customer.register.title' | t }}</h1>
+
+    {%- form 'create_customer', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div class="form__message form__message--error">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <div class="customer__grid customer__grid--two" style="margin-bottom: 1rem;">
+        <div class="field">
+          <label class="field__label" for="RegisterFirstName">{{ 'customer.register.first_name' | t }}</label>
+          <input type="text" id="RegisterFirstName" name="customer[first_name]" autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label class="field__label" for="RegisterLastName">{{ 'customer.register.last_name' | t }}</label>
+          <input type="text" id="RegisterLastName" name="customer[last_name]" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 1rem;">
+        <label class="field__label" for="RegisterEmail">{{ 'customer.register.email' | t }}</label>
+        <input type="email" id="RegisterEmail" name="customer[email]" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="RegisterPassword">{{ 'customer.register.password' | t }}</label>
+        <input type="password" id="RegisterPassword" name="customer[password]" autocomplete="new-password" required>
+      </div>
+
+      <button type="submit" class="button button--full" style="margin-top: 1.5rem;">{{ 'customer.register.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

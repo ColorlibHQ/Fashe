@@ -1,0 +1,37 @@
+{%- assign product_form_id = 'ProductForm-' | append: product.id -%}
+<div class="product__quantity" {{ block.shopify_attributes }}>
+  <label class="variant-option__label" for="Quantity-{{ product.id }}">
+    {{ 'products.product.quantity' | t }}
+  </label>
+  <quantity-input class="quantity">
+    <button type="button" class="quantity__button" name="minus" aria-label="{{ 'products.product.decrease_quantity' | t: title: product.title | escape }}">
+      {% render 'icon', name: 'minus' %}
+    </button>
+    <input
+      class="quantity__input"
+      type="number"
+      id="Quantity-{{ product.id }}"
+      name="quantity"
+      form="{{ product_form_id }}"
+      value="1"
+      min="1"
+      step="1"
+      inputmode="numeric"
+    >
+    <button type="button" class="quantity__button" name="plus" aria-label="{{ 'products.product.increase_quantity' | t: title: product.title | escape }}">
+      {% render 'icon', name: 'plus' %}
+    </button>
+  </quantity-input>
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.quantity.name",
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:blocks.quantity.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}

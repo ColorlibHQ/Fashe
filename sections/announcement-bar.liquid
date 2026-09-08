@@ -1,0 +1,92 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="announcement color-{{ section.settings.color_scheme }} color-scheme">
+    <div class="page-width" style="padding-block: 0.6rem; text-align: center;">
+      {%- if section.blocks.size == 1 -%}
+        {%- assign block = section.blocks.first -%}
+        <p class="text-xs" style="margin: 0; letter-spacing: 0.06em;" {{ block.shopify_attributes }}>
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+          {%- else -%}
+            {{ block.settings.text }}
+          {%- endif -%}
+        </p>
+      {%- else -%}
+        <announcement-rotator data-interval="{{ section.settings.interval }}">
+          {%- for block in section.blocks -%}
+            <p
+              class="text-xs"
+              style="margin: 0; letter-spacing: 0.06em;"
+              {% unless forloop.first %}hidden{% endunless %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+              {%- else -%}
+                {{ block.settings.text }}
+              {%- endif -%}
+            </p>
+          {%- endfor -%}
+        </announcement-rotator>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.announcement-bar.settings.color_scheme.label",
+      "default": "scheme_3"
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "t:sections.announcement-bar.settings.interval.label",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label",
+          "default": "Free shipping on orders over $100"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "announcement"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  }
+}
+{% endschema %}

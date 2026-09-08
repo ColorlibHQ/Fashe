@@ -1,0 +1,18 @@
+{%- if product.metafields.reviews.rating.value != blank -%}
+  {%- liquid
+    assign rating = product.metafields.reviews.rating.value
+    assign rating_count = product.metafields.reviews.rating_count.value
+    assign percent = rating.rating | divided_by: rating.scale_max | times: 100
+  -%}
+  <div class="rating">
+    <span
+      class="rating__stars"
+      role="img"
+      aria-label="{{ 'products.product.rating_html' | t: rating_value: rating.rating, rating_max: rating.scale_max }}"
+      style="--percent: {{ percent }}%;"
+    >★★★★★</span>
+    {%- if rating_count > 0 -%}
+      <span class="rating__count">({{ rating_count }})</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}

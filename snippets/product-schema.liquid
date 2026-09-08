@@ -1,0 +1,40 @@
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign product_image = product.featured_image
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {% if product_image %}"image": [{{ product_image | image_url: width: 1200 | prepend: "https:" | json }}],{% endif %}
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  {% if product.selected_or_first_available_variant.sku != blank %}"sku": {{ variant.sku | json }},{% endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | default: shop.name | json }}
+  },
+  {%- if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count.value > 0 -%}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ product.metafields.reviews.rating.value.rating | json }},
+    "ratingCount": {{ product.metafields.reviews.rating_count.value | json }},
+    "bestRating": {{ product.metafields.reviews.rating.value.scale_max | json }}
+  },
+  {%- endif -%}
+  "offers": [
+    {%- for v in product.variants -%}
+      {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | append: '?variant=' | append: v.id | json }},
+        "price": {{ v.price | divided_by: 100.0 | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+        {% if v.sku != blank %}"sku": {{ v.sku | json }},{% endif %}
+        "name": {{ v.title | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>

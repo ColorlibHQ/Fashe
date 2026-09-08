@@ -1,0 +1,92 @@
+<div
+  class="block-group"
+  style="
+    display: flex;
+    flex-direction: {{ block.settings.direction }};
+    gap: {{ block.settings.gap }}px;
+    align-items: {{ block.settings.alignment }};
+    {% if block.settings.direction == 'row' %}flex-wrap: wrap;{% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.group.name",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "t:blocks.group.settings.direction.label",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:blocks.group.settings.direction.options__1.label"
+        },
+        {
+          "value": "row",
+          "label": "t:blocks.group.settings.direction.options__2.label"
+        }
+      ],
+      "default": "column"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:blocks.group.settings.alignment.label",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:blocks.group.settings.alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:blocks.group.settings.alignment.options__2.label"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:blocks.group.settings.alignment.options__3.label"
+        },
+        {
+          "value": "stretch",
+          "label": "t:blocks.group.settings.alignment.options__4.label"
+        }
+      ],
+      "default": "stretch"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "t:blocks.group.settings.gap.label",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.group.presets.preset__1.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

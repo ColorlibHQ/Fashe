@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": { "heading": "New season essentials", "size": "h0", "alignment": "center" }
+        },
+        "text": {
+          "type": "text",
+          "settings": { "text": "<p>Considered pieces, made to be worn every day.</p>", "alignment": "center" }
+        },
+        "button": {
+          "type": "button",
+          "settings": { "label": "Shop new arrivals", "style": "solid", "alignment": "center" }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "height": 80,
+        "overlay_opacity": 20,
+        "content_position": "center",
+        "color_scheme": "scheme_3"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "item-1": { "type": "item", "settings": { "text": "Free shipping over $100" } },
+        "item-2": { "type": "item", "settings": { "text": "30 day returns" } },
+        "item-3": { "type": "item", "settings": { "text": "Carbon neutral delivery" } }
+      },
+      "block_order": ["item-1", "item-2", "item-3"],
+      "settings": { "text_size": "text-sm", "speed": 30, "padding": 16, "color_scheme": "scheme_3" }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-1": { "type": "collection", "settings": {} },
+        "collection-2": { "type": "collection", "settings": {} },
+        "collection-3": { "type": "collection", "settings": {} }
+      },
+      "block_order": ["collection-1", "collection-2", "collection-3"],
+      "settings": {
+        "heading": "Shop by category",
+        "heading_size": "h2",
+        "image_ratio": "portrait",
+        "title_position": "on",
+        "columns": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme_1"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New arrivals",
+        "heading_size": "h2",
+        "layout": "grid",
+        "products_to_show": 8,
+        "columns": 4,
+        "columns_mobile": "2",
+        "show_view_all": true,
+        "color_scheme": "scheme_1"
+      }
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Made to last" } },
+        "text": {
+          "type": "text",
+          "settings": { "text": "<p>Natural fibres, considered construction and a fit that holds its shape. Fewer, better pieces.</p>" }
+        },
+        "button": { "type": "button", "settings": { "label": "Our story", "style": "outline" } }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image_ratio": "landscape",
+        "image_position": "left",
+        "vertical_alignment": "center",
+        "color_scheme": "scheme_1"
+      }
+    },
+    "multicolumn": {
+      "type": "multicolumn",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": { "heading": "Free shipping", "text": "<p>On all orders over $100.</p>" }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": { "heading": "30 day returns", "text": "<p>Not right? Send it back, no questions.</p>" }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": { "heading": "Made responsibly", "text": "<p>Traceable materials and fair factories.</p>" }
+        }
+      },
+      "block_order": ["column-1", "column-2", "column-3"],
+      "settings": { "heading": "Why shop with us", "alignment": "center", "color_scheme": "scheme_2" }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "heading": "Journal",
+        "blog": "news",
+        "posts_to_show": 3,
+        "show_excerpt": true,
+        "color_scheme": "scheme_1"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Join the list",
+        "text": "<p>Be first to know about new arrivals and offers.</p>",
+        "color_scheme": "scheme_2"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "collection-list",
+    "featured-collection",
+    "image-with-text",
+    "multicolumn",
+    "blog-posts",
+    "newsletter"
+  ]
+}

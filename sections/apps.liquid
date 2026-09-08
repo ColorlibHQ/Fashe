@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="page-width">
+    {% content_for 'blocks' %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.apps.name",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.apps.presets.preset__1.name"
+    }
+  ]
+}
+{% endschema %}
