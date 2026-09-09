@@ -659,21 +659,38 @@ document.querySelectorAll('select[data-auto-submit]').forEach((select) => {
 /* Scroll reveal --------------------------------------------------------- */
 
 if (document.body.classList.contains('animate-reveal') && 'IntersectionObserver' in window) {
+  const reveal = (el) => {
+    el.classList.add('is-visible');
+    revealObserver.unobserve(el);
+  };
+
   const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    },
+    (entries) => entries.forEach((entry) => entry.isIntersecting && reveal(entry.target)),
     { rootMargin: '0px 0px -10% 0px' }
   );
 
   const observeAll = (root = document) =>
     root.querySelectorAll('[data-animate]:not(.is-visible)').forEach((el) => revealObserver.observe(el));
 
+  // Safety net: IntersectionObserver drops entries during fast or programmatic
+  // scrolling, which would otherwise leave whole sections invisible.
+  let sweeping = false;
+  const sweep = () => {
+    sweeping = false;
+    document.querySelectorAll('[data-animate]:not(.is-visible)').forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.95) reveal(el);
+    });
+  };
+  const scheduleSweep = () => {
+    if (sweeping) return;
+    sweeping = true;
+    requestAnimationFrame(sweep);
+  };
+
   observeAll();
+  scheduleSweep();
+  window.addEventListener('scroll', scheduleSweep, { passive: true });
+  window.addEventListener('resize', scheduleSweep, { passive: true });
   document.addEventListener('shopify:section:load', (event) => observeAll(event.target));
   document.addEventListener('section:loaded', (event) => observeAll(event.detail.target));
 }

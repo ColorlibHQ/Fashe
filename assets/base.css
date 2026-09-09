@@ -52,6 +52,10 @@ h6 { font-size: var(--text-h6); }
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 
+[hidden] {
+  display: none !important;
+}
+
 img,
 svg,
 video {
@@ -1036,6 +1040,23 @@ body:has(dialog.modal[open]) { overflow: hidden; }
   scroll-snap-align: center;
 }
 
+@media screen and (min-width: 990px) {
+  /* On desktop the gallery stacks; the swipe carousel is a mobile affordance. */
+  .product__media-scroller {
+    display: grid;
+    gap: var(--space-xs);
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .product__media-scroller > * { flex: none; }
+
+  .product__media-list--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product__media-list--grid > :first-child { grid-column: 1 / -1; }
+
+  .product__media .slideshow__dots { display: none; }
+}
+
 .product__title { margin-bottom: 0.35rem; }
 
 .product__price { margin-bottom: var(--space-md); }
@@ -1329,10 +1350,20 @@ body:has(dialog.modal[open]) { overflow: hidden; }
   justify-items: var(--content-justify, center);
   width: 100%;
   max-width: 44rem;
+  /* The block itself needs centring; justify-items only places its children. */
+  margin-inline: auto;
   padding: var(--space-lg);
   text-align: var(--content-align, center);
   color: rgb(var(--color-banner-text, var(--color-text)));
 }
+
+/* Text sits over photography, so guarantee legibility whatever the image. */
+.banner__content:not(.banner__content--boxed) {
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+}
+
+.banner__content--start { margin-inline: 0 auto; }
+.banner__content--end { margin-inline: auto 0; }
 
 .banner__content--boxed {
   background-color: rgb(var(--color-background));

@@ -1,7 +1,8 @@
 {%- if shop.published_locales.size > 1 or localization.available_countries.size > 1 -%}
   <div class="localization">
     {%- if localization.available_countries.size > 1 -%}
-      {%- form 'localization', class: 'localization__form', id: 'CountryForm-' | append: context -%}
+      {%- assign country_form_id = 'CountryForm-' | append: context -%}
+      {%- form 'localization', class: 'localization__form', id: country_form_id -%}
         <label class="visually-hidden" for="CountrySelect-{{ context }}">{{ 'general.filters.filter_by_label' | t }}</label>
         <select id="CountrySelect-{{ context }}" name="country_code" data-auto-submit>
           {%- for country in localization.available_countries -%}
@@ -18,7 +19,8 @@
     {%- endif -%}
 
     {%- if shop.published_locales.size > 1 -%}
-      {%- form 'localization', class: 'localization__form', id: 'LocaleForm-' | append: context -%}
+      {%- assign locale_form_id = 'LocaleForm-' | append: context -%}
+      {%- form 'localization', class: 'localization__form', id: locale_form_id -%}
         <label class="visually-hidden" for="LocaleSelect-{{ context }}">{{ 'general.filters.filter_by_label' | t }}</label>
         <select id="LocaleSelect-{{ context }}" name="locale_code" data-auto-submit>
           {%- for locale in shop.published_locales -%}

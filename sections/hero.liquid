@@ -1,10 +1,13 @@
 {%- liquid
   assign align = section.settings.content_position
   assign justify = 'center'
+  assign placement = ''
   if align == 'left'
     assign justify = 'start'
+    assign placement = ' banner__content--start'
   elsif align == 'right'
     assign justify = 'end'
+    assign placement = ' banner__content--end'
   endif
 -%}
 
@@ -40,7 +43,7 @@
   </div>
 
   <div class="page-width">
-    <div class="banner__content{% if section.settings.boxed %} banner__content--boxed{% endif %}" data-animate>
+    <div class="banner__content{{ placement }}{% if section.settings.boxed %} banner__content--boxed{% endif %}" data-animate>
       {% content_for 'blocks' %}
     </div>
   </div>
