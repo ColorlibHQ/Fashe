@@ -188,6 +188,9 @@ hr {
 .h1 { font-size: var(--text-h1); }
 .h2 { font-size: var(--text-h2); }
 .h3 { font-size: var(--text-h3); }
+.h4 { font-size: var(--text-h4); }
+.h5 { font-size: var(--text-h5); }
+.h6 { font-size: var(--text-h6); }
 
 .text-sm { font-size: var(--text-sm); }
 .text-xs { font-size: var(--text-xs); }
@@ -739,7 +742,11 @@ select {
 }
 
 .nav__link {
-  display: block;
+  /* inline-flex, not block: dropdown links carry a chevron that would
+     otherwise wrap onto its own line. */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   padding-block: 0.5rem;
   font-size: var(--text-sm);
   letter-spacing: 0.04em;
