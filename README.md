@@ -34,16 +34,21 @@ demonstrated there; on a real store they run against Shopify's own APIs.
 
 | | |
 |---|---|
-| <img src=".github/screenshots/collection-page.jpg" alt="Collection page with colour, size and price filters"> | <img src=".github/screenshots/product-page.jpg" alt="Product page with variant swatches and collapsible rows"> |
+| <img src=".github/screenshots/collection-page.jpg" width="420" alt="Collection page with category, colour, size and price filters"> | <img src=".github/screenshots/product-page.jpg" width="420" alt="Product page with colour swatches, size picker and collapsible rows"> |
 | **Collection page** — filter by category, colour, price and size | **Product page** — built from movable theme blocks |
-| <img src=".github/screenshots/cart-drawer.jpg" alt="Ajax cart drawer sliding in over the storefront"> | <img src=".github/screenshots/mobile-view.jpg" alt="Fashe Shopify theme on a mobile phone"> |
-| **Cart drawer** — ajax, no page reload | **Mobile** — drawer nav, scroll-snap carousels |
-| <img src=".github/screenshots/blog-page.jpg" alt="Blog listing page"> | <img src=".github/screenshots/about-page.jpg" alt="About page"> |
-| **Blog** | **About** |
+| <img src=".github/screenshots/cart-drawer.jpg" width="420" alt="Ajax cart drawer sliding in over the storefront"> | <img src=".github/screenshots/blog-page.jpg" width="420" alt="Blog listing page"> |
+| **Cart drawer** — ajax, no page reload | **Blog** — with an about page and full customer accounts too |
+
+<p align="center">
+  <img src=".github/screenshots/mobile-view.jpg" width="270" alt="Fashe Shopify theme on a mobile phone: drawer navigation and a full-bleed hero">
+  <br><b>Mobile</b> — drawer navigation, scroll-snap carousels, thumb-sized tap targets
+</p>
 
 <details>
-<summary>The whole homepage in one image</summary>
-<img src=".github/screenshots/homepage-full.jpg" alt="Full-length screenshot of the Fashe Shopify theme homepage">
+<summary>The whole homepage, and the about page</summary>
+<br>
+<img src=".github/screenshots/homepage-full.jpg" width="720" alt="Full-length screenshot of the Fashe Shopify theme homepage">
+<img src=".github/screenshots/about-page.jpg" width="720" alt="About page">
 </details>
 
 ## What you get
