@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.1 — 2026-09-09
+
+### Fixed
+- `[hidden]` was overridden by component `display` rules, so hidden form messages and the
+  buy-button error box rendered permanently.
+- Reveal-on-scroll could leave whole sections invisible when IntersectionObserver dropped
+  entries during fast scrolling. A throttled scroll/resize sweep now backs it up.
+- `.banner__content` never centred — `justify-items` places children, not the block.
+- The desktop product gallery rendered as a peeking mobile carousel; it now stacks or
+  grids from 990px up.
+- A filter used inside a `form` tag argument in `localization-form.liquid`, which newer
+  Shopify CLI versions reject as a syntax error.
+
 ## 2.0.0 — 2026-09-08
 
 Complete rewrite. Nothing is shared with 1.x apart from the name and the general
