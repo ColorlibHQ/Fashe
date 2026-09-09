@@ -1,19 +1,78 @@
-# Fashe 2.0 — Shopify theme
+<h1 align="center">Fashe — free Shopify theme for fashion and apparel</h1>
 
-A free fashion and apparel theme for Shopify, rebuilt from scratch on the current
-theme architecture. No jQuery, no CSS framework, no third-party assets.
+<p align="center">
+  An open-source Shopify theme for clothing, accessories and boutique stores, rebuilt in 2026
+  on Online Store 2.0 theme blocks.<br>
+  No jQuery, no CSS framework, no third-party assets — one stylesheet and one ES module.
+</p>
 
-## What it is
+<p align="center">
+  <a href="https://preview.colorlib.com/theme/fashe/"><strong>Live preview</strong></a> ·
+  <a href="https://downloads.colorlib.com/theme/fashe-shopify-theme.zip"><strong>Download the theme</strong></a> ·
+  <a href="https://colorlib.com/wp/themes/fashe-free-shopify-ecommerce-theme/"><strong>Theme page &amp; FAQ</strong></a>
+</p>
 
-Fashe 2.0 is a **theme-blocks theme** — the newest Shopify theme architecture, the
-same generation as Shopify's Horizon themes. Merchants can add, remove, reorder and
-nest blocks inside sections directly in the theme editor, including on the product
-page.
+<p align="center">
+  <img alt="Shopify theme check: 0 offenses" src="https://img.shields.io/badge/theme%20check-0%20offenses-success">
+  <img alt="Online Store 2.0" src="https://img.shields.io/badge/Online%20Store-2.0%20theme%20blocks-5A31F4">
+  <img alt="No dependencies" src="https://img.shields.io/badge/dependencies-none-success">
+  <img alt="Theme size 98 KB" src="https://img.shields.io/badge/size-98%20KB-informational">
+</p>
+
+<p align="center">
+  <img src=".github/screenshots/hero.jpg" alt="Fashe free Shopify theme — homepage with a full-width fashion hero and featured products">
+</p>
+
+## Preview
+
+**[preview.colorlib.com/theme/fashe](https://preview.colorlib.com/theme/fashe/)**
+
+The preview is a static build of the same design rather than a live storefront —
+`assets/base.css` here and the stylesheet behind the preview are the same file, so what
+you see is what the theme renders. Cart, filtering, sorting and predictive search are all
+demonstrated there; on a real store they run against Shopify's own APIs.
+
+| | |
+|---|---|
+| <img src=".github/screenshots/collection-page.jpg" alt="Collection page with colour, size and price filters"> | <img src=".github/screenshots/product-page.jpg" alt="Product page with variant swatches and collapsible rows"> |
+| **Collection page** — filter by category, colour, price and size | **Product page** — built from movable theme blocks |
+| <img src=".github/screenshots/cart-drawer.jpg" alt="Ajax cart drawer sliding in over the storefront"> | <img src=".github/screenshots/mobile-view.jpg" alt="Fashe Shopify theme on a mobile phone"> |
+| **Cart drawer** — ajax, no page reload | **Mobile** — drawer nav, scroll-snap carousels |
+| <img src=".github/screenshots/blog-page.jpg" alt="Blog listing page"> | <img src=".github/screenshots/about-page.jpg" alt="About page"> |
+| **Blog** | **About** |
+
+<details>
+<summary>The whole homepage in one image</summary>
+<img src=".github/screenshots/homepage-full.jpg" alt="Full-length screenshot of the Fashe Shopify theme homepage">
+</details>
+
+## What you get
+
+- **Three homepage layouts** — full-width hero, promotional, and a split layout with fixed
+  side navigation.
+- **Filterable catalogue** — category, colour, price and size, with sorting, through
+  Shopify's free Search & Discovery app.
+- **Product pages built from blocks** — title, price, variant picker, quantity, buy
+  buttons, stock status, description and collapsible rows, each movable in the editor.
+- **Ajax cart drawer** with quick add straight from the product grid.
+- **Predictive search** — product, collection, article and page suggestions as you type.
+- **Colour and image swatches** driven by your own Shopify product options.
+- **Multi-currency and multi-language** through Shopify Markets.
+- **Blog, about, contact** and the full set of customer account pages.
+- **Four editable colour schemes**, applied per section, plus font pickers and layout
+  controls.
+
+## What it is, technically
+
+Fashe 2.0 is a **theme-blocks theme** — the newest Shopify theme architecture, the same
+generation as Shopify's Horizon themes. Merchants can add, remove, reorder and nest blocks
+inside sections directly in the theme editor, including on the product page.
 
 | | Fashe 1.x (2018) | Fashe 2.0 |
 |---|---|---|
 | `shopify theme check` | 48 errors, 21 warnings | **0** |
 | Architecture | Vintage (pre Online Store 2.0) | Theme blocks + JSON templates + section groups |
+| Editable in the theme editor | Homepage only | Every template |
 | Stylesheets on the homepage | 19 | 1 |
 | Scripts on the homepage | 34 | 1 (ES module) |
 | jQuery | 3.2.1 | none |
@@ -29,10 +88,14 @@ page.
 | `{% include %}` (deprecated) | 148 uses | 0 — `{% render %}` throughout |
 | Cart | Page reload | Ajax cart drawer via the Section Rendering API |
 | Colour schemes | 14 individual colour settings | 4 editable colour schemes, per section |
+| Theme file size | 2.9 MB | 98 KB |
 
 ## Installing
 
-Upload `fashe-shopify-theme.zip` in **Online Store → Themes → Add theme → Upload zip**.
+Download [`fashe-shopify-theme.zip`](https://downloads.colorlib.com/theme/fashe-shopify-theme.zip)
+and upload it in **Online Store → Themes → Add theme → Upload zip file**. Do not unzip it
+first — Shopify expects the archive. Then click **Customize** to set your logo, colours and
+menus, and **Publish** when you are happy.
 
 To work on it locally:
 
@@ -87,31 +150,30 @@ stays the single source of truth for markup.
   free.
 - Motion is disabled under `prefers-reduced-motion`.
 
+### SEO and structured data
+
+Product and BlogPosting JSON-LD, a clean heading order, canonical URLs, Open Graph and
+Twitter card tags, responsive images with alt text taken from your product data, and no
+render-blocking library stack in front of the first paint.
+
 ### Accessibility
 
 Skip link, visible focus rings, labelled form inputs, `aria-current` navigation,
 `role="listbox"` search suggestions, 24px+ touch targets, and alt text driven by
 `image.alt` throughout.
 
-## Open issues this rewrite addresses
+## Upgrading from Fashe 1.x
 
-Measured against the 20 open issues on `ColorlibHQ/Fashe`. These are addressed by the
-rewrite's design; none are verified against a live store yet (see Known gaps).
+Treat 2.0 as a new theme, not an update. Upload it alongside your current live theme, set
+it up in the editor, preview it, and publish when it looks right. There is no automatic
+migration of 1.x settings — the two versions have completely different section and block
+structures, which is exactly why 2.0 can be edited on every template instead of only the
+homepage.
 
-| Issue | Addressed by |
-|---|---|
-| #62 Limiting blog posts on home page | `blog-posts` section has a `posts_to_show` setting |
-| #60 Cart on mobile not clickable | Header cart rebuilt; opens the cart drawer |
-| #57 Cart/checkout button will not work | Standard `{% form 'cart' %}` with a `checkout` submit |
-| #56 Cart will not display the item added | Ajax add-to-cart re-renders the drawer via the Section Rendering API |
-| #49 Cart shows the item twice | One `cart-items` snippet shared by drawer and cart page |
-| #47 Add to cart on mobile shows cart empty | Same ajax cart path on every breakpoint |
-| #46 Update Cart redirects to checkout | Separate `update` submit, distinct from `checkout` |
-| #54 #55 #58 #59 Colour palettes not fully applied | Colour schemes applied per section, 404 and footer included |
-| #53 Instagram access token / 404 | Instagram feed section dropped — the Basic Display API was shut down in Dec 2024 |
-| #50 Currency converter not working | Replaced by the native Shopify Markets country/currency selector |
-| #48 No documentation | This README plus CHANGELOG |
-| #42 `{% include %}` deprecated in favour of `{% render %}` | v1 had 148 `include` calls; v2 has none |
+The v1 issue backlog was reviewed and closed against this rewrite in September 2026: the
+cart, the colour settings, the Instagram feed, the currency converter and the deprecated
+`{% include %}` calls that those reports were about no longer exist. If you hit any of it
+on 2.0.1, please open a new issue.
 
 ## Known gaps
 
@@ -119,8 +181,15 @@ rewrite's design; none are verified against a live store yet (see Known gaps).
   language is a matter of translating `en.default.json` and `en.default.schema.json`.
 - Not yet rendered against a live store — see CHANGELOG.
 
+## Contributing
+
+Issues and pull requests are welcome. Please run `shopify theme check` before opening a
+PR; the theme is at zero offenses and should stay there.
+
 ## Licence
 
-**Undecided.** `ColorlibHQ/Fashe` has never carried a `LICENSE` file, and the repo has
-63 forks and merged community pull requests. Pick and add one before release rather than
-inheriting the ambiguity.
+`ColorlibHQ/Fashe` has never carried a `LICENSE` file, across 63 forks and several merged
+community pull requests, so the terms are not yet stated here. This is being settled — do
+not assume MIT. In the meantime the theme is published as a free download for use on
+Shopify stores; if you need the position in writing before you build on it, ask at
+[colorlib.com/wp/support](https://colorlib.com/wp/support/).
